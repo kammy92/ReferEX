@@ -20,7 +20,8 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="visible">
 
-            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
                 style="@style/Widget.MyApp.ActionBar"
                 android:layout_width="match_parent"
@@ -113,9 +114,9 @@
             android:id="@+id/rlList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/button2"
             android:layout_below="@+id/appBar"
-            android:visibility="visible"
-            android:layout_above="@+id/button2">
+            android:visibility="visible">
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh_layout"
@@ -135,16 +136,16 @@
         </RelativeLayout>
 
         <Button
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
-            android:textColor="@color/text_color_white"
             android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_margin"
+            android:background="@color/primary"
             android:text="Save this search as an alert"
+            android:textColor="@color/text_color_white"
             android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
-            android:id="@+id/button2"
-            android:layout_margin="@dimen/activity_margin" />
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:id="@+id/rlInternetConnection"
