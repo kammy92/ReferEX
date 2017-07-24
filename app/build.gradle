@@ -44,5 +44,9 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.mikepenz:fontawesome-typeface:4.7.0.1@aar'
     compile 'com.libaml.android.view.chip:AndroidChipLayout:1.0.6'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.github.mabbas007:TagsEditText:1.0.5'
+    compile 'com.android.support:multidex:1.0.0'
 
 }

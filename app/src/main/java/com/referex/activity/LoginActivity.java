@@ -69,13 +69,17 @@ import com.referex.utils.Utils;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import mabbas007.tagsedittext.TagsEditText;
 
-public class LoginActivity extends AppCompatActivity {
+
+public class LoginActivity extends AppCompatActivity implements TagsEditText.TagsEditListener, View.OnClickListener {
 
     public static int PERMISSION_REQUEST_CODE = 1;
     EditText etName;
@@ -85,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     CoordinatorLayout clMain;
     ProgressDialog progressDialog;
     UserDetailsPref userDetailsPref;
-    ChipLayout etToolType;
+    private TagsEditText mTagsEditText;
     String[] countries = {"india", "australia", "austria", "indonesia", "canada"};
 
     TextView tvTerm;
@@ -118,6 +122,18 @@ public class LoginActivity extends AppCompatActivity {
         ss.setSpan(new myClickableSpan(2), 40, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvTerm.setText(ss);
         tvTerm.setMovementMethod(LinkMovementMethod.getInstance());
+
+        String[] title = {
+                "C", "C++", "Java", "Android", "Html", "Php", "Hadoop", "Tableau", "Ios"
+        };
+
+        mTagsEditText.setHint("Skill");
+        mTagsEditText.setTagsListener(LoginActivity.this);
+        mTagsEditText.setTagsWithSpacesEnabled(true);
+        mTagsEditText.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, title));
+        mTagsEditText.setThreshold(1);
+
+
     }
 
     private void initView() {
@@ -129,63 +145,12 @@ public class LoginActivity extends AppCompatActivity {
         tvTerm = (TextView) findViewById(R.id.tvTermConditions);
         cbTermAndCondition = (CheckBox) findViewById(R.id.cbTerm);
         tvSubmit = (TextView) findViewById(R.id.tvSubmit);
-        etToolType = (ChipLayout) findViewById(R.id.etToolType);
+        mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
 
         Utils.setTypefaceToAllViews(this, tvSubmit);
     }
 
     private void initListener() {
-        etToolType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("---------------", etToolType.getText().toString());
-
-            }
-        });
-        etToolType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("---------------", "" + i);
-            }
-        });
-        etToolType.addLayoutTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                // Log.d("---------------",editable.toString());
-
-            }
-        });
-        etToolType.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                Log.d("----", String.valueOf(b));
-            }
-        });
-        etToolType.setOnChipItemChangeListener(new ChipLayout.ChipItemChangeListener() {
-            @Override
-            public void onChipAdded(int pos, String txt) {
-                Log.d(txt, String.valueOf(pos));
-
-            }
-
-            @Override
-            public void onChipRemoved(int pos, String txt) {
-                Log.d(txt, String.valueOf(pos));
-            }
-        });
-        String[] countries = {"india", "australia", "austria", "indonesia", "canada"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
-        etToolType.setAdapter(adapter);
 
 
         tvSubmit.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +196,10 @@ public class LoginActivity extends AppCompatActivity {
                                 etMobile.setError(s4);
                                 break;
                             case 3:
-                                getOTP(etMobile.getText().toString());
+                                // getOTP(etMobile.getText().toString());
+                              /*  Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);*/
                                 break;
                             case 4:
                                 etMobile.setError(s3);
@@ -730,6 +698,21 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onTagsChanged(Collection<String> collection) {
+
+    }
+
+    @Override
+    public void onEditingFinished() {
+
+    }
+
     class CustomListener implements View.OnClickListener {
         private final MaterialDialog dialog;
         Activity activity;
@@ -820,4 +803,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

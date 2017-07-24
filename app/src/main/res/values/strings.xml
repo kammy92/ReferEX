@@ -48,6 +48,9 @@
     </string>
 
 
+    <string name="activity_main_title">Job Found</string>
+
+
     <string name="dialog_text_enter_otp">Enter the OTP sent to your mobile number</string>
     <string name="dialog_action_yes">YES</string>
     <string name="dialog_action_no">NO</string>
