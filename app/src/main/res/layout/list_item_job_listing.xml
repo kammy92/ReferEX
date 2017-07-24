@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivRating"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_unselect_rating" />
+
+    <LinearLayout
+        android:id="@+id/llJobCriteria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/ivRating"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvJobDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/edittext_padding"
+            android:padding="@dimen/edittext_padding"
+            android:text="Software Engineer"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tvCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/edittext_padding"
+            android:paddingLeft="@dimen/edittext_padding"
+            android:text="Actiknow business consulting private limited"
+            android:textColor="@color/text_color_grey_dark"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tvExperience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/edittext_padding"
+            android:gravity="center"
+            android:paddingLeft="@dimen/edittext_padding"
+            android:text="6 - 10 year"
+            android:textColor="@color/text_color_grey_dark"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/edittext_padding"
+            android:gravity="center"
+            android:paddingLeft="@dimen/edittext_padding"
+            android:text="New Delhi"
+            android:textColor="@color/text_color_grey_dark"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:id="@+id/tvSkill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="@dimen/edittext_padding"
+            android:paddingLeft="@dimen/edittext_padding"
+            android:text="c, c++, java, android, php, html"
+            android:textColor="@color/text_color_grey_dark"
+            android:textSize="@dimen/text_size_small" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/llJobCriteria"
+        android:layout_margin="@dimen/activity_margin_small"
+        android:background="@color/text_color_grey_dark"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="@dimen/edittext_padding"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:text="c, c++, java, android, php, html"
+        android:textColor="@color/text_color_grey_light"
+        android:textSize="@dimen/text_size_medium" />
+
+</RelativeLayout>
