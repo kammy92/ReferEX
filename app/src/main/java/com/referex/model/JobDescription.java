@@ -13,13 +13,14 @@ public class JobDescription {
 
 
 
-    public JobDescription(int id,String job_name,String company_name,String experience,String location,String skill) {
+    public JobDescription(int id,String job_name,String company_name,String experience,String location,String skill,boolean is_refer) {
         this.id=id;
         this.job_name=job_name;
         this.experience=experience;
         this.skill=skill;
         this.company_name=company_name;
         this.location=location;
+        this.is_refer=is_refer;
 
     }
 
@@ -72,5 +73,21 @@ public class JobDescription {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public boolean is_favorite() {
+        return is_favorite;
+    }
+
+    public void setIs_favorite(boolean is_favorite) {
+        this.is_favorite = is_favorite;
+    }
+
+    public boolean is_refer() {
+        return is_refer;
+    }
+
+    public void setIs_refer(boolean is_refer) {
+        this.is_refer = is_refer;
     }
 }

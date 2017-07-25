@@ -82,13 +82,31 @@
             android:textSize="@dimen/text_size_small" />
 
 
+
+
+
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRefer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:text="Refer"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_below="@+id/llJobCriteria"
+        android:gravity="end"
+        android:paddingRight="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/llJobCriteria"
+        android:layout_below="@+id/tvRefer"
         android:layout_margin="@dimen/activity_margin_small"
         android:background="@color/text_color_grey_dark"
         android:drawableLeft="@drawable/ic_phone"

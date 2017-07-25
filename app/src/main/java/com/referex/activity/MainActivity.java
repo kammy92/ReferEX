@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         jobDescriptionList.clear ();
-        jobDescriptionList.add(new JobDescription(1,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs ","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
-        jobDescriptionList.add(new JobDescription(2,"Sr. Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
-        jobDescriptionList.add(new JobDescription(3,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
-        jobDescriptionList.add(new JobDescription(4,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
-        jobDescriptionList.add(new JobDescription(5,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
-        jobDescriptionList.add(new JobDescription(6,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony"));
+        jobDescriptionList.add(new JobDescription(1,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs ","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",true));
+        jobDescriptionList.add(new JobDescription(2,"Sr. Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
+        jobDescriptionList.add(new JobDescription(3,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
+        jobDescriptionList.add(new JobDescription(4,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",true));
+        jobDescriptionList.add(new JobDescription(5,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
+        jobDescriptionList.add(new JobDescription(6,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
 
 
         swipeRefreshLayout.setRefreshing (false);

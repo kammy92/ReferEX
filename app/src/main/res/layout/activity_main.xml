@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/app_background_color">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,8 +19,7 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="visible">
 
-            <android.support.v7.widget.Toolbar
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
                 style="@style/Widget.MyApp.ActionBar"
                 android:layout_width="match_parent"
@@ -140,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/activity_margin"
+            android:layout_margin="@dimen/activity_margin_small"
             android:background="@color/primary"
             android:text="Save this search as an alert"
             android:textColor="@color/text_color_white"
