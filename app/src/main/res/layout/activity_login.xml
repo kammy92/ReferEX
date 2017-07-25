@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:TagsEditText="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -92,9 +92,13 @@
                         android:textColorHint="@color/hint_text_color"
                         android:textSize="@dimen/text_size_medium"
                         TagsEditText:allowSpaceInTag="true"
-                        TagsEditText:tagsBackground="@drawable/square_default"
+                        TagsEditText:tagsBackground="@drawable/square"
                         TagsEditText:tagsCloseImageRight="@drawable/tag_close"
                         android:textColor="@color/text_color_black"/>
+
+
+
+
                     <Spinner
                         android:id="@+id/spType"
                         android:layout_width="match_parent"
