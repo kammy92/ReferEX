@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public class JobDescription {
     int id;
     String job_name,experience,skill,company_name,location;
+    boolean is_favorite,is_refer;
 
 
 
