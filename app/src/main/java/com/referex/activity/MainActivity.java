@@ -268,7 +268,8 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem ().withName ("Recommended Job").withIcon (FontAwesome.Icon.faw_handshake_o).withIdentifier (3).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_info).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
+                        new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Add Resume").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
                        /* new PrimaryDrawerItem ().withName ("FAQ").withIcon (FontAwesome.Icon.faw_question).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("My Profile").withIcon (FontAwesome.Icon.faw_user).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Change Password").withIcon (FontAwesome.Icon.faw_key).withIdentifier (9).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
@@ -279,11 +280,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         switch ((int) drawerItem.getIdentifier ()) {
-                           /* case 2:
-                                Intent intent = new Intent (MainActivity.this, MyFavouriteActivity.class);
+                            case 7:
+                                Intent intent = new Intent (MainActivity.this, UploadResumeActivity.class);
                                 startActivity (intent);
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
+
+                            /*
                             case 3:
                                 Intent intent2 = new Intent (MainActivity.this, HowItWorksActivity.class);
                                 startActivity (intent2);
