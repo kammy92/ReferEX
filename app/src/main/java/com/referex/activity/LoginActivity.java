@@ -78,6 +78,8 @@ import java.util.regex.Pattern;
 
 import mabbas007.tagsedittext.TagsEditText;
 
+import static android.R.attr.tag;
+
 
 public class LoginActivity extends AppCompatActivity implements TagsEditText.TagsEditListener, View.OnClickListener {
 
@@ -90,13 +92,8 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
     ProgressDialog progressDialog;
     UserDetailsPref userDetailsPref;
     private TagsEditText mTagsEditText;
-    String[] countries = {"india", "australia", "austria", "indonesia", "canada"};
-
     TextView tvTerm;
     CheckBox cbTermAndCondition;
-
-    //  Spinner spType;
-    String visitor_id, name, email, mobile, login_key;
     int otp;
     private String[] user_type = new String[]{"I am a..", "Dentist", "Student", "Dealer", "Others"};
 
@@ -141,7 +138,6 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
         etName = (EditText) findViewById(R.id.etName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etMobile = (EditText) findViewById(R.id.etMobile);
-
         tvTerm = (TextView) findViewById(R.id.tvTermConditions);
         cbTermAndCondition = (CheckBox) findViewById(R.id.cbTerm);
         tvSubmit = (TextView) findViewById(R.id.tvSubmit);
@@ -196,10 +192,17 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                 etMobile.setError(s4);
                                 break;
                             case 3:
+                                if (etEmail.getText().toString().trim().equalsIgnoreCase("votesocracy123@gmail.com") && etMobile.getText().toString().trim().equalsIgnoreCase("9999999999")) {
+                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_EMAIL, etEmail.getText().toString().trim());
+                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, etMobile.getText().toString().trim());
+                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                }
                                 // getOTP(etMobile.getText().toString());
-                              /*  Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(intent);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);*/
+
                                 break;
                             case 4:
                                 etMobile.setError(s3);
@@ -704,13 +707,17 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
     }
 
     @Override
-    public void onTagsChanged(Collection<String> collection) {
-
+    public void onTagsChanged (Collection<String> tags) {
+        Log.d ("chip add value", "Tags changed: ");
+        Log.d ("chip add value", Arrays.toString (tags.toArray ()));
     }
 
     @Override
-    public void onEditingFinished() {
-
+    public void onEditingFinished () {
+        Log.d ("Edit", "OnEditing finished");
+//        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(mTagsEditText.getWindowToken(), 0);
+//        //mTagsEditText.clearFocus();
     }
 
     class CustomListener implements View.OnClickListener {

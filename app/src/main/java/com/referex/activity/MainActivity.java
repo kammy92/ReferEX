@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -37,6 +40,7 @@ import com.referex.R;
 import com.referex.adapter.JobDescriptionAdapter;
 import com.referex.model.JobDescription;
 import com.referex.utils.SetTypeFace;
+import com.referex.utils.UserDetailsPref;
 import com.referex.utils.Utils;
 
 import java.util.ArrayList;
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView ivNavigation;
     SwipeRefreshLayout swipeRefreshLayout;
     JobDescriptionAdapter jobDescriptionAdapter;
+    UserDetailsPref userDetailsPref;
+    ImageView ivFilter;
 
     
     @Override
@@ -68,11 +74,23 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         initListener();
+        isLogin();
 
+    }
+
+    private void isLogin () {
+        if (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY) == "") {
+            Intent myIntent = new Intent (this, LoginActivity.class);
+            startActivity (myIntent);
+            finish ();
+        }
+        if (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY) == "")
+            finish ();
     }
 
     private void initView() {
         ivNavigation=(ImageView)findViewById(R.id.ivNavigation);
+        ivFilter=(ImageView)findViewById(R.id.ivFilter);
         rlInternetConnection=(RelativeLayout)findViewById(R.id.rlInternetConnection);
         rlNoResultFound=(RelativeLayout)findViewById(R.id.rlNoResultFound);
         rvJobList=(RecyclerView)findViewById(R.id.rvJobList);
@@ -81,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        userDetailsPref=UserDetailsPref.getInstance();
         jobDescriptionList.clear ();
         jobDescriptionList.add(new JobDescription(1,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs ","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",true));
         jobDescriptionList.add(new JobDescription(2,"Sr. Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
@@ -102,10 +121,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListener() {
+        ivFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ivFilter.setOnClickListener (new View.OnClickListener () {
+                    @Override
+                    public void onClick (View v) {
+                        Intent intent4 = new Intent (MainActivity.this, FilterActivity.class);
+                        startActivity (intent4);
+                        overridePendingTransition (R.anim.slide_in_up, R.anim.slide_out_up);
+                    }
+                });
+            }
+        });
+
+
+
         ivNavigation.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
                 result.openDrawer ();
+            }
+        });
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+
             }
         });
 
@@ -248,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .build ();
             headerResult.addProfiles (new ProfileDrawerItem()
-                    .withIcon (R.drawable.ic_user_name)
+                    .withIcon (R.drawable.doctor)
                     .withName ("Rahul jain")
                     .withEmail ("Rahul.jain@actiknowbi.com"));
 
@@ -269,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_info).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Add Resume").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
+                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
                        /* new PrimaryDrawerItem ().withName ("FAQ").withIcon (FontAwesome.Icon.faw_question).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("My Profile").withIcon (FontAwesome.Icon.faw_user).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Change Password").withIcon (FontAwesome.Icon.faw_key).withIdentifier (9).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
@@ -281,17 +325,11 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         switch ((int) drawerItem.getIdentifier ()) {
                             case 7:
-                                Intent intent = new Intent (MainActivity.this, UploadResumeActivity.class);
-                                startActivity (intent);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                showLogOutDialog ();
                                 break;
+                            case 8:
 
                             /*
-                            case 3:
-                                Intent intent2 = new Intent (MainActivity.this, HowItWorksActivity.class);
-                                startActivity (intent2);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
-                                break;
                             case 4:
                                 Intent intent3 = new Intent (MainActivity.this, AboutUsActivity.class);
                                 startActivity (intent3);
@@ -313,4 +351,33 @@ public class MainActivity extends AppCompatActivity {
                 .build ();
 //        result.getActionBarDrawerToggle ().setDrawerIndicatorEnabled (false);
     }
+
+
+    private void showLogOutDialog () {
+        MaterialDialog dialog = new MaterialDialog.Builder (this)
+                .limitIconToDefaultSize ()
+                .content ("Do you wish to Sign Out?")
+                .positiveText ("Yes")
+                .negativeText ("No")
+                .typeface (SetTypeFace.getTypeface (MainActivity.this), SetTypeFace.getTypeface (MainActivity.this))
+                .onPositive (new MaterialDialog.SingleButtonCallback () {
+                    @Override
+                    public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+
+                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_EMAIL, "");
+                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_NAME, "");
+                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
+                        Intent intent = new Intent (MainActivity.this, LoginActivity.class);
+                        intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity (intent);
+                        overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+                }).build ();
+        dialog.show ();
+    }
+
+
+
+
 }

@@ -7,6 +7,7 @@
         android:left="10dp"
         android:right="10dp"
         android:top="5dp"/>
+    <corners android:radius="5dp"/>
 
     <solid android:color="@color/primary"/>
 </shape>

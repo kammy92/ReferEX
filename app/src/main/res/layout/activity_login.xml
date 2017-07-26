@@ -47,7 +47,8 @@
                         android:background="@drawable/edit_text_background"
                         android:hint="@string/activity_login_hint_full_name"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColorHint="@color/app_text_color_light"/>
 
                     <EditText
                         android:id="@+id/etEmail"
@@ -61,7 +62,8 @@
                         android:hint="@string/activity_login_hint_email"
                         android:inputType="textEmailAddress"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColorHint="@color/app_text_color_light" />
 
                     <EditText
                         android:id="@+id/etMobile"
@@ -76,7 +78,8 @@
                         android:inputType="number"
                         android:maxLength="10"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:textColorHint="@color/app_text_color_light" />
 
 
 

@@ -72,6 +72,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 import static android.content.Context.ACTIVITY_SERVICE;
 
 /**
@@ -711,7 +714,33 @@ public class Utils {
 
     }
 
+    public static String encrypt (String input) {
+        String key = "2345678234567823";
+        byte[] crypted = null;
+        try {
+            SecretKeySpec skey = new SecretKeySpec (key.getBytes (), "AES");
+            Cipher cipher = Cipher.getInstance ("AES/ECB/PKCS5Padding");
+            cipher.init (Cipher.ENCRYPT_MODE, skey);
+            crypted = cipher.doFinal (input.getBytes ());
+        } catch (Exception e) {
+            System.out.println (e.toString ());
+        }
+        return new String (Base64.encode (crypted, 0));
+    }
 
+    public static String decrypt (String input) {
+        String key = "2345678234567823";
+        byte[] output = null;
+        try {
+            SecretKeySpec skey = new SecretKeySpec(key.getBytes (), "AES");
+            Cipher cipher = Cipher.getInstance ("AES/ECB/PKCS5Padding");
+            cipher.init (Cipher.DECRYPT_MODE, skey);
+            output = cipher.doFinal (Base64.decode (input, 0));
+        } catch (Exception e) {
+            System.out.println (e.toString ());
+        }
+        return new String (output);
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.referex.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 
 
 import com.referex.R;
+import com.referex.activity.UploadResumeActivity;
 import com.referex.model.JobDescription;
+import com.referex.utils.AppConfigTags;
 import com.referex.utils.Utils;
 
 import org.json.JSONObject;
@@ -127,6 +130,11 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
 
         @Override
         public void onClick(View v) {
+            final JobDescription jobDescription = jobDescriptions.get (getLayoutPosition ());
+            Intent intent=new Intent(activity, UploadResumeActivity.class);
+            intent.putExtra(AppConfigTags.JOB_POSITION,jobDescription.getJob_name());
+            activity.startActivity(intent);
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 
         }

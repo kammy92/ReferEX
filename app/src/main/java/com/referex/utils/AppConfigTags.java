@@ -48,7 +48,8 @@ public class AppConfigTags {
     
     public static String LATITUDE = "latitude";
     public static String LONGITUDE = "longitude";
-    
+    public static String JOB_POSITION = "job_position";
+
     
 
     

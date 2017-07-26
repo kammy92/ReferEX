@@ -19,39 +19,66 @@
         android:layout_toLeftOf="@+id/ivRating"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl1"
+                android:layout_alignTop="@+id/rl2"
+                android:layout_alignBottom="@+id/rl2"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvJobDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/edittext_padding"
-            android:padding="@dimen/edittext_padding"
-            android:text="Software Engineer"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/text_size_extra_large"
-            android:textStyle="bold"/>
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_margin="@dimen/activity_margin_extra_small"
+                    android:src="@drawable/ic_hot" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rl2"
+                android:layout_toRightOf="@+id/rl1">
+
+                <TextView
+                    android:id="@+id/tvJobDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/edittext_padding"
+                    android:paddingTop="@dimen/edittext_padding"
+                    android:text="Software Engineer"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_size_extra_large"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvCompanyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvJobDescription"
+                    android:text="Actiknow business consulting private limited"
+                    android:textColor="@color/text_color_grey_dark"
+                    android:textSize="@dimen/text_size_small" />
 
 
-        <TextView
-            android:id="@+id/tvCompanyName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/edittext_padding"
-            android:paddingLeft="@dimen/edittext_padding"
-            android:text="Actiknow business consulting private limited"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="@dimen/text_size_small" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/tvExperience"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/edittext_padding"
+            android:drawableLeft="@drawable/ic_exeperience"
+            android:drawablePadding="@dimen/activity_margin_small"
             android:gravity="center"
-            android:paddingLeft="@dimen/edittext_padding"
+            android:paddingLeft="2dp"
             android:text="6 - 10 year"
             android:textColor="@color/text_color_grey_dark"
             android:textSize="@dimen/text_size_small" />
@@ -61,10 +88,8 @@
             android:id="@+id/tvLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/edittext_padding"
-            android:gravity="center"
-            android:paddingLeft="@dimen/edittext_padding"
+            android:drawableLeft="@drawable/ic_location"
+            android:gravity="center_vertical"
             android:text="New Delhi"
             android:textColor="@color/text_color_grey_dark"
             android:textSize="@dimen/text_size_small" />
@@ -74,16 +99,11 @@
             android:id="@+id/tvSkill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_phone"
-            android:drawablePadding="@dimen/edittext_padding"
-            android:paddingLeft="@dimen/edittext_padding"
+            android:drawableLeft="@drawable/ic_skill"
+            android:gravity="center_vertical"
             android:text="c, c++, java, android, php, html"
             android:textColor="@color/text_color_grey_dark"
             android:textSize="@dimen/text_size_small" />
-
-
-
-
 
 
     </LinearLayout>
@@ -92,15 +112,15 @@
         android:id="@+id/tvRefer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/edittext_padding"
-        android:text="Refer"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_medium"
         android:layout_below="@+id/llJobCriteria"
         android:gravity="end"
+        android:paddingLeft="@dimen/edittext_padding"
         android:paddingRight="20dp"
+        android:text="Refer"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 
     <TextView
