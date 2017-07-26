@@ -67,7 +67,8 @@
                         android:text="@string/activity_main_title"
                         android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_title"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:id="@+id/tvTitle"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"

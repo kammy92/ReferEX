@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     JobDescriptionAdapter jobDescriptionAdapter;
     UserDetailsPref userDetailsPref;
     ImageView ivFilter;
+    TextView tvTitle;
 
     
     @Override
@@ -95,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         rlNoResultFound=(RelativeLayout)findViewById(R.id.rlNoResultFound);
         rvJobList=(RecyclerView)findViewById(R.id.rvJobList);
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
+        tvTitle=(TextView)findViewById(R.id.tvTitle);
+
+        Utils.setTypefaceToAllViews(MainActivity.this,tvTitle);
 
     }
 
