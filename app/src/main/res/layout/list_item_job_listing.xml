@@ -1,113 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/ivRating"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"
-        android:src="@drawable/ic_unselect_rating" />
 
     <LinearLayout
         android:id="@+id/llJobCriteria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/ivRating"
+        android:layout_margin="@dimen/activity_margin_small"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <RelativeLayout
-                android:id="@+id/rl1"
-                android:layout_alignTop="@+id/rl2"
-                android:layout_alignBottom="@+id/rl2"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv1"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="@dimen/activity_margin_extra_small"
-                    android:src="@drawable/ic_hot" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rl2"
-                android:layout_toRightOf="@+id/rl1">
-
                 <TextView
                     android:id="@+id/tvJobDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/edittext_padding"
-                    android:paddingTop="@dimen/edittext_padding"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ivRating"
+                    android:layout_toStartOf="@+id/ivRating"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:text="Software Engineer"
                     android:textColor="@color/primary"
                     android:textSize="@dimen/text_size_extra_large"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
+            <ImageView
+                android:id="@+id/ivRating"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_unselect_rating"/>
+        </RelativeLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_marginTop="@dimen/activity_margin_extra_small">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_hot"/>
                 <TextView
                     android:id="@+id/tvCompanyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvJobDescription"
-                    android:text="Actiknow business consulting private limited"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Actiknow Business Consulting Pvt Ltd"
                     android:textColor="@color/text_color_grey_dark"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="@dimen/text_size_small"/>
+            </TableRow>
 
+            <TableRow>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_exp"/>
+                <TextView
+                    android:id="@+id/tvExperience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="6 - 10 year"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+            </TableRow>
 
-            </RelativeLayout>
+            <TableRow>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_location"/>
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Delhi"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+            </TableRow>
 
-
-        </RelativeLayout>
-
-
-        <TextView
-            android:id="@+id/tvExperience"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_exeperience"
-            android:drawablePadding="@dimen/activity_margin_small"
-            android:gravity="center"
-            android:paddingLeft="2dp"
-            android:text="6 - 10 year"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="@dimen/text_size_small" />
-
-
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_location"
-            android:gravity="center_vertical"
-            android:text="New Delhi"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="@dimen/text_size_small" />
-
-
-        <TextView
-            android:id="@+id/tvSkill"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_skill"
-            android:gravity="center_vertical"
-            android:text="c, c++, java, android, php, html"
-            android:textColor="@color/text_color_grey_dark"
-            android:textSize="@dimen/text_size_small" />
-
-
+            <TableRow>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_skill"/>
+                <TextView
+                    android:id="@+id/tvSkill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="c, c++, java, android, php, html"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
-
     <TextView
         android:id="@+id/tvRefer"
         android:layout_width="match_parent"
@@ -120,20 +136,13 @@
         android:textColor="@color/primary"
         android:textSize="@dimen/text_size_small"
         android:textStyle="bold"
-        android:visibility="gone" />
-
-
+        android:visibility="gone"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/tvRefer"
-        android:layout_margin="@dimen/activity_margin_small"
-        android:background="@color/divider"
-        android:drawableLeft="@drawable/ic_phone"
-        android:drawablePadding="@dimen/edittext_padding"
-        android:paddingLeft="@dimen/edittext_padding"
-        android:text="c, c++, java, android, php, html"
-        android:textColor="@color/text_color_grey_light"
-        android:textSize="@dimen/text_size_medium" />
+        android:layout_marginLeft="@dimen/activity_margin_small"
+        android:layout_marginRight="@dimen/activity_margin_small"
+        android:background="@color/divider"/>
 
 </RelativeLayout>
