@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/clMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/app_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:visibility="visible">
+
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/toolbar"
+                style="@style/Widget.MyApp.ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/transparent"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                android:visibility="visible"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin">
+
+                <RelativeLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rlBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_back"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tvBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@+id/ivBack"
+                            android:layout_toRightOf="@+id/ivBack"
+                            android:gravity="center_vertical"
+                            android:text="Home"
+                            android:textColor="@color/text_color_white"
+                            android:textSize="@dimen/text_size_small" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="@string/activity_filter_title"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_title"
+                        android:textStyle="bold"
+                        android:id="@+id/tvTitle"/>
+
+                    <TextView
+                        android:id="@+id/tvApply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:padding="@dimen/activity_margin"
+                        android:text="Apply"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appBar">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:padding="5dp"
+                        android:text="Salary (lacs)"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium"
+                        android:id="@+id/tv1"
+
+                        />
+
+                    <Spinner
+                        android:id="@+id/spSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:background="@drawable/edit_text_background"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Location"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium"
+                        android:id="@+id/tv2"/>
+
+
+                    <mabbas007.tagsedittext.TagsEditText
+                        android:id="@+id/locationEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin_small"
+                        android:background="@drawable/edit_text_background"
+                        android:padding="@dimen/edittext_padding"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium"
+                        TagsEditText:allowSpaceInTag="true"
+                        TagsEditText:tagsBackground="@drawable/square"
+                        TagsEditText:tagsCloseImageRight="@drawable/tag_close" />
+
+
+                    <TextView
+                        android:id="@+id/tvRole"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Role"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <EditText
+                        android:id="@+id/etRole"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin_small"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Role"
+                        android:padding="@dimen/edittext_padding"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+
+                    <TextView
+                        android:id="@+id/tvEducation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Education"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <EditText
+                        android:id="@+id/etEducation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin_small"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Education"
+                        android:padding="@dimen/edittext_padding"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+
+                    <TextView
+                        android:id="@+id/tvFunctionalArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Functional/Area"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <EditText
+                        android:id="@+id/etFunctionalArea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_margin"
+                        android:layout_marginRight="@dimen/activity_margin"
+                        android:layout_marginTop="@dimen/activity_margin_small"
+                        android:background="@drawable/edit_text_background"
+                        android:hint="Functional Area"
+                        android:padding="@dimen/edittext_padding"
+                        android:textColor="@color/text_color_black"
+                        android:textColorHint="@color/hint_text_color"
+                        android:textSize="@dimen/text_size_medium" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
