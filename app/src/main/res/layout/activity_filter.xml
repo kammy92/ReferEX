@@ -151,8 +151,8 @@
                         android:id="@+id/tv2"/>
 
 
-                    <mabbas007.tagsedittext.TagsEditText
-                        android:id="@+id/locationEditText"
+                    <EditText
+                        android:id="@+id/etLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_margin"
@@ -163,9 +163,7 @@
                         android:textColor="@color/text_color_black"
                         android:textColorHint="@color/hint_text_color"
                         android:textSize="@dimen/text_size_medium"
-                        TagsEditText:allowSpaceInTag="true"
-                        TagsEditText:tagsBackground="@drawable/square"
-                        TagsEditText:tagsCloseImageRight="@drawable/tag_close" />
+                        android:focusable="false"/>
 
 
                     <TextView
@@ -192,7 +190,8 @@
                         android:padding="@dimen/edittext_padding"
                         android:textColor="@color/text_color_black"
                         android:textColorHint="@color/hint_text_color"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:focusable="false"/>
 
 
                     <TextView
@@ -246,7 +245,8 @@
                         android:padding="@dimen/edittext_padding"
                         android:textColor="@color/text_color_black"
                         android:textColorHint="@color/hint_text_color"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:focusable="false"/>
 
 
                 </LinearLayout>
