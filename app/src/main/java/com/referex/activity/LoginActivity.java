@@ -194,7 +194,8 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                             case 3:
                                 if (etEmail.getText().toString().trim().equalsIgnoreCase("votesocracy123@gmail.com") && etMobile.getText().toString().trim().equalsIgnoreCase("9999999999")) {
                                     userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_EMAIL, etEmail.getText().toString().trim());
-                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, etMobile.getText().toString().trim());
+                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, etName.getText().toString().trim());
+                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_MOBILE, etMobile.getText().toString().trim());
                                     userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

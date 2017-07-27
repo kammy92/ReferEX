@@ -128,7 +128,7 @@
         android:layout_height="1dp"
         android:layout_below="@+id/tvRefer"
         android:layout_margin="@dimen/activity_margin_small"
-        android:background="@color/text_color_grey_dark"
+        android:background="@color/divider"
         android:drawableLeft="@drawable/ic_phone"
         android:drawablePadding="@dimen/edittext_padding"
         android:paddingLeft="@dimen/edittext_padding"
