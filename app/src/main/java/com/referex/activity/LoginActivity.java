@@ -37,12 +37,9 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +50,6 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.libaml.android.view.chip.ChipLayout;
 import com.referex.R;
 import com.referex.receiver.SmsListener;
 import com.referex.receiver.SmsReceiver;
@@ -66,7 +62,6 @@ import com.referex.utils.TypefaceSpan;
 import com.referex.utils.UserDetailsPref;
 import com.referex.utils.Utils;
 
-
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -77,8 +72,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import mabbas007.tagsedittext.TagsEditText;
-
-import static android.R.attr.tag;
 
 
 public class LoginActivity extends AppCompatActivity implements TagsEditText.TagsEditListener, View.OnClickListener {
@@ -91,10 +84,10 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
     CoordinatorLayout clMain;
     ProgressDialog progressDialog;
     UserDetailsPref userDetailsPref;
-    private TagsEditText mTagsEditText;
     TextView tvTerm;
     CheckBox cbTermAndCondition;
     int otp;
+    private TagsEditText mTagsEditText;
     private String[] user_type = new String[]{"I am a..", "Dentist", "Student", "Dealer", "Others"};
 
     @Override
@@ -192,18 +185,27 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                 etMobile.setError(s4);
                                 break;
                             case 3:
-                                if (etEmail.getText().toString().trim().equalsIgnoreCase("votesocracy123@gmail.com") && etMobile.getText().toString().trim().equalsIgnoreCase("9999999999")) {
-                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_EMAIL, etEmail.getText().toString().trim());
-                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, etName.getText().toString().trim());
-                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_MOBILE, etMobile.getText().toString().trim());
-                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                }
+//                                if (etEmail.getText().toString().trim().equalsIgnoreCase("votesocracy123@gmail.com") && etMobile.getText().toString().trim().equalsIgnoreCase("")) {
+//                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_EMAIL, etEmail.getText().toString().trim());
+//                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, etMobile.getText().toString().trim());
+//                                    userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    startActivity(intent);
+//                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                                }
                                 // getOTP(etMobile.getText().toString());
-
+    
+                                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_EMAIL, etEmail.getText ().toString ().trim ());
+                                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_NAME, etName.getText ().toString ().trim ());
+                                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_MOBILE, etMobile.getText ().toString ().trim ());
+                                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+    
+                                Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+                                intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity (intent);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+    
                                 break;
                             case 4:
                                 etMobile.setError(s3);
@@ -267,16 +269,6 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
             public void afterTextChanged(Editable s) {
             }
         });
-
-      /*  ivIndiaSupplyLogo.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick (View v) {
-                Uri uri = Uri.parse ("http://indiasupply.com");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity (intent);
-
-            }
-        });*/
     }
 
     private void displayFirebaseRegId() {

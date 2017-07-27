@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,11 +50,7 @@ import java.util.List;
 import mabbas007.tagsedittext.TagsEditText;
 
 public class MainActivity extends AppCompatActivity {
-    private AccountHeader headerResult = null;
-    private Drawer result = null;
     Bundle savedInstanceState;
-    private TagsEditText mTagsEditText;
-
     List<JobDescription> jobDescriptionList= new ArrayList<>();
     RelativeLayout rlInternetConnection;
     RelativeLayout   rlNoResultFound;
@@ -65,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
     UserDetailsPref userDetailsPref;
     ImageView ivFilter;
     TextView tvTitle;
+    private AccountHeader headerResult = null;
+    private Drawer result = null;
+    private TagsEditText mTagsEditText;
 
-    
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -106,12 +104,12 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         userDetailsPref=UserDetailsPref.getInstance();
         jobDescriptionList.clear ();
-        jobDescriptionList.add(new JobDescription(1,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs ","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",true));
-        jobDescriptionList.add(new JobDescription(2,"Sr. Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
-        jobDescriptionList.add(new JobDescription(3,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
-        jobDescriptionList.add(new JobDescription(4,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",true));
-        jobDescriptionList.add(new JobDescription(5,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
-        jobDescriptionList.add(new JobDescription(6,"Engineering Manager(Roby, python, Aws ,Php)-NIT, REC, BITs","3D Staffing Research & Consulting Co India","6-10 Years","Delhi","Python, Java, My Sql, CSS, Java Script, Java, Php, Html5, Django, Symphony",false));
+        jobDescriptionList.add (new JobDescription (1, "Engineering Manager (PHP)", "ABC Technologies Pvt Ltd", "6 - 10 Years", "Delhi", "Java, MySQL, CSS, PHP, HTML5", true));
+        jobDescriptionList.add (new JobDescription (2, "Android Developer - Java", "XYZ Pvt Ltd", "1-3 Years", "Bengaluru", "Android, Java, SDK, Mobile Development", false));
+        jobDescriptionList.add (new JobDescription (3, "Sr Project Manager", "SLA Consulting India", "3-6 Years", "Faridabad, Guurgaon", "Team Lead, Python, Java, JavaScript, Django", false));
+        jobDescriptionList.add (new JobDescription (4, "Consultant / Sr. Consultant", "Focus Consulting Co India", "6-10 Years", "Delhi", "Java, PHP, HTML5, Django, Symphony", true));
+        jobDescriptionList.add (new JobDescription (5, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", false));
+        jobDescriptionList.add (new JobDescription (6, "C++ Developer", "Angel Network", "2-3 Years", "Pune", "C++, C, Java, OOOPs, CSS, Django, Symphony", false));
 
 
         swipeRefreshLayout.setRefreshing (false);

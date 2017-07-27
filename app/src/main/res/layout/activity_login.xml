@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/logo_height"
                     android:layout_margin="@dimen/activity_margin"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/referex_logo"/>
 
 
                 <LinearLayout
@@ -47,8 +47,8 @@
                         android:background="@drawable/edit_text_background"
                         android:hint="@string/activity_login_hint_full_name"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColorHint="@color/app_text_color_light"/>
+                        android:textColorHint="@color/app_text_color_light"
+                        android:textSize="@dimen/text_size_medium"/>
 
                     <EditText
                         android:id="@+id/etEmail"
@@ -62,8 +62,8 @@
                         android:hint="@string/activity_login_hint_email"
                         android:inputType="textEmailAddress"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColorHint="@color/app_text_color_light" />
+                        android:textColorHint="@color/app_text_color_light"
+                        android:textSize="@dimen/text_size_medium"/>
 
                     <EditText
                         android:id="@+id/etMobile"
@@ -78,8 +78,8 @@
                         android:inputType="number"
                         android:maxLength="10"
                         android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textColorHint="@color/app_text_color_light" />
+                        android:textColorHint="@color/app_text_color_light"
+                        android:textSize="@dimen/text_size_medium"/>
 
 
 
@@ -92,12 +92,12 @@
                         android:layout_marginTop="@dimen/activity_margin"
                         android:background="@drawable/edit_text_background"
                         android:padding="@dimen/edittext_padding"
+                        android:textColor="@color/text_color_black"
                         android:textColorHint="@color/hint_text_color"
                         android:textSize="@dimen/text_size_medium"
                         TagsEditText:allowSpaceInTag="true"
                         TagsEditText:tagsBackground="@drawable/square"
-                        TagsEditText:tagsCloseImageRight="@drawable/tag_close"
-                        android:textColor="@color/text_color_black"/>
+                        TagsEditText:tagsCloseImageRight="@drawable/tag_close"/>
 
 
 
