@@ -1,7 +1,5 @@
 package com.referex.model;
 
-import org.json.JSONObject;
-
 /**
  * Created by Rahul jain on 21-07-2017.
  */
@@ -9,18 +7,17 @@ import org.json.JSONObject;
 public class JobDescription {
     int id;
     String job_name,experience,skill,company_name,location;
-    boolean is_favorite,is_refer;
-
-
-
-    public JobDescription(int id,String job_name,String company_name,String experience,String location,String skill,boolean is_refer) {
+    boolean is_favorite, is_hot;
+    
+    
+    public JobDescription (int id, String job_name, String company_name, String experience, String location, String skill, boolean is_hot) {
         this.id=id;
         this.job_name=job_name;
         this.experience=experience;
         this.skill=skill;
         this.company_name=company_name;
         this.location=location;
-        this.is_refer=is_refer;
+        this.is_hot = is_hot;
 
     }
 
@@ -82,12 +79,12 @@ public class JobDescription {
     public void setIs_favorite(boolean is_favorite) {
         this.is_favorite = is_favorite;
     }
-
-    public boolean is_refer() {
-        return is_refer;
+    
+    public boolean is_hot () {
+        return is_hot;
     }
-
-    public void setIs_refer(boolean is_refer) {
-        this.is_refer = is_refer;
+    
+    public void setIs_hot (boolean is_hot) {
+        this.is_hot = is_hot;
     }
 }
