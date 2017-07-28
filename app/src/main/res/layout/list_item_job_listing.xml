@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_margin_extra_small"
+    card_view:cardCornerRadius="@dimen/cardview_default_radius"
+    card_view:cardElevation="@dimen/cardview_elevation">
 
-    <LinearLayout
-        android:id="@+id/llJobCriteria"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin_small"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llJobCriteria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin_small"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tvJobDescription"
                     android:layout_width="match_parent"
@@ -29,23 +38,23 @@
                     android:textSize="@dimen/text_size_extra_large"
                     android:textStyle="bold"/>
 
-            <ImageView
-                android:id="@+id/ivRating"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/ic_unselect_rating"/>
-        </RelativeLayout>
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
-
-            <TableRow
-                android:layout_marginTop="@dimen/activity_margin_extra_small">
                 <ImageView
+                    android:id="@+id/ivRating"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_unselect_rating"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin_extra_small">
+
+
+                <ImageView
+                    android:id="@+id/ivHot"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
@@ -57,15 +66,20 @@
                     android:id="@+id/tvCompanyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ivHot"
+                    android:layout_toRightOf="@id/ivHot"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="Actiknow Business Consulting Pvt Ltd"
                     android:textColor="@color/text_color_grey_dark"
                     android:textSize="@dimen/text_size_small"/>
-            </TableRow>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TableRow>
                 <ImageView
+                    android:id="@+id/iv1"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
@@ -78,13 +92,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/iv1"
+                    android:layout_toRightOf="@+id/iv1"
                     android:text="6 - 10 year"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
-            </TableRow>
 
-            <TableRow>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <ImageView
+                    android:id="@+id/iv2"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
@@ -97,13 +117,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/iv2"
+                    android:layout_toRightOf="@+id/iv2"
                     android:text="Delhi"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
-            </TableRow>
 
-            <TableRow>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/iv3"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
@@ -116,33 +141,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/iv3"
+                    android:layout_toRightOf="@+id/iv3"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="c, c++, java, android, php, html"
+                    android:text="c, c++, java, android, php, html skdj kjsdf kjnsdf kjnsdf fkjnsdf kjsdf fkjsdf fkjndsff"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tvRefer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llJobCriteria"
-        android:gravity="end"
-        android:paddingLeft="@dimen/edittext_padding"
-        android:paddingRight="20dp"
-        android:text="Refer"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/text_size_small"
-        android:textStyle="bold"
-        android:visibility="gone"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/tvRefer"
-        android:layout_marginLeft="@dimen/activity_margin_small"
-        android:layout_marginRight="@dimen/activity_margin_small"
-        android:background="@color/divider"/>
-
-</RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

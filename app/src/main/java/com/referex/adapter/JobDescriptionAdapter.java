@@ -2,18 +2,13 @@ package com.referex.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 
 import com.referex.R;
 import com.referex.activity.UploadResumeActivity;
@@ -21,13 +16,8 @@ import com.referex.model.JobDescription;
 import com.referex.utils.AppConfigTags;
 import com.referex.utils.Utils;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
 
 public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAdapter.ViewHolder> {
@@ -64,11 +54,11 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         holder.tvLocation.setText(jobDescription.getLocation());
         holder.tvSkill.setText(jobDescription.getSkill());
         holder.tvExperience.setText(jobDescription.getExperience());
-
-        if (jobDescription.is_refer()) {
-            holder.tvRefer.setVisibility(View.VISIBLE);
+    
+        if (jobDescription.is_hot ()) {
+            holder.ivHot.setVisibility (View.VISIBLE);
         } else {
-            holder.tvRefer.setVisibility(View.GONE);
+            holder.ivHot.setVisibility (View.INVISIBLE);
         }
 
 
@@ -109,9 +99,8 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         TextView tvExperience;
         TextView tvLocation;
         TextView tvSkill;
-        TextView tvRefer;
         ImageView ivRating;
-
+        ImageView ivHot;
         ProgressBar progressBar;
 
 
@@ -122,9 +111,9 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
             tvExperience = (TextView) view.findViewById(R.id.tvExperience);
             tvLocation = (TextView) view.findViewById(R.id.tvLocation);
             tvSkill = (TextView) view.findViewById(R.id.tvSkill);
-            tvRefer = (TextView) view.findViewById(R.id.tvRefer);
             ivRating = (ImageView) view.findViewById(R.id.ivRating);
-
+    
+            ivHot = (ImageView) view.findViewById (R.id.ivHot);
             view.setOnClickListener(this);
         }
 

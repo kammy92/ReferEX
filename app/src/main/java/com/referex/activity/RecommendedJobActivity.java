@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.referex.R;
 import com.referex.adapter.JobDescriptionAdapter;
 import com.referex.model.JobDescription;
+import com.referex.utils.SimpleDividerItemDecoration;
 import com.referex.utils.UserDetailsPref;
 import com.referex.utils.Utils;
 
@@ -68,8 +69,13 @@ public class RecommendedJobActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-        
-        
+    
+        swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
+            @Override
+            public void onRefresh () {
+                swipeRefreshLayout.setRefreshing (false);
+            }
+        });
     }
     
     private void initData () {
@@ -82,12 +88,12 @@ public class RecommendedJobActivity extends AppCompatActivity {
         jobDescriptionList.add (new JobDescription (5, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", false));
         jobDescriptionList.add (new JobDescription (6, "C++ Developer", "Angel Network", "2-3 Years", "Pune", "C++, C, Java, OOOPs, CSS, Django, Symphony", false));
         
-        
         swipeRefreshLayout.setRefreshing (false);
-        
+    
         jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
         rvJobList.setAdapter (jobDescriptionAdapter);
         rvJobList.setHasFixedSize (true);
+        rvJobList.addItemDecoration (new SimpleDividerItemDecoration (this));
         rvJobList.setLayoutManager (new LinearLayoutManager (this, LinearLayoutManager.VERTICAL, false));
         rvJobList.setItemAnimator (new DefaultItemAnimator ());
         

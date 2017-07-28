@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
     CheckBox cbTermAndCondition;
     int otp;
     ArrayList<String> skillsArrayList = new ArrayList<String> ();
+    ArrayList<String> skillsSelectedArrayList = new ArrayList<String> ();
     FlowLayout chipsBoxLayout;
     Button btAddSkills;
     private TagsEditText mTagsEditText;
@@ -300,19 +301,39 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
         btAddSkills.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
-                
-                int skillPosition[];
-                
-                
+                ArrayList<Integer> skillPositionList = new ArrayList<Integer> ();
+                for (int i = 0; i < skillsSelectedArrayList.size (); i++) {
+                    for (int j = 0; j < skillsArrayList.size (); j++) {
+                        if (skillsSelectedArrayList.get (i).equalsIgnoreCase (skillsArrayList.get (j))) {
+                            skillPositionList.add (j);
+                        }
+                    }
+                }
+    
+                Integer[] ints = new Integer[skillPositionList.size ()];
+                int i = 0;
+                for (Integer n : skillPositionList) {
+                    ints[i++] = n;
+                }
+    
+    
                 new MaterialDialog.Builder (LoginActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
-                        .itemsCallbackMultiChoice (new Integer[] {1, 2}, new MaterialDialog.ListCallbackMultiChoice () {
+                        .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                                 FlowLayout.LayoutParams params = new FlowLayout.LayoutParams (FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                                 params.setMargins (5, 5, 5, 5);
+                                chipsBoxLayout.removeAllViews ();
+                                skillsSelectedArrayList.clear ();
+                                if (text.length > 0) {
+                                    btAddSkills.setText ("ADD/EDIT");
+                                } else {
+                                    btAddSkills.setText ("ADD");
+                                }
                                 for (int i = 0; i < text.length; i++) {
+                                    skillsSelectedArrayList.add (text[i].toString ());
                                     final TextView t = new TextView (LoginActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
@@ -330,21 +351,24 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                     t.setBackgroundResource (R.drawable.square);
                                     chipsBoxLayout.addView (t);
                                 }
-                                
-                                String value = "";
-                                for (int i = 0; i < text.length; i++) {
-                                    if (i == 0) {
-                                        value = text[0].toString ();
-                                    } else {
-                                        value = value + "," + text[i].toString ();
-                                    }
-                                    Log.e ("Text", "" + text[i].toString () + ",");
-                                }
                                 return true;
                             }
                         })
                         .neutralText ("CLEAR")
+                        .onNeutral (new MaterialDialog.SingleButtonCallback () {
+                            @Override
+                            public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.clearSelectedIndices ();
+                            }
+                        })
                         .positiveText ("SELECT")
+                        .onPositive (new MaterialDialog.SingleButtonCallback () {
+                            @Override
+                            public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss ();
+                            }
+                        })
+                        .autoDismiss (false)
                         .alwaysCallInputCallback ()
                         .show ();
             }
@@ -513,8 +537,8 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                                 .inputType (InputType.TYPE_CLASS_NUMBER)
                                                 .positiveText (R.string.dialog_action_submit)
                                                 .neutralText (R.string.dialog_action_resend_otp);
-        
-        
+    
+    
                                         mBuilder.input ("OTP", null, new MaterialDialog.InputCallback () {
                                             @Override
                                             public void onInput (MaterialDialog dialog, CharSequence input) {
@@ -543,19 +567,19 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                                         } catch (Exception e) {
                                                             e.printStackTrace ();
                                                         }*/
-            
+    
                                                         sendSignUpDetailsToServer (etName.getText ().toString (), etEmail.getText ().toString (), etMobile.getText ().toString (), otp);
                                                     } else {
                                                         Utils.showSnackBar (LoginActivity.this, clMain, "OTP didn't match", Snackbar.LENGTH_LONG, null, null);
                                                     }
                                                     dialog.dismiss ();
                                                 } else {
-        
+    
                                                 }
                                             }
                                         });
-        
-        
+    
+    
                                         InputFilter[] FilterArray = new InputFilter[1];
                                         FilterArray[0] = new InputFilter.LengthFilter (6);
                                         final MaterialDialog dialog = mBuilder.build ();
@@ -580,7 +604,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                         } catch (Exception e) {
                                             e.printStackTrace ();
                                         }
-        
+    
                                         dialog.getActionButton (DialogAction.POSITIVE).setEnabled (false);
                                         try {
                                             dialog.getInputEditText ().addTextChangedListener (new TextWatcher () {
@@ -594,11 +618,11 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                                         dialog.getActionButton (DialogAction.POSITIVE).setEnabled (false);
                                                     }
                                                 }
-        
+    
                                                 @Override
                                                 public void beforeTextChanged (CharSequence s, int start, int count, int after) {
                                                 }
-        
+    
                                                 @Override
                                                 public void afterTextChanged (Editable s) {
                                                 }
@@ -610,7 +634,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
 
 
 //                                        dialog.getInputEditText ().setText (jsonObj.getString (AppConfigTags.OTP));
-        
+    
                                         dialog.getActionButton (DialogAction.POSITIVE).setOnClickListener (new CustomListener (LoginActivity.this, dialog, DialogAction.POSITIVE));
                                         dialog.getActionButton (DialogAction.NEUTRAL).setOnClickListener (new CustomListener (LoginActivity.this, dialog, DialogAction.NEUTRAL));
                                         SmsReceiver.bindListener (new SmsListener () {
@@ -625,8 +649,8 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                                 }
                                             }
                                         });
-        
-        
+    
+    
                                         dialog.show ();
                                         
                                         
@@ -693,7 +717,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                     checkSelfPermission (Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED ||
 //                    checkSelfPermission (Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
                     checkSelfPermission (Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-        
+    
                 requestPermissions (new String[] {
                                 Manifest.permission.RECEIVE_SMS,
                                 Manifest.permission.VIBRATE,
@@ -814,7 +838,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                         dialog.getInputEditText ().setHint ("Resend OTP in 00:" + String.format ("%02d", seconds));
                         dialog.getActionButton (DialogAction.NEUTRAL).setEnabled (false);
                     }
-        
+    
                     public void onFinish () {
                         dialog.getInputEditText ().setHint ("Still not received, Resend");
                         dialog.getActionButton (DialogAction.NEUTRAL).setEnabled (true);
@@ -843,7 +867,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                         } catch (Exception e) {
                             e.printStackTrace ();
                         }*/
-            
+    
                         sendSignUpDetailsToServer (etName.getText ().toString (), etEmail.getText ().toString (), etMobile.getText ().toString (), otp);
                     } else {
                         Utils.showSnackBar (LoginActivity.this, clMain, "OTP didn't match", Snackbar.LENGTH_LONG, null, null);
