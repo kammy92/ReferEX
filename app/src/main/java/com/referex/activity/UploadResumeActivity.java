@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,10 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +26,6 @@ import com.referex.utils.Utils;
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
@@ -42,7 +37,10 @@ import mabbas007.tagsedittext.TagsEditText;
  */
 
 public class UploadResumeActivity extends AppCompatActivity implements TagsEditText.TagsEditListener{
-
+    
+    public static final String UPLOAD_URL = "https://project-referex-cammy92.c9users.io/api/upload_new.php";
+    public static final String PDF_FETCH_URL = "http://internetfaqs.net/AndroidPdfUpload/getPdfs.php";
+    private static final int STORAGE_PERMISSION_CODE = 123;
     TextView tvUploadResume;
     TextView tvTitle;
     TextView tvSelectResume;
@@ -51,17 +49,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     EditText etMobile;
     TagsEditText mTagsEditText;
     TextView tvJobPosition;
-
-    public static final String UPLOAD_URL = "https://project-referex-cammy92.c9users.io/api/upload_new.php";
-    public static final String PDF_FETCH_URL = "http://internetfaqs.net/AndroidPdfUpload/getPdfs.php";
-    private int PICK_PDF_REQUEST = 1;
-    private static final int STORAGE_PERMISSION_CODE = 123;
-    private Uri filePath;
     ProgressDialog progressDialog;
     String jobPosition;
-
     RelativeLayout rlBack;
-
+    private int PICK_PDF_REQUEST = 1;
+    private Uri filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +79,16 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     private void initData() {
         requestStoragePermission();
         progressDialog = new ProgressDialog(this);
+    
+        String[] title = {"C", "C++", "Java", "Android", "Html", "Php", "Hadoop", "Tableau", "Ios"};
 
-        String[] title = {"C", "C++", "Java", "Android", "Html", "Php", "Hadoop", "Tableau", "Ios"
-        };
-
-        mTagsEditText.setHint("Skill");
+//        mTagsEditText.setHint("Skill");
         mTagsEditText.setTagsListener(UploadResumeActivity.this);
         mTagsEditText.setTagsWithSpacesEnabled(true);
         mTagsEditText.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, title));
         mTagsEditText.setThreshold(1);
-
+    
         Utils.setTypefaceToAllViews (this, tvSelectResume);
-        Utils.setTypefaceToAllViews (this, tvUploadResume);
-        Utils.setTypefaceToAllViews (this, tvTitle);
     }
 
     private void initView() {

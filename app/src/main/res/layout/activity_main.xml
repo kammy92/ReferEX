@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/clMain"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout android:id="@+id/clMain"
+                                                 xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:plainpie="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,23 +19,23 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="visible">
 
-            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/toolbar"
-                style="@style/Widget.MyApp.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:animateLayoutChanges="true"
-                android:background="@android:color/transparent"
-                android:contentInsetEnd="0dp"
-                android:contentInsetLeft="0dp"
-                android:contentInsetRight="0dp"
-                android:contentInsetStart="0dp"
-                android:visibility="visible"
-                app:contentInsetEnd="0dp"
-                app:contentInsetLeft="0dp"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin">
+            <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+                                               style="@style/Widget.MyApp.ActionBar"
+                                               xmlns:android="http://schemas.android.com/apk/res/android"
+                                               android:layout_width="match_parent"
+                                               android:layout_height="?attr/actionBarSize"
+                                               android:animateLayoutChanges="true"
+                                               android:background="@android:color/transparent"
+                                               android:contentInsetEnd="0dp"
+                                               android:contentInsetLeft="0dp"
+                                               android:contentInsetRight="0dp"
+                                               android:contentInsetStart="0dp"
+                                               android:visibility="visible"
+                                               app:contentInsetEnd="0dp"
+                                               app:contentInsetLeft="0dp"
+                                               app:contentInsetRight="0dp"
+                                               app:contentInsetStart="0dp"
+                                               app:layout_collapseMode="pin">
 
                 <RelativeLayout
                     android:id="@+id/toolbar_layout"
@@ -60,6 +60,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -67,8 +68,7 @@
                         android:text="@string/activity_main_title"
                         android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_title"
-                        android:textStyle="bold"
-                        android:id="@+id/tvTitle"/>
+                        android:textStyle="bold"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -112,40 +112,126 @@
         <RelativeLayout
             android:id="@+id/rlList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button2"
+            android:layout_height="match_parent"
             android:layout_below="@+id/appBar"
             android:visibility="visible">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvJobList"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/appBar"
-                    android:paddingBottom="4dp" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary">
 
-            </android.support.v4.widget.SwipeRefreshLayout>
+                    <TextView
+                        android:id="@+id/tvProfilePer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/pieView"
+                        android:padding="10dp"
+                        android:text="Profile Performance"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_extra_large"
+                        android:textStyle="bold"/>
+
+                    <az.plainpie.PieView
+                        android:id="@+id/pieView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_margin="10dp"
+                        plainpie:inner_pie_padding="30"
+                        plainpie:inner_text_visibility="true"
+                        plainpie:percentage="35"
+                        plainpie:percentage_size="70"/>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl2"
+                    android:background="@color/primary_dark">
+
+
+                    <TextView
+                        android:id="@+id/tvTotalReferrals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Total Referrals"
+                        android:textColor="@color/text_color_white"/>
+                    <TextView
+                        android:id="@+id/tvTotalReferralsCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/tvTotalReferrals"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="0"
+                        android:textColor="@color/text_color_white"/>
+                    <TextView
+                        android:id="@+id/tvTotalReferralsSelected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTotalReferrals"
+                        android:padding="10dp"
+                        android:text="Total Referrals - Selected"
+                        android:textColor="@color/text_color_white"/>
+                    <TextView
+                        android:id="@+id/tvReferralsSelectedCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTotalReferrals"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/tvTotalReferralsSelected"
+                        android:gravity="end"
+                        android:padding="10dp"
+                        android:text="0"
+                        android:textColor="@color/text_color_white"/>
+                    <TextView
+                        android:id="@+id/tvReferralsRejected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTotalReferralsSelected"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:text="Total Referrals - Rejected"
+                        android:textColor="@color/text_color_white"/>
+                    <TextView
+                        android:id="@+id/tvReferralsRejectedCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTotalReferralsSelected"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/tvReferralsRejected"
+                        android:gravity="end"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="0"
+                        android:textColor="@color/text_color_white"/>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
 
 
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/activity_margin_small"
-            android:background="@color/primary"
-            android:text="Save this search as an alert"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
-            android:visibility="gone"/>
 
         <RelativeLayout
             android:id="@+id/rlInternetConnection"

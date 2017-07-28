@@ -2,7 +2,6 @@ package com.referex.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ import com.referex.R;
 import com.referex.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import mabbas007.tagsedittext.TagsEditText;
 
@@ -53,8 +51,7 @@ public class FilterActivity extends AppCompatActivity {
         initData();
         initListener();
     }
-
-
+    
     private void initView() {
         spSalary = (Spinner) findViewById(R.id.spSalary);
         locationEditText = (TagsEditText) findViewById(R.id.locationEditText);
@@ -87,20 +84,17 @@ public class FilterActivity extends AppCompatActivity {
         Utils.setTypefaceToAllViews (this, tvTitle);
 
     }
-
-
+    
     private void initData() {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, salaryArray); //selected item will look like a spinner set from XML
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spSalary.setAdapter(spinnerArrayAdapter);
 
-
         roleList.add("Programmer");
         roleList.add("Designer");
         roleList.add("Analyst");
         roleList.add("Manager");
-
-
+        
         functionalAreaList.add("Software Engineer");
         functionalAreaList.add("Java Developer");
         functionalAreaList.add("Finance Management");
@@ -179,6 +173,4 @@ public class FilterActivity extends AppCompatActivity {
 
 
     }
-
-
 }

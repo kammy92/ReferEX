@@ -8,11 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,32 +34,24 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.referex.R;
-import com.referex.adapter.JobDescriptionAdapter;
-import com.referex.model.JobDescription;
 import com.referex.utils.SetTypeFace;
 import com.referex.utils.UserDetailsPref;
 import com.referex.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mabbas007.tagsedittext.TagsEditText;
+import az.plainpie.PieView;
+import az.plainpie.animation.PieAngleAnimation;
 
 public class MainActivity extends AppCompatActivity {
     Bundle savedInstanceState;
-    List<JobDescription> jobDescriptionList= new ArrayList<>();
     RelativeLayout rlInternetConnection;
     RelativeLayout   rlNoResultFound;
-    RecyclerView rvJobList;
     ImageView ivNavigation;
-    SwipeRefreshLayout swipeRefreshLayout;
-    JobDescriptionAdapter jobDescriptionAdapter;
     UserDetailsPref userDetailsPref;
     ImageView ivFilter;
     TextView tvTitle;
+    PieView pieView;
     private AccountHeader headerResult = null;
     private Drawer result = null;
-    private TagsEditText mTagsEditText;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -93,33 +81,26 @@ public class MainActivity extends AppCompatActivity {
         ivFilter=(ImageView)findViewById(R.id.ivFilter);
         rlInternetConnection=(RelativeLayout)findViewById(R.id.rlInternetConnection);
         rlNoResultFound=(RelativeLayout)findViewById(R.id.rlNoResultFound);
-        rvJobList=(RecyclerView)findViewById(R.id.rvJobList);
-        swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh_layout);
         tvTitle=(TextView)findViewById(R.id.tvTitle);
-
+        pieView = (PieView) findViewById (R.id.pieView);
         Utils.setTypefaceToAllViews(MainActivity.this,tvTitle);
 
     }
 
     private void initData() {
         userDetailsPref=UserDetailsPref.getInstance();
-        jobDescriptionList.clear ();
-        jobDescriptionList.add (new JobDescription (1, "Engineering Manager (PHP)", "ABC Technologies Pvt Ltd", "6 - 10 Years", "Delhi", "Java, MySQL, CSS, PHP, HTML5", true));
-        jobDescriptionList.add (new JobDescription (2, "Android Developer - Java", "XYZ Pvt Ltd", "1-3 Years", "Bengaluru", "Android, Java, SDK, Mobile Development", false));
-        jobDescriptionList.add (new JobDescription (3, "Sr Project Manager", "SLA Consulting India", "3-6 Years", "Faridabad, Guurgaon", "Team Lead, Python, Java, JavaScript, Django", false));
-        jobDescriptionList.add (new JobDescription (4, "Consultant / Sr. Consultant", "Focus Consulting Co India", "6-10 Years", "Delhi", "Java, PHP, HTML5, Django, Symphony", true));
-        jobDescriptionList.add (new JobDescription (5, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", false));
-        jobDescriptionList.add (new JobDescription (6, "C++ Developer", "Angel Network", "2-3 Years", "Pune", "C++, C, Java, OOOPs, CSS, Django, Symphony", false));
-
-
-        swipeRefreshLayout.setRefreshing (false);
-
-        jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
-        rvJobList.setAdapter (jobDescriptionAdapter);
-        rvJobList.setHasFixedSize (true);
-        rvJobList.setLayoutManager (new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rvJobList.setItemAnimator (new DefaultItemAnimator());
-
+    
+        pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.text_color_orange));
+        pieView.setMainBackgroundColor (getResources ().getColor (R.color.tab_text_color_selected));
+        pieView.setTextColor (getResources ().getColor (R.color.text_color_white));
+        pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.text_color_orange));
+        PieAngleAnimation animation = new PieAngleAnimation (pieView);
+        animation.setDuration (5000); //This is the duration of the animation in millis
+        pieView.startAnimation (animation);
+        pieView.setInnerTextVisibility (View.VISIBLE);
+        pieView.setInnerText ("35");
+        pieView.setPercentageTextSize (35);
+        pieView.setPercentage (35);
 
     }
 
@@ -148,13 +129,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(false);
-
-            }
-        });
 
     }
 
@@ -327,6 +301,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         switch ((int) drawerItem.getIdentifier ()) {
+    
+                            case 3:
+                                Intent intent3 = new Intent (MainActivity.this, RecommendedJobActivity.class);
+                                startActivity (intent3);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
+
                             case 7:
                                 showLogOutDialog ();
                                 break;
