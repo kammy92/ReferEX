@@ -49,6 +49,8 @@ dependencies {
     compile 'com.github.mabbas007:TagsEditText:1.0.5'
     compile 'com.android.support:multidex:1.0.0'
 
+    compile 'com.github.zurche:plain-pie:v0.2.2'
+
     compile 'net.gotev:uploadservice:2.1'
 
 }

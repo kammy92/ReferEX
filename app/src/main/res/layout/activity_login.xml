@@ -1,171 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<!--<android.support.design.widget.CoordinatorLayout
     android:id="@+id/clMain"
     xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/app_background">
+    android:background="@color/app_background">-->
+<RelativeLayout
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <ImageView
+                android:id="@+id/ivLogo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/logo_height"
+                android:layout_margin="@dimen/activity_margin"
+                android:src="@drawable/referex_logo"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/ivLogo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/logo_height"
-                    android:layout_margin="@dimen/activity_margin"
-                    android:src="@drawable/referex_logo"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Full Name"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="@dimen/text_size_small"/>
 
-
-                <LinearLayout
+                <EditText
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <EditText
-                        android:id="@+id/etName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:background="@drawable/edit_text_background"
-                        android:hint="@string/activity_login_hint_full_name"
-                        android:padding="@dimen/edittext_padding"
-                        android:textColorHint="@color/app_text_color_light"
-                        android:textSize="@dimen/text_size_medium"/>
-
-                    <EditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:background="@drawable/edit_text_background"
-                        android:hint="@string/activity_login_hint_email"
-                        android:inputType="textEmailAddress"
-                        android:padding="@dimen/edittext_padding"
-                        android:textColorHint="@color/app_text_color_light"
-                        android:textSize="@dimen/text_size_medium"/>
-
-                    <EditText
-                        android:id="@+id/etMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:background="@drawable/edit_text_background"
-                        android:hint="@string/activity_login_hint_mobile"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:padding="@dimen/edittext_padding"
-                        android:textColorHint="@color/app_text_color_light"
-                        android:textSize="@dimen/text_size_medium"/>
-
-
-
-                    <mabbas007.tagsedittext.TagsEditText
-                        android:id="@+id/tagsEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin"
-                        android:background="@drawable/edit_text_background"
-                        android:padding="@dimen/edittext_padding"
-                        android:textColor="@color/text_color_black"
-                        android:textColorHint="@color/hint_text_color"
-                        android:textSize="@dimen/text_size_medium"
-                        TagsEditText:allowSpaceInTag="true"
-                        TagsEditText:tagsBackground="@drawable/square"
-                        TagsEditText:tagsCloseImageRight="@drawable/tag_close"/>
-
-
-
-
-                    <Spinner
-                        android:id="@+id/spType"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:background="@drawable/edit_text_background"
-                        android:hint="Type"
-                        android:padding="@dimen/edittext_padding"
-                        android:spinnerMode="dialog"
-                        android:visibility="gone" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:orientation="horizontal">
-
-                        <CheckBox
-                            android:id="@+id/cbTerm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true" />
-
-
-                        <TextView
-                            android:id="@+id/tvTermConditions"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/cbTerm"
-                            android:layout_toRightOf="@+id/cbTerm" />
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
+                    android:background="@drawable/edittext_underline"
+                    android:inputType="textPersonName"
+                    android:text="Karman Singh"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
-                    android:id="@+id/tvSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:text="Email Address"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="@dimen/text_size_small"/>
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_underline"
+                    android:inputType="textEmailAddress"
+                    android:text="karman.singh@actiknowbi.com"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:text="Mobile"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="@dimen/text_size_small"/>
+                <EditText
+                    android:id="@+id/etMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_underline"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:text="9873684678"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium"/>
+                <RelativeLayout android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Skills"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
+
+                    <Button android:id="@+id/btAddSkills"
+                            style="@style/Widget.AppCompat.Light.ActionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@null"
+                            android:text="ADD"
+                            android:textColor="@color/primary_dark"/>
+
+                </RelativeLayout>
+
+                <com.referex.utils.FlowLayout
+                    android:id="@+id/chips_box_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start">
+
+
+                </com.referex.utils.FlowLayout>
+
+                <mabbas007.tagsedittext.TagsEditText
+                    android:id="@+id/tagsEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_underline"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_medium"
+                    android:visibility="gone"
+                    TagsEditText:allowSpaceInTag="true"
+                    TagsEditText:tagsBackground="@drawable/square"
+                    TagsEditText:tagsCloseImageRight="@drawable/tag_close"/>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_margin_small"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin_small"
-                    android:background="@drawable/button_bg"
-                    android:elevation="@dimen/button_elevation"
-                    android:gravity="center"
-                    android:padding="@dimen/activity_margin"
-                    android:text="@string/activity_login_button_submit"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/text_size_extra_large" />
-
-
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+                    <CheckBox
+                        android:id="@+id/cbTerm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:checked="true"/>
+                    <TextView
+                        android:id="@+id/tvTermConditions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/cbTerm"
+                        android:layout_toRightOf="@+id/cbTerm"/>
+                </RelativeLayout>
             </LinearLayout>
-        </ScrollView>
-
-    </RelativeLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="@drawable/button_bg"
+                android:elevation="@dimen/button_elevation"
+                android:gravity="center"
+                android:padding="@dimen/edittext_padding"
+                android:text="SUBMIT"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/text_size_large"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
+    <!--
+    </android.support.design.widget.CoordinatorLayout>-->
