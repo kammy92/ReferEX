@@ -1,5 +1,6 @@
 package com.referex.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class RecommendedJobActivity extends AppCompatActivity {
     RelativeLayout rlInternetConnection;
     RelativeLayout rlNoResultFound;
     RecyclerView rvJobList;
+    ImageView ivFilter;
     
     JobDescriptionAdapter jobDescriptionAdapter;
     UserDetailsPref userDetailsPref;
@@ -51,6 +54,7 @@ public class RecommendedJobActivity extends AppCompatActivity {
     
     private void initView () {
         rlInternetConnection = (RelativeLayout) findViewById (R.id.rlInternetConnection);
+        ivFilter = (ImageView) findViewById (R.id.ivFilter);
         rlNoResultFound = (RelativeLayout) findViewById (R.id.rlNoResultFound);
         rvJobList = (RecyclerView) findViewById (R.id.rvJobList);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById (R.id.swipe_refresh_layout);
@@ -76,6 +80,21 @@ public class RecommendedJobActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing (false);
             }
         });
+    
+        ivFilter.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View view) {
+                ivFilter.setOnClickListener (new View.OnClickListener () {
+                    @Override
+                    public void onClick (View v) {
+                        Intent intent4 = new Intent (RecommendedJobActivity.this, FilterActivity.class);
+                        startActivity (intent4);
+                        overridePendingTransition (R.anim.slide_in_up, R.anim.slide_out_up);
+                    }
+                });
+            }
+        });
+    
     }
     
     private void initData () {

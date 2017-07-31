@@ -88,9 +88,9 @@
                     android:text="9873684678"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/text_size_medium"/>
-                <RelativeLayout android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -110,15 +110,11 @@
                             android:textColor="@color/primary_dark"/>
 
                 </RelativeLayout>
-
                 <com.referex.utils.FlowLayout
                     android:id="@+id/chips_box_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start">
-
-
-                </com.referex.utils.FlowLayout>
+                    android:gravity="start"/>
 
                 <mabbas007.tagsedittext.TagsEditText
                     android:id="@+id/tagsEditText"

@@ -19,7 +19,7 @@
             android:id="@+id/llJobCriteria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin_small"
+            android:layout_margin="@dimen/activity_margin_extra_small"
             android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -29,6 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_margin_extra_small"
                     android:layout_toLeftOf="@+id/ivRating"
                     android:layout_toStartOf="@+id/ivRating"
                     android:ellipsize="end"
@@ -40,8 +41,8 @@
 
                 <ImageView
                     android:id="@+id/ivRating"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"

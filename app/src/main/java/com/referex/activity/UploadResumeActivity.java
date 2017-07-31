@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -14,21 +15,25 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.referex.R;
 import com.referex.utils.AppConfigTags;
 import com.referex.utils.FilePath;
+import com.referex.utils.FlowLayout;
 import com.referex.utils.Utils;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
@@ -50,12 +55,15 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     EditText etName;
     EditText etEmail;
     EditText etMobile;
-    TagsEditText mTagsEditText;
     TextView tvJobPosition;
     ProgressDialog progressDialog;
     String jobPosition;
     RelativeLayout rlBack;
     TextView tvFileSelected;
+    Button btAddSkills;
+    FlowLayout chipsBoxLayout;
+    ArrayList<String> skillsArrayList = new ArrayList<String> ();
+    ArrayList<String> skillsSelectedArrayList = new ArrayList<String> ();
     private int PICK_PDF_REQUEST = 1;
     private Uri filePath;
     
@@ -67,29 +75,19 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         initData ();
         initListener ();
         getExtras ();
-        
     }
-    
     
     private void getExtras () {
         Intent intent = getIntent ();
         jobPosition = intent.getStringExtra (AppConfigTags.JOB_POSITION);
         tvJobPosition.setText (jobPosition);
-        
     }
-    
     
     private void initData () {
         requestStoragePermission ();
         progressDialog = new ProgressDialog (this);
-        
-        String[] title = {"C", "C++", "Java", "Android", "Html", "Php", "Hadoop", "Tableau", "Ios"};
-
-//        mTagsEditText.setHint("Skill");
-        mTagsEditText.setTagsListener (UploadResumeActivity.this);
-        mTagsEditText.setTagsWithSpacesEnabled (true);
-        mTagsEditText.setAdapter (new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, title));
-        mTagsEditText.setThreshold (1);
+    
+        skillsArrayList.addAll (Arrays.asList (new String[] {"C", "C++", "Java", "Android", "HTML", "PHP", "Hadoop", "Tableau", "iOS"}));
         
         Utils.setTypefaceToAllViews (this, tvSelectResume);
     }
@@ -102,20 +100,12 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         etName = (EditText) findViewById (R.id.etName);
         etEmail = (EditText) findViewById (R.id.etEmail);
         etMobile = (EditText) findViewById (R.id.etMobile);
-        mTagsEditText = (TagsEditText) findViewById (R.id.tagsEditText);
         rlBack = (RelativeLayout) findViewById (R.id.rlBack);
         tvFileSelected = (TextView) findViewById (R.id.etFileSelected);
-        
+        btAddSkills = (Button) findViewById (R.id.btAddSkills);
+        chipsBoxLayout = (FlowLayout) findViewById (R.id.chips_box_layout);
         
         Utils.setTypefaceToAllViews (this, tvSelectResume);
-        Utils.setTypefaceToAllViews (this, tvUploadResume);
-        Utils.setTypefaceToAllViews (this, tvTitle);
-        Utils.setTypefaceToAllViews (this, etName);
-        Utils.setTypefaceToAllViews (this, etEmail);
-        Utils.setTypefaceToAllViews (this, etMobile);
-        Utils.setTypefaceToAllViews (this, mTagsEditText);
-        
-        
     }
     
     private void initListener () {
@@ -141,7 +131,82 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-        
+    
+        btAddSkills.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View view) {
+                ArrayList<Integer> skillPositionList = new ArrayList<Integer> ();
+                for (int i = 0; i < skillsSelectedArrayList.size (); i++) {
+                    for (int j = 0; j < skillsArrayList.size (); j++) {
+                        if (skillsSelectedArrayList.get (i).equalsIgnoreCase (skillsArrayList.get (j))) {
+                            skillPositionList.add (j);
+                        }
+                    }
+                }
+            
+                Integer[] ints = new Integer[skillPositionList.size ()];
+                int i = 0;
+                for (Integer n : skillPositionList) {
+                    ints[i++] = n;
+                }
+            
+            
+                new MaterialDialog.Builder (UploadResumeActivity.this)
+                        .title ("Skills")
+                        .items (skillsArrayList)
+                        .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
+                            @Override
+                            public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
+                                FlowLayout.LayoutParams params = new FlowLayout.LayoutParams (FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
+                                params.setMargins (5, 5, 5, 5);
+                                chipsBoxLayout.removeAllViews ();
+                                skillsSelectedArrayList.clear ();
+                                if (text.length > 0) {
+                                    btAddSkills.setText ("ADD/EDIT");
+                                } else {
+                                    btAddSkills.setText ("ADD");
+                                }
+                                for (int i = 0; i < text.length; i++) {
+                                    skillsSelectedArrayList.add (text[i].toString ());
+                                    final TextView t = new TextView (UploadResumeActivity.this);
+                                    t.setLayoutParams (params);
+                                    t.setPadding (8, 8, 8, 8);
+                                    t.setText (text[i]);
+                                    t.setTextColor (Color.WHITE);
+//                                    t.setCompoundDrawablePadding (10);
+//                                    final int finalI = i;
+//                                    t.setOnClickListener (new View.OnClickListener () {
+//                                        @Override
+//                                        public void onClick (View view) {
+//                                            chipsBoxLayout.removeViewAt (finalI);
+//                                        }
+//                                    });
+//                                    t.setCompoundDrawablesWithIntrinsicBounds (0, 0, R.drawable.ic_cancel, 0);
+                                    t.setBackgroundResource (R.drawable.square);
+                                    chipsBoxLayout.addView (t);
+                                }
+                                return true;
+                            }
+                        })
+                        .neutralText ("CLEAR")
+                        .onNeutral (new MaterialDialog.SingleButtonCallback () {
+                            @Override
+                            public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.clearSelectedIndices ();
+                            }
+                        })
+                        .positiveText ("SELECT")
+                        .onPositive (new MaterialDialog.SingleButtonCallback () {
+                            @Override
+                            public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss ();
+                            }
+                        })
+                        .autoDismiss (false)
+                        .alwaysCallInputCallback ()
+                        .show ();
+            }
+        });
     }
     
     

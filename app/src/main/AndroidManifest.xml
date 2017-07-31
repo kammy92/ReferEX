@@ -37,10 +37,14 @@
         <activity
             android:name=".activity.RecommendedJobActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.FilterActivity"/>
-
-
+        <activity android:name=".activity.LoginActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FilterActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.FeedbackActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SearchJobActivity"
+                  android:screenOrientation="portrait"/>
 
 
         <service android:name="com.referex.service.MyFirebaseMessagingService">

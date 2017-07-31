@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background_color">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         android:animateLayoutChanges="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:visibility="visible">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Widget.MyApp.ActionBar"
@@ -26,14 +28,17 @@
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
             app:layout_collapseMode="pin">
+
             <RelativeLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <RelativeLayout
                     android:id="@+id/rlBack"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
+
                     <ImageView
                         android:id="@+id/ivBack"
                         android:layout_width="wrap_content"
@@ -43,6 +48,7 @@
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_back"
                         android:visibility="visible"/>
+
                     <TextView
                         android:id="@+id/tvBack"
                         android:layout_width="wrap_content"
@@ -54,39 +60,30 @@
                         android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"
                         android:visibility="invisible"/>
+
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toEndOf="@+id/ivBack"
+                        android:layout_toRightOf="@+id/ivBack"
+                        android:gravity="center"
+                        android:text="Feedback"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_large"/>
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:text="Submit Profile"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/text_size_large"/>
-
             </RelativeLayout>
-
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBar"
         android:layout_margin="@dimen/activity_margin"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <TextView
-            android:id="@+id/tvJobPosition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Software Engineer"
-            android:textColor="@color/primary_dark"
-            android:textSize="@dimen/text_size_extra_large"
-            android:textStyle="bold"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,12 +92,13 @@
             android:text="Full Name"
             android:textColor="@color/primary_dark"
             android:textSize="@dimen/text_size_small"/>
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_underline"
-            android:inputType="textPersonName|textCapSentences"
+            android:inputType="textPersonName"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
 
@@ -111,6 +109,7 @@
             android:text="Email"
             android:textColor="@color/primary_dark"
             android:textSize="@dimen/text_size_small"/>
+
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
@@ -124,106 +123,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_margin"
-            android:text="Mobile"
+            android:text="Feedback"
             android:textColor="@color/primary_dark"
             android:textSize="@dimen/text_size_small"/>
+
         <EditText
-            android:id="@+id/etMobile"
+            android:id="@+id/etFeedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_underline"
-            android:inputType="number"
-            android:maxLength="10"
+            android:inputType="textMultiLine"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_margin"
-                android:text="Skills"
-                android:textColor="@color/primary_dark"
-                android:textSize="@dimen/text_size_small"/>
-
-            <Button android:id="@+id/btAddSkills"
-                    style="@style/Widget.AppCompat.Light.ActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@null"
-                    android:text="ADD"
-                    android:textColor="@color/primary_dark"/>
-
-        </RelativeLayout>
-        <com.referex.utils.FlowLayout
-            android:id="@+id/chips_box_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:text="Upload Resume (Optional)"
-            android:textColor="@color/primary_dark"
-            android:textSize="@dimen/text_size_small"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/editTextName"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_margin_small"
-                android:background="@drawable/button_bg"
-                android:gravity="center"
-                android:padding="@dimen/edittext_padding"
-                android:text="SELECT FILE"
-                android:textColor="@color/text_color_white"
-                android:textSize="@dimen/text_size_medium"/>
-            <TextView
-                android:id="@+id/etFileSelected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginStart="@dimen/activity_margin"
-                android:enabled="false"
-                android:text="resume.pdf"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/text_size_medium"
-                android:visibility="gone"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-
-            <Button
-                android:id="@+id/buttonChoose"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/primary"
-                android:text="Select"
-                android:textColor="@color/text_color_white"
-                android:textStyle="bold"
-                android:visibility="gone"/>
-
-        </LinearLayout>
-        <TextView
-            android:id="@+id/buttonUpload"
+            android:id="@+id/tvSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_margin"
@@ -234,7 +149,6 @@
             android:text="SUBMIT"
             android:textColor="@color/text_color_white"
             android:textSize="@dimen/text_size_large"/>
+
     </LinearLayout>
-
-
 </android.support.design.widget.CoordinatorLayout>

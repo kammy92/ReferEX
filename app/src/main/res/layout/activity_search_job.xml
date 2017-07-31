@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:text="Filter"
+                    android:text="Search Job"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_large"/>
 
@@ -204,7 +204,7 @@
             </LinearLayout>
         </ScrollView>
         <TextView
-            android:id="@+id/tvApply"
+            android:id="@+id/tvSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -213,7 +213,7 @@
             android:elevation="@dimen/button_elevation"
             android:gravity="center"
             android:padding="@dimen/edittext_padding"
-            android:text="APPLY"
+            android:text="SEARCH"
             android:textColor="@color/text_color_white"
             android:textSize="@dimen/text_size_large"/>
     </RelativeLayout>
