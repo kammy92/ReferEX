@@ -66,7 +66,8 @@
                             android:gravity="center_vertical"
                             android:text="Home"
                             android:textColor="@color/text_color_white"
-                            android:textSize="@dimen/text_size_small"/>
+                            android:textSize="@dimen/text_size_small"
+                            android:visibility="invisible"/>
                     </RelativeLayout>
 
                     <TextView
@@ -80,20 +81,38 @@
                         android:textSize="@dimen/text_size_title"
                         android:textStyle="bold"/>
 
-                    <TextView
-                        android:id="@+id/tvApply"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:gravity="center"
-                        android:padding="@dimen/activity_margin"
-                        android:text="Apply"
-                        android:textColor="@color/text_color_white"
-                        android:textSize="@dimen/text_size_small"
-                        android:textStyle="bold"
-                        android:visibility="gone"/>
+                        android:layout_alignParentRight="true">
+                        <ImageView
+                            android:id="@+id/ivOverflow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivFilter"
+                            android:padding="@dimen/activity_margin_small"
+                            android:src="@drawable/ic_overflow_menu"
+                            android:visibility="gone"/>
+                        <ImageView
+                            android:id="@+id/ivMaps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/ivFilter"
+                            android:layout_toRightOf="@+id/ivFilter"
+                            android:padding="@dimen/activity_margin_small"
+                            android:visibility="gone"/>
+                        <ImageView
+                            android:id="@+id/ivFilter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/activity_margin_small"
+                            android:src="@drawable/ic_filter"
+                            android:visibility="visible"/>
+                    </RelativeLayout>
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>

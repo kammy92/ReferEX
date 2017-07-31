@@ -11,6 +11,10 @@
     <color name="app_background">#f5f5f5</color>
 
 
+    <color name="pie_color_background">#00000000</color>
+    <color name="pie_color_good">#77dd91</color>
+    <color name="pie_color_average">#fff</color>
+    <color name="pie_color_bad">#fff</color>
 
 
     <color name="tab_text_color">#fff</color>

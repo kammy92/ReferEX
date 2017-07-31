@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout   rlNoResultFound;
     ImageView ivNavigation;
     UserDetailsPref userDetailsPref;
-    ImageView ivFilter;
     TextView tvTitle;
     PieView pieView;
+    View bottomSheet;
+    ImageView ivSwipe;
     private AccountHeader headerResult = null;
     private Drawer result = null;
-
+    private BottomSheetBehavior mBottomSheetBehavior;
+    
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -78,56 +81,66 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         ivNavigation=(ImageView)findViewById(R.id.ivNavigation);
-        ivFilter=(ImageView)findViewById(R.id.ivFilter);
         rlInternetConnection=(RelativeLayout)findViewById(R.id.rlInternetConnection);
         rlNoResultFound=(RelativeLayout)findViewById(R.id.rlNoResultFound);
         tvTitle=(TextView)findViewById(R.id.tvTitle);
         pieView = (PieView) findViewById (R.id.pieView);
-        Utils.setTypefaceToAllViews(MainActivity.this,tvTitle);
-
+    
+        bottomSheet = findViewById (R.id.bottom_sheet);
+    
+        ivSwipe = (ImageView) findViewById (R.id.ivSwipe);
+    
+        Utils.setTypefaceToAllViews (MainActivity.this, tvTitle);
     }
 
     private void initData() {
         userDetailsPref=UserDetailsPref.getInstance();
     
-        pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.text_color_orange));
-        pieView.setMainBackgroundColor (getResources ().getColor (R.color.tab_text_color_selected));
+        pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.pie_color_good));
+        pieView.setInnerBackgroundColor (getResources ().getColor (R.color.primary));
         pieView.setTextColor (getResources ().getColor (R.color.text_color_white));
-        pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.text_color_orange));
         PieAngleAnimation animation = new PieAngleAnimation (pieView);
-        animation.setDuration (5000); //This is the duration of the animation in millis
+        animation.setDuration (2000); //This is the duration of the animation in millis
         pieView.startAnimation (animation);
         pieView.setInnerTextVisibility (View.VISIBLE);
-        pieView.setInnerText ("35");
-        pieView.setPercentageTextSize (35);
-        pieView.setPercentage (35);
-
+        pieView.setInnerText ("75%");
+        pieView.setPercentageTextSize (Utils.pxFromDp (this, 8));
+        pieView.setPercentage (75);
+    
+        mBottomSheetBehavior = BottomSheetBehavior.from (bottomSheet);
+        mBottomSheetBehavior.setPeekHeight ((int) Utils.pxFromDp (this, 80));
+        mBottomSheetBehavior.setState (BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     private void initListener() {
-        ivFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ivFilter.setOnClickListener (new View.OnClickListener () {
-                    @Override
-                    public void onClick (View v) {
-                        Intent intent4 = new Intent (MainActivity.this, FilterActivity.class);
-                        startActivity (intent4);
-                        overridePendingTransition (R.anim.slide_in_up, R.anim.slide_out_up);
-                    }
-                });
-            }
-        });
-
-
-
+    
+    
         ivNavigation.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
                 result.openDrawer ();
             }
         });
-
+    
+    
+        mBottomSheetBehavior.setBottomSheetCallback (new BottomSheetBehavior.BottomSheetCallback () {
+            @Override
+            public void onStateChanged (@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        ivSwipe.setImageResource (R.drawable.swipe_down);
+                        break;
+                    default:
+                        ivSwipe.setImageResource (R.drawable.swipe_up);
+                        break;
+                }
+            }
+        
+            @Override
+            public void onSlide (@NonNull View bottomSheet, float slideOffset) {
+                // React to dragging events
+            }
+        });
 
 
     }
@@ -301,13 +314,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         switch ((int) drawerItem.getIdentifier ()) {
-    
+                            case 2:
+                                Intent intent2 = new Intent (MainActivity.this, SearchJobActivity.class);
+                                startActivity (intent2);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
                             case 3:
                                 Intent intent3 = new Intent (MainActivity.this, RecommendedJobActivity.class);
                                 startActivity (intent3);
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
-
+    
+                            case 5:
+                                Intent intent5 = new Intent (MainActivity.this, FeedbackActivity.class);
+                                startActivity (intent5);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
+                            
                             case 7:
                                 showLogOutDialog ();
                                 break;
@@ -335,8 +358,13 @@ public class MainActivity extends AppCompatActivity {
                 .build ();
 //        result.getActionBarDrawerToggle ().setDrawerIndicatorEnabled (false);
     }
-
-
+    
+    @Override
+    public void onBackPressed () {
+        super.onBackPressed ();
+    }
+    
+    
     private void showLogOutDialog () {
         MaterialDialog dialog = new MaterialDialog.Builder (this)
                 .limitIconToDefaultSize ()

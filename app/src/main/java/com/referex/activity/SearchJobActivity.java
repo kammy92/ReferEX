@@ -21,8 +21,8 @@ import java.util.Arrays;
 /**
  * Created by actiknow on 7/25/17.
  */
-public class FilterActivity extends AppCompatActivity {
-    TextView tvApply;
+public class SearchJobActivity extends AppCompatActivity {
+    TextView tvSearch;
     TextView tvBack;
     
     Button btAddExperience;
@@ -50,44 +50,44 @@ public class FilterActivity extends AppCompatActivity {
     ArrayList<String> experienceSelectedArrayList = new ArrayList<String> ();
     
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filter);
-        initView();
-        initData();
-        initListener();
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_search_job);
+        initView ();
+        initData ();
+        initListener ();
     }
     
-    private void initView() {
-        tvApply = (TextView) findViewById(R.id.tvApply);
-        tvBack = (TextView) findViewById(R.id.tvBack);
-        rlBack=(RelativeLayout)findViewById(R.id.rlBack);
-    
+    private void initView () {
+        tvSearch = (TextView) findViewById (R.id.tvSearch);
+        tvBack = (TextView) findViewById (R.id.tvBack);
+        rlBack = (RelativeLayout) findViewById (R.id.rlBack);
+        
         btAddExperience = (Button) findViewById (R.id.btAddExperience);
         btAddLocation = (Button) findViewById (R.id.btAddLocation);
         btAddRole = (Button) findViewById (R.id.btAddRole);
         btAddSkills = (Button) findViewById (R.id.btAddSkills);
-    
+        
         flExperience = (FlowLayout) findViewById (R.id.flExperience);
         flLocation = (FlowLayout) findViewById (R.id.flLocation);
         flRole = (FlowLayout) findViewById (R.id.flRole);
         flSkills = (FlowLayout) findViewById (R.id.flSkills);
     }
     
-    private void initData() {
+    private void initData () {
         skillsArrayList.addAll (Arrays.asList (new String[] {"C", "C++", "Java", "Android", "HTML", "PHP", "Hadoop", "Tableau", "iOS"}));
-        skillsSelectedArrayList.addAll (skillsArrayList);
-    
+//        skillsSelectedArrayList.addAll (skillsArrayList);
+        
         locationArrayList.addAll (Arrays.asList (new String[] {"Delhi NCR", "Bangalore", "Pune", "Mumbai", "Hyderabad"}));
-        locationSelectedArrayList.addAll (locationArrayList);
-    
+//        locationSelectedArrayList.addAll (locationArrayList);
+        
         roleArrayList.addAll (Arrays.asList (new String[] {"Programmers", "Analyst", "Manager", "Designer"}));
-        roleSelectedArrayList.addAll (roleArrayList);
-    
+//        roleSelectedArrayList.addAll (roleArrayList);
+        
         experienceArrayList.addAll (Arrays.asList (new String[] {"0-1 Years", "1-2 Years", "2-3 Years", "3-4 Years", "4+ years"}));
-        experienceSelectedArrayList.addAll (experienceArrayList);
-    
-    
+//        experienceSelectedArrayList.addAll (experienceArrayList);
+        
+        
         FlowLayout.LayoutParams params = new FlowLayout.LayoutParams (FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins (5, 5, 5, 5);
         if (skillsSelectedArrayList.size () > 0) {
@@ -95,14 +95,14 @@ public class FilterActivity extends AppCompatActivity {
         } else {
             btAddSkills.setText ("ADD");
         }
-    
+        
         flSkills.removeAllViews ();
         flLocation.removeAllViews ();
         flRole.removeAllViews ();
         flExperience.removeAllViews ();
         TextView t;
         for (int i = 0; i < skillsSelectedArrayList.size (); i++) {
-            t = new TextView (FilterActivity.this);
+            t = new TextView (SearchJobActivity.this);
             t.setLayoutParams (params);
             t.setPadding (8, 8, 8, 8);
             t.setText (skillsSelectedArrayList.get (i));
@@ -110,14 +110,14 @@ public class FilterActivity extends AppCompatActivity {
             t.setBackgroundResource (R.drawable.square);
             flSkills.addView (t);
         }
-    
+        
         if (locationSelectedArrayList.size () > 0) {
             btAddLocation.setText ("ADD/EDIT");
         } else {
             btAddLocation.setText ("ADD");
         }
         for (int i = 0; i < locationSelectedArrayList.size (); i++) {
-            t = new TextView (FilterActivity.this);
+            t = new TextView (SearchJobActivity.this);
             t.setLayoutParams (params);
             t.setPadding (8, 8, 8, 8);
             t.setText (locationSelectedArrayList.get (i));
@@ -125,14 +125,14 @@ public class FilterActivity extends AppCompatActivity {
             t.setBackgroundResource (R.drawable.square);
             flLocation.addView (t);
         }
-    
+        
         if (roleSelectedArrayList.size () > 0) {
             btAddRole.setText ("ADD/EDIT");
         } else {
             btAddRole.setText ("ADD");
         }
         for (int i = 0; i < roleSelectedArrayList.size (); i++) {
-            t = new TextView (FilterActivity.this);
+            t = new TextView (SearchJobActivity.this);
             t.setLayoutParams (params);
             t.setPadding (8, 8, 8, 8);
             t.setText (roleSelectedArrayList.get (i));
@@ -140,14 +140,14 @@ public class FilterActivity extends AppCompatActivity {
             t.setBackgroundResource (R.drawable.square);
             flRole.addView (t);
         }
-    
+        
         if (experienceSelectedArrayList.size () > 0) {
             btAddExperience.setText ("ADD/EDIT");
         } else {
             btAddExperience.setText ("ADD");
         }
         for (int i = 0; i < experienceSelectedArrayList.size (); i++) {
-            t = new TextView (FilterActivity.this);
+            t = new TextView (SearchJobActivity.this);
             t.setLayoutParams (params);
             t.setPadding (8, 8, 8, 8);
             t.setText (experienceSelectedArrayList.get (i));
@@ -155,12 +155,12 @@ public class FilterActivity extends AppCompatActivity {
             t.setBackgroundResource (R.drawable.square);
             flExperience.addView (t);
         }
-    
+        
         Utils.setTypefaceToAllViews (this, tvBack);
     }
-
-    private void initListener() {
-        tvApply.setOnClickListener (new View.OnClickListener () {
+    
+    private void initListener () {
+        tvSearch.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
                 finish ();
@@ -173,8 +173,8 @@ public class FilterActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-    
-    
+        
+        
         btAddSkills.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -186,14 +186,14 @@ public class FilterActivity extends AppCompatActivity {
                         }
                     }
                 }
-    
+                
                 Integer[] ints = new Integer[skillPositionList.size ()];
                 int i = 0;
                 for (Integer n : skillPositionList) {
                     ints[i++] = n;
                 }
-    
-                new MaterialDialog.Builder (FilterActivity.this)
+                
+                new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
@@ -211,7 +211,7 @@ public class FilterActivity extends AppCompatActivity {
                                 TextView t;
                                 for (int i = 0; i < text.length; i++) {
                                     skillsSelectedArrayList.add (text[i].toString ());
-                                    t = new TextView (FilterActivity.this);
+                                    t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
@@ -241,7 +241,7 @@ public class FilterActivity extends AppCompatActivity {
                         .show ();
             }
         });
-    
+        
         btAddRole.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -253,14 +253,14 @@ public class FilterActivity extends AppCompatActivity {
                         }
                     }
                 }
-    
+                
                 Integer[] ints = new Integer[rolePositionList.size ()];
                 int i = 0;
                 for (Integer n : rolePositionList) {
                     ints[i++] = n;
                 }
-    
-                new MaterialDialog.Builder (FilterActivity.this)
+                
+                new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Skills")
                         .items (roleArrayList)
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
@@ -278,7 +278,7 @@ public class FilterActivity extends AppCompatActivity {
                                 TextView t;
                                 for (int i = 0; i < text.length; i++) {
                                     roleSelectedArrayList.add (text[i].toString ());
-                                    t = new TextView (FilterActivity.this);
+                                    t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
@@ -308,7 +308,7 @@ public class FilterActivity extends AppCompatActivity {
                         .show ();
             }
         });
-    
+        
         btAddExperience.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -320,14 +320,14 @@ public class FilterActivity extends AppCompatActivity {
                         }
                     }
                 }
-            
+                
                 Integer[] ints = new Integer[experiencePositionList.size ()];
                 int i = 0;
                 for (Integer n : experiencePositionList) {
                     ints[i++] = n;
                 }
-            
-                new MaterialDialog.Builder (FilterActivity.this)
+                
+                new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Experience")
                         .items (experienceArrayList)
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
@@ -345,7 +345,7 @@ public class FilterActivity extends AppCompatActivity {
                                 TextView t;
                                 for (int i = 0; i < text.length; i++) {
                                     experienceSelectedArrayList.add (text[i].toString ());
-                                    t = new TextView (FilterActivity.this);
+                                    t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
@@ -375,7 +375,7 @@ public class FilterActivity extends AppCompatActivity {
                         .show ();
             }
         });
-    
+        
         btAddLocation.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -387,14 +387,14 @@ public class FilterActivity extends AppCompatActivity {
                         }
                     }
                 }
-            
+                
                 Integer[] ints = new Integer[locationPositionList.size ()];
                 int i = 0;
                 for (Integer n : locationPositionList) {
                     ints[i++] = n;
                 }
-            
-                new MaterialDialog.Builder (FilterActivity.this)
+                
+                new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Location")
                         .items (locationArrayList)
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
@@ -412,7 +412,7 @@ public class FilterActivity extends AppCompatActivity {
                                 TextView t;
                                 for (int i = 0; i < text.length; i++) {
                                     locationSelectedArrayList.add (text[i].toString ());
-                                    t = new TextView (FilterActivity.this);
+                                    t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
@@ -442,6 +442,6 @@ public class FilterActivity extends AppCompatActivity {
                         .show ();
             }
         });
-    
+        
     }
 }
