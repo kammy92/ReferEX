@@ -159,6 +159,15 @@
                     android:textColor="@color/primary_dark"/>
 
         </RelativeLayout>
+        <TextView
+            android:id="@+id/tvNoSkills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:text="Please add skills"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/text_size_small"/>
         <com.referex.utils.FlowLayout
             android:id="@+id/chips_box_layout"
             android:layout_width="match_parent"

@@ -103,7 +103,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin"
+                        android:layout_centerVertical="true"
                         android:text="Experience (Years)"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small"/>
@@ -118,6 +118,16 @@
                         android:text="ADD"
                         android:textColor="@color/primary_dark"/>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add experience"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
                 <com.referex.utils.FlowLayout
                     android:id="@+id/flExperience"
                     android:layout_width="match_parent"
@@ -129,7 +139,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin"
+                        android:layout_centerVertical="true"
                         android:text="Location"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small"/>
@@ -144,6 +154,16 @@
                         android:text="ADD"
                         android:textColor="@color/primary_dark"/>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add location"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
                 <com.referex.utils.FlowLayout
                     android:id="@+id/flLocation"
                     android:layout_width="match_parent"
@@ -155,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin"
+                        android:layout_centerVertical="true"
                         android:text="Role"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small"/>
@@ -170,18 +190,28 @@
                         android:text="ADD"
                         android:textColor="@color/primary_dark"/>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoRole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add role"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
                 <com.referex.utils.FlowLayout
                     android:id="@+id/flRole"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"/>
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin"
+                        android:layout_centerVertical="true"
                         android:text="Skills"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small"/>
@@ -196,6 +226,15 @@
                         android:text="ADD"
                         android:textColor="@color/primary_dark"/>
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add skills"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
                 <com.referex.utils.FlowLayout
                     android:id="@+id/flSkills"
                     android:layout_width="match_parent"

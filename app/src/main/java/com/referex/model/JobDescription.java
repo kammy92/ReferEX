@@ -10,7 +10,7 @@ public class JobDescription {
     boolean is_favorite, is_hot;
     
     
-    public JobDescription (int id, String job_name, String company_name, String experience, String location, String skill, boolean is_hot) {
+    public JobDescription (int id, String job_name, String company_name, String experience, String location, String skill, boolean is_hot, boolean is_favorite) {
         this.id=id;
         this.job_name=job_name;
         this.experience=experience;
@@ -18,7 +18,7 @@ public class JobDescription {
         this.company_name=company_name;
         this.location=location;
         this.is_hot = is_hot;
-
+        this.is_favorite = is_favorite;
     }
 
     public JobDescription() {

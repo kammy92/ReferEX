@@ -38,7 +38,6 @@ import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -95,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
     ArrayList<String> skillsSelectedArrayList = new ArrayList<String> ();
     FlowLayout chipsBoxLayout;
     Button btAddSkills;
-    private TagsEditText mTagsEditText;
+    TextView tvNoSkills;
     
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -123,13 +122,6 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
         tvTerm.setMovementMethod (LinkMovementMethod.getInstance ());
         
         
-        mTagsEditText.setHint ("Skill");
-        mTagsEditText.setTagsListener (LoginActivity.this);
-        mTagsEditText.setTagsWithSpacesEnabled (true);
-        mTagsEditText.setAdapter (new ArrayAdapter<String> (this, android.R.layout.simple_dropdown_item_1line, skillsArrayList));
-        mTagsEditText.setThreshold (1);
-
-
 //        FlowLayout.LayoutParams params = new FlowLayout.LayoutParams (FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
 //        params.setMargins (5, 5, 5, 5);
 //        for (int i = 0; i < skillsArrayList.size (); i++) {
@@ -160,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
         tvTerm = (TextView) findViewById (R.id.tvTermConditions);
         cbTermAndCondition = (CheckBox) findViewById (R.id.cbTerm);
         tvSubmit = (TextView) findViewById (R.id.tvSubmit);
-        mTagsEditText = (TagsEditText) findViewById (R.id.tagsEditText);
+        tvNoSkills = (TextView) findViewById (R.id.tvNoSkills);
         btAddSkills = (Button) findViewById (R.id.btAddSkills);
         
         Utils.setTypefaceToAllViews (this, tvSubmit);
@@ -320,6 +312,7 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                 new MaterialDialog.Builder (LoginActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
+                        .typeface (SetTypeFace.getTypeface (LoginActivity.this), SetTypeFace.getTypeface (LoginActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -328,8 +321,10 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                 chipsBoxLayout.removeAllViews ();
                                 skillsSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoSkills.setVisibility (View.GONE);
                                     btAddSkills.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoSkills.setVisibility (View.VISIBLE);
                                     btAddSkills.setText ("ADD");
                                 }
                                 for (int i = 0; i < text.length; i++) {
@@ -337,17 +332,9 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                                     final TextView t = new TextView (LoginActivity.this);
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
+                                    t.setTypeface (SetTypeFace.getTypeface (LoginActivity.this));
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
-//                                    t.setCompoundDrawablePadding (10);
-//                                    final int finalI = i;
-//                                    t.setOnClickListener (new View.OnClickListener () {
-//                                        @Override
-//                                        public void onClick (View view) {
-//                                            chipsBoxLayout.removeViewAt (finalI);
-//                                        }
-//                                    });
-//                                    t.setCompoundDrawablesWithIntrinsicBounds (0, 0, R.drawable.ic_cancel, 0);
                                     t.setBackgroundResource (R.drawable.square);
                                     chipsBoxLayout.addView (t);
                                 }

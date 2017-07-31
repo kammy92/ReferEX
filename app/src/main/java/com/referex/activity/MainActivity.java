@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
         this.savedInstanceState = savedInstanceState;
-        initDrawer();
         initView();
         initData();
         initListener();
+        initDrawer ();
         isLogin();
 
     }
@@ -283,12 +283,8 @@ public class MainActivity extends AppCompatActivity {
                     .build ();
             headerResult.addProfiles (new ProfileDrawerItem()
                     .withIcon (R.drawable.doctor)
-                    .withName ("Rahul jain")
-                    .withEmail ("Rahul.jain@actiknowbi.com"));
-
-      /*   .withIcon (buyerDetailsPref.getStringPref (MainActivity.this, BuyerDetailsPref.BUYER_IMAGE))
-                .withName (buyerDetailsPref.getStringPref (MainActivity.this, BuyerDetailsPref.BUYER_NAME))
-                .withEmail (buyerDetailsPref.getStringPref (MainActivity.this, BuyerDetailsPref.BUYER_EMAIL)));*/
+                    .withName (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_NAME))
+                    .withEmail (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL)));
 
 
         result = new DrawerBuilder()
@@ -297,17 +293,13 @@ public class MainActivity extends AppCompatActivity {
 //                .withToolbar (toolbar)
 //                .withItemAnimator (new AlphaCrossFadeAnimator ())
                 .addDrawerItems (
-                        new PrimaryDrawerItem().withName ("My Home").withIcon (FontAwesome.Icon.faw_home).withIdentifier (1).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Search job").withIcon (FontAwesome.Icon.faw_heart).withIdentifier (2).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Recommended Job").withIcon (FontAwesome.Icon.faw_handshake_o).withIdentifier (3).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_info).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Dashboard").withIcon (FontAwesome.Icon.faw_tachometer).withIdentifier (1).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Search job").withIcon (FontAwesome.Icon.faw_search).withIdentifier (2).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Recommended Job").withIcon (FontAwesome.Icon.faw_thumbs_up).withIdentifier (3).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_bookmark).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_bullhorn).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
-                       /* new PrimaryDrawerItem ().withName ("FAQ").withIcon (FontAwesome.Icon.faw_question).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("My Profile").withIcon (FontAwesome.Icon.faw_user).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Change Password").withIcon (FontAwesome.Icon.faw_key).withIdentifier (9).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (10).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))*/
                 )
                 .withSavedInstance (savedInstanceState)
                 .withOnDrawerItemClickListener (new Drawer.OnDrawerItemClickListener () {
@@ -324,13 +316,16 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity (intent3);
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
-    
+                            case 4:
+                                Intent intent4 = new Intent (MainActivity.this, BookmarkedJobActivity.class);
+                                startActivity (intent4);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
                             case 5:
                                 Intent intent5 = new Intent (MainActivity.this, FeedbackActivity.class);
                                 startActivity (intent5);
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
-                            
                             case 7:
                                 showLogOutDialog ();
                                 break;
