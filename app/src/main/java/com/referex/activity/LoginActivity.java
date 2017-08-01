@@ -180,7 +180,6 @@ public class LoginActivity extends AppCompatActivity implements TagsEditText.Tag
                 SpannableString s7 = new SpannableString (getResources ().getString (R.string.activity_login_text_check_term_condition));
                 s7.setSpan (new TypefaceSpan (LoginActivity.this, Constants.font_name), 0, s7.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     
-    
                 if (etName.getText ().toString ().trim ().length () == 0 && etEmail.getText ().toString ().length () == 0 && etMobile.getText ().toString ().length () == 0) {
                     etName.setError (s);
                     etEmail.setError (s2);
