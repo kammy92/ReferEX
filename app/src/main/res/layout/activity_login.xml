@@ -8,7 +8,6 @@
     android:animateLayoutChanges="true"
     android:background="@color/app_background">-->
 <RelativeLayout
-    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -110,25 +109,20 @@
                             android:textColor="@color/primary_dark"/>
 
                 </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add skills"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
                 <com.referex.utils.FlowLayout
                     android:id="@+id/chips_box_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"/>
-
-                <mabbas007.tagsedittext.TagsEditText
-                    android:id="@+id/tagsEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_underline"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/primary_text"
-                    android:textSize="@dimen/text_size_medium"
-                    android:visibility="gone"
-                    TagsEditText:allowSpaceInTag="true"
-                    TagsEditText:tagsBackground="@drawable/square"
-                    TagsEditText:tagsCloseImageRight="@drawable/tag_close"/>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

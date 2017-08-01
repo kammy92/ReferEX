@@ -45,6 +45,8 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.SearchJobActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BookmarkedJobActivity"
+                  android:screenOrientation="portrait"/>
 
 
         <service android:name="com.referex.service.MyFirebaseMessagingService">

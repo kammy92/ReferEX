@@ -26,7 +26,7 @@ import java.util.List;
  * Created by l on 27/07/2017.
  */
 
-public class RecommendedJobActivity extends AppCompatActivity {
+public class BookmarkedJobActivity extends AppCompatActivity {
     Bundle savedInstanceState;
     List<JobDescription> jobDescriptionList = new ArrayList<> ();
     RelativeLayout rlInternetConnection;
@@ -44,7 +44,7 @@ public class RecommendedJobActivity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_recommended_job);
+        setContentView (R.layout.activity_bookmarked_job);
         this.savedInstanceState = savedInstanceState;
         initView ();
         initData ();
@@ -73,42 +73,38 @@ public class RecommendedJobActivity extends AppCompatActivity {
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-    
+        
         swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
             @Override
             public void onRefresh () {
                 swipeRefreshLayout.setRefreshing (false);
             }
         });
-    
+        
         ivFilter.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
                 ivFilter.setOnClickListener (new View.OnClickListener () {
                     @Override
                     public void onClick (View v) {
-                        Intent intent4 = new Intent (RecommendedJobActivity.this, FilterActivity.class);
+                        Intent intent4 = new Intent (BookmarkedJobActivity.this, FilterActivity.class);
                         startActivity (intent4);
                         overridePendingTransition (R.anim.slide_in_up, R.anim.slide_out_up);
                     }
                 });
             }
         });
-    
+        
     }
     
     private void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         jobDescriptionList.clear ();
-        jobDescriptionList.add (new JobDescription (1, "Engineering Manager (PHP)", "ABC Technologies Pvt Ltd", "6 - 10 Years", "Delhi", "Java, MySQL, CSS, PHP, HTML5", true, false));
-        jobDescriptionList.add (new JobDescription (2, "Android Developer - Java", "XYZ Pvt Ltd", "1-3 Years", "Bengaluru", "Android, Java, SDK, Mobile Development", false, false));
-        jobDescriptionList.add (new JobDescription (3, "Sr Project Manager", "SLA Consulting India", "3-6 Years", "Faridabad, Guurgaon", "Team Lead, Python, Java, JavaScript, Django", false, false));
-        jobDescriptionList.add (new JobDescription (4, "Consultant / Sr. Consultant", "Focus Consulting Co India", "6-10 Years", "Delhi", "Java, PHP, HTML5, Django, Symphony", true, false));
-        jobDescriptionList.add (new JobDescription (5, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", false, false));
-        jobDescriptionList.add (new JobDescription (6, "C++ Developer", "Angel Network", "2-3 Years", "Pune", "C++, C, Java, OOOPs, CSS, Django, Symphony", false, false));
+        jobDescriptionList.add (new JobDescription (1, "Android Developer - Java", "XYZ Pvt Ltd", "1-3 Years", "Bengaluru", "Android, Java, SDK, Mobile Development", true, true));
+        jobDescriptionList.add (new JobDescription (2, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", true, true));
         
         swipeRefreshLayout.setRefreshing (false);
-    
+        
         jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
         rvJobList.setAdapter (jobDescriptionAdapter);
         rvJobList.setHasFixedSize (true);
@@ -118,4 +114,6 @@ public class RecommendedJobActivity extends AppCompatActivity {
         
         
     }
+    
+    
 }

@@ -60,19 +60,26 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         } else {
             holder.ivHot.setVisibility (View.INVISIBLE);
         }
-
+    
+        if (jobDescription.is_favorite ()) {
+            holder.ivRating.setImageResource (R.drawable.ic_bookmark_filled);
+        } else {
+            holder.ivRating.setImageResource (R.drawable.ic_bookmark);
+        }
 
         holder.ivRating.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
                 if (jobDescription.is_favorite ()) {
                     jobDescription.setIs_favorite (false);
-                    holder.ivRating.setImageResource (R.drawable.ic_unselect_rating);
-                   // updateFavouriteStatus (false, property.getId ());
+                    holder.ivRating.setImageResource (R.drawable.ic_bookmark);
+//                    holder.ivRating.setImageResource (R.drawable.ic_unselect_rating);
+                    // updateFavouriteStatus (false, property.getId ());
                 } else {
                     jobDescription.setIs_favorite (true);
-                    holder.ivRating.setImageResource (R.drawable.ic_select_rating);
-                 //   updateFavouriteStatus (true, property.getId ());
+                    holder.ivRating.setImageResource (R.drawable.ic_bookmark_filled);
+//                    holder.ivRating.setImageResource (R.drawable.ic_select_rating);
+                    //   updateFavouriteStatus (true, property.getId ());
                 }
             }
         });

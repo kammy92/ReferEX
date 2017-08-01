@@ -13,6 +13,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.referex.R;
 import com.referex.utils.FlowLayout;
+import com.referex.utils.SetTypeFace;
 import com.referex.utils.Utils;
 
 import java.util.ArrayList;
@@ -35,6 +36,11 @@ public class SearchJobActivity extends AppCompatActivity {
     FlowLayout flRole;
     FlowLayout flSkills;
     
+    TextView tvNoExperience;
+    TextView tvNoLocation;
+    TextView tvNoRole;
+    TextView tvNoSkills;
+
     RelativeLayout rlBack;
     
     ArrayList<String> skillsArrayList = new ArrayList<String> ();
@@ -72,6 +78,11 @@ public class SearchJobActivity extends AppCompatActivity {
         flLocation = (FlowLayout) findViewById (R.id.flLocation);
         flRole = (FlowLayout) findViewById (R.id.flRole);
         flSkills = (FlowLayout) findViewById (R.id.flSkills);
+    
+        tvNoExperience = (TextView) findViewById (R.id.tvNoExperience);
+        tvNoLocation = (TextView) findViewById (R.id.tvNoLocation);
+        tvNoRole = (TextView) findViewById (R.id.tvNoRole);
+        tvNoSkills = (TextView) findViewById (R.id.tvNoSkills);
     }
     
     private void initData () {
@@ -196,6 +207,7 @@ public class SearchJobActivity extends AppCompatActivity {
                 new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
+                        .typeface (SetTypeFace.getTypeface (SearchJobActivity.this), SetTypeFace.getTypeface (SearchJobActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -204,8 +216,10 @@ public class SearchJobActivity extends AppCompatActivity {
                                 flSkills.removeAllViews ();
                                 skillsSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoSkills.setVisibility (View.GONE);
                                     btAddSkills.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoSkills.setVisibility (View.VISIBLE);
                                     btAddSkills.setText ("ADD");
                                 }
                                 TextView t;
@@ -213,6 +227,7 @@ public class SearchJobActivity extends AppCompatActivity {
                                     skillsSelectedArrayList.add (text[i].toString ());
                                     t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
+                                    t.setTypeface (SetTypeFace.getTypeface (SearchJobActivity.this));
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
@@ -263,6 +278,7 @@ public class SearchJobActivity extends AppCompatActivity {
                 new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Skills")
                         .items (roleArrayList)
+                        .typeface (SetTypeFace.getTypeface (SearchJobActivity.this), SetTypeFace.getTypeface (SearchJobActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -271,8 +287,10 @@ public class SearchJobActivity extends AppCompatActivity {
                                 flRole.removeAllViews ();
                                 roleSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoRole.setVisibility (View.GONE);
                                     btAddRole.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoRole.setVisibility (View.VISIBLE);
                                     btAddRole.setText ("ADD");
                                 }
                                 TextView t;
@@ -280,6 +298,7 @@ public class SearchJobActivity extends AppCompatActivity {
                                     roleSelectedArrayList.add (text[i].toString ());
                                     t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
+                                    t.setTypeface (SetTypeFace.getTypeface (SearchJobActivity.this));
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
@@ -329,6 +348,7 @@ public class SearchJobActivity extends AppCompatActivity {
                 
                 new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Experience")
+                        .typeface (SetTypeFace.getTypeface (SearchJobActivity.this), SetTypeFace.getTypeface (SearchJobActivity.this))
                         .items (experienceArrayList)
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
@@ -338,8 +358,10 @@ public class SearchJobActivity extends AppCompatActivity {
                                 flExperience.removeAllViews ();
                                 experienceSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoExperience.setVisibility (View.GONE);
                                     btAddExperience.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoExperience.setVisibility (View.VISIBLE);
                                     btAddExperience.setText ("ADD");
                                 }
                                 TextView t;
@@ -347,6 +369,7 @@ public class SearchJobActivity extends AppCompatActivity {
                                     experienceSelectedArrayList.add (text[i].toString ());
                                     t = new TextView (SearchJobActivity.this);
                                     t.setLayoutParams (params);
+                                    t.setTypeface (SetTypeFace.getTypeface (SearchJobActivity.this));
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
@@ -397,6 +420,7 @@ public class SearchJobActivity extends AppCompatActivity {
                 new MaterialDialog.Builder (SearchJobActivity.this)
                         .title ("Location")
                         .items (locationArrayList)
+                        .typeface (SetTypeFace.getTypeface (SearchJobActivity.this), SetTypeFace.getTypeface (SearchJobActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -405,14 +429,17 @@ public class SearchJobActivity extends AppCompatActivity {
                                 flLocation.removeAllViews ();
                                 locationSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoLocation.setVisibility (View.GONE);
                                     btAddLocation.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoLocation.setVisibility (View.VISIBLE);
                                     btAddLocation.setText ("ADD");
                                 }
                                 TextView t;
                                 for (int i = 0; i < text.length; i++) {
                                     locationSelectedArrayList.add (text[i].toString ());
                                     t = new TextView (SearchJobActivity.this);
+                                    t.setTypeface (SetTypeFace.getTypeface (SearchJobActivity.this));
                                     t.setLayoutParams (params);
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);

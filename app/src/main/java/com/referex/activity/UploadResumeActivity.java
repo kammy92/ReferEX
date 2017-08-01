@@ -27,6 +27,7 @@ import com.referex.R;
 import com.referex.utils.AppConfigTags;
 import com.referex.utils.FilePath;
 import com.referex.utils.FlowLayout;
+import com.referex.utils.SetTypeFace;
 import com.referex.utils.Utils;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -56,6 +57,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     EditText etEmail;
     EditText etMobile;
     TextView tvJobPosition;
+    TextView tvNoSkills;
     ProgressDialog progressDialog;
     String jobPosition;
     RelativeLayout rlBack;
@@ -103,6 +105,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         rlBack = (RelativeLayout) findViewById (R.id.rlBack);
         tvFileSelected = (TextView) findViewById (R.id.etFileSelected);
         btAddSkills = (Button) findViewById (R.id.btAddSkills);
+        tvNoSkills = (TextView) findViewById (R.id.tvNoSkills);
         chipsBoxLayout = (FlowLayout) findViewById (R.id.chips_box_layout);
         
         Utils.setTypefaceToAllViews (this, tvSelectResume);
@@ -143,17 +146,18 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                         }
                     }
                 }
-            
+    
                 Integer[] ints = new Integer[skillPositionList.size ()];
                 int i = 0;
                 for (Integer n : skillPositionList) {
                     ints[i++] = n;
                 }
-            
-            
+    
+    
                 new MaterialDialog.Builder (UploadResumeActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
+                        .typeface (SetTypeFace.getTypeface (UploadResumeActivity.this), SetTypeFace.getTypeface (UploadResumeActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
                             @Override
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -162,14 +166,17 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                 chipsBoxLayout.removeAllViews ();
                                 skillsSelectedArrayList.clear ();
                                 if (text.length > 0) {
+                                    tvNoSkills.setVisibility (View.GONE);
                                     btAddSkills.setText ("ADD/EDIT");
                                 } else {
+                                    tvNoSkills.setVisibility (View.VISIBLE);
                                     btAddSkills.setText ("ADD");
                                 }
                                 for (int i = 0; i < text.length; i++) {
                                     skillsSelectedArrayList.add (text[i].toString ());
                                     final TextView t = new TextView (UploadResumeActivity.this);
                                     t.setLayoutParams (params);
+                                    t.setTypeface (SetTypeFace.getTypeface (UploadResumeActivity.this));
                                     t.setPadding (8, 8, 8, 8);
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
@@ -214,7 +221,6 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         
         String name = tvSelectResume.getText ().toString ().trim ();
         String path = FilePath.getPath (this, filePath);
-        tvSelectResume.setText (path);
         if (path == null) {
             Toast.makeText (this, "Please move your .pdf file to internal storage and retry", Toast.LENGTH_LONG).show ();
         } else {
@@ -252,7 +258,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         
         if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData () != null) {
             filePath = data.getData ();
-        
+    
         }
         
         switch (requestCode) {

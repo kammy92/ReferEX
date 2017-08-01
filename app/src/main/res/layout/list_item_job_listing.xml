@@ -41,12 +41,14 @@
 
                 <ImageView
                     android:id="@+id/ivRating"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_unselect_rating"/>
+                    android:paddingLeft="@dimen/activity_margin_extra_small"
+                    android:paddingRight="@dimen/activity_margin_extra_small"
+                    android:src="@drawable/ic_bookmark"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
