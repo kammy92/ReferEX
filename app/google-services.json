@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "13947244010",
+    "firebase_url": "https://referex-4051b.firebaseio.com",
+    "project_id": "referex-4051b",
+    "storage_bucket": "referex-4051b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13947244010:android:3904b66448abf821",
+        "android_client_info": {
+          "package_name": "com.referex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13947244010-akdig6trn3mvk6hfbg4e3b7b4ucee635.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb5Teht9vk8lApVa-SBcqzzPNxmkyar1c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

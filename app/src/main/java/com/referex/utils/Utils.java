@@ -53,7 +53,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.referex.R;
 import com.referex.app.AppController;
 
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -715,7 +714,7 @@ public class Utils {
     }
 
     public static String encrypt (String input) {
-        String key = "2345678234567823";
+        String key = "referex123456789";
         byte[] crypted = null;
         try {
             SecretKeySpec skey = new SecretKeySpec (key.getBytes (), "AES");
@@ -729,7 +728,7 @@ public class Utils {
     }
 
     public static String decrypt (String input) {
-        String key = "2345678234567823";
+        String key = "referex123456789";
         byte[] output = null;
         try {
             SecretKeySpec skey = new SecretKeySpec(key.getBytes (), "AES");

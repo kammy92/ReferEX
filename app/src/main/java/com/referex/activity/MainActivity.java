@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
     Bundle savedInstanceState;
     RelativeLayout rlInternetConnection;
     RelativeLayout   rlNoResultFound;
-    ImageView ivNavigation;
     UserDetailsPref userDetailsPref;
     TextView tvTitle;
     PieView pieView;
     View bottomSheet;
     ImageView ivSwipe;
+    ImageView ivNavigation;
     private AccountHeader headerResult = null;
     private Drawer result = null;
     private BottomSheetBehavior mBottomSheetBehavior;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void isLogin () {
+
         if (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY) == "") {
             Intent myIntent = new Intent (this, LoginActivity.class);
             startActivity (myIntent);
@@ -85,17 +86,13 @@ public class MainActivity extends AppCompatActivity {
         rlNoResultFound=(RelativeLayout)findViewById(R.id.rlNoResultFound);
         tvTitle=(TextView)findViewById(R.id.tvTitle);
         pieView = (PieView) findViewById (R.id.pieView);
-    
         bottomSheet = findViewById (R.id.bottom_sheet);
-    
         ivSwipe = (ImageView) findViewById (R.id.ivSwipe);
-    
         Utils.setTypefaceToAllViews (MainActivity.this, tvTitle);
     }
 
     private void initData() {
         userDetailsPref=UserDetailsPref.getInstance();
-    
         pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.pie_color_good));
         pieView.setInnerBackgroundColor (getResources ().getColor (R.color.primary));
         pieView.setTextColor (getResources ().getColor (R.color.text_color_white));
@@ -121,8 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 result.openDrawer ();
             }
         });
-    
-    
         mBottomSheetBehavior.setBottomSheetCallback (new BottomSheetBehavior.BottomSheetCallback () {
             @Override
             public void onStateChanged (@NonNull View bottomSheet, int newState) {
@@ -144,8 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
     private void initDrawer () {
         IProfile profile = new IProfile () {
             @Override

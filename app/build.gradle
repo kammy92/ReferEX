@@ -57,3 +57,5 @@ dependencies {
     compile 'net.gotev:uploadservice:2.1'
 
 }
+
+apply plugin: 'com.google.gms.google-services'

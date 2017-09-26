@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<android.support.design.widget.CoordinatorLayout
+<?xml version="1.0" encoding="utf-8"?><!--<android.support.design.widget.CoordinatorLayout
     android:id="@+id/clMain"
     xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -7,165 +6,44 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/app_background">-->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/logo_height"
-                android:layout_margin="@dimen/activity_margin"
-                android:src="@drawable/referex_logo"/>
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin"
+            android:src="@drawable/referex_logo" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin"
-                android:orientation="vertical">
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:layout_marginEnd="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin_small"
+            android:layout_marginRight="@dimen/activity_margin_small"
+            android:layout_marginStart="@dimen/activity_margin_small"
+            app:tabIndicatorColor="@color/primary"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextColor="@color/secondary_text" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Full Name"
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/text_size_small"/>
-
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_underline"
-                    android:inputType="textPersonName"
-                    android:text="Karman Singh"
-                    android:textColor="@color/primary_text"
-                    android:textSize="@dimen/text_size_medium"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_margin"
-                    android:text="Email Address"
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/text_size_small"/>
-
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_underline"
-                    android:inputType="textEmailAddress"
-                    android:text="karman.singh@actiknowbi.com"
-                    android:textColor="@color/primary_text"
-                    android:textSize="@dimen/text_size_medium"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_margin"
-                    android:text="Mobile"
-                    android:textColor="@color/primary_dark"
-                    android:textSize="@dimen/text_size_small"/>
-                <EditText
-                    android:id="@+id/etMobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_underline"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:text="9873684678"
-                    android:textColor="@color/primary_text"
-                    android:textSize="@dimen/text_size_medium"/>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_margin"
-                        android:text="Skills"
-                        android:textColor="@color/primary_dark"
-                        android:textSize="@dimen/text_size_small"/>
-
-                    <Button android:id="@+id/btAddSkills"
-                            style="@style/Widget.AppCompat.Light.ActionButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:background="@null"
-                            android:text="ADD"
-                            android:textColor="@color/primary_dark"/>
-
-                </RelativeLayout>
-                <TextView
-                    android:id="@+id/tvNoSkills"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:layout_marginStart="@dimen/activity_margin"
-                    android:text="Please add skills"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_small"/>
-                <com.referex.utils.FlowLayout
-                    android:id="@+id/chips_box_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"/>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_margin_small"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:layout_marginRight="@dimen/activity_margin"
-                    android:layout_marginTop="@dimen/activity_margin_small"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-                    <CheckBox
-                        android:id="@+id/cbTerm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:checked="true"/>
-                    <TextView
-                        android:id="@+id/tvTermConditions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@+id/cbTerm"
-                        android:layout_toRightOf="@+id/cbTerm"/>
-                </RelativeLayout>
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/tvSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin"
-                android:background="@drawable/button_bg"
-                android:elevation="@dimen/button_elevation"
-                android:gravity="center"
-                android:padding="@dimen/edittext_padding"
-                android:text="SUBMIT"
-                android:textColor="@color/text_color_white"
-                android:textSize="@dimen/text_size_large"/>
-
-        </LinearLayout>
-    </ScrollView>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabs" />
+    </RelativeLayout>
 </RelativeLayout>
     <!--
     </android.support.design.widget.CoordinatorLayout>-->

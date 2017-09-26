@@ -69,4 +69,16 @@
     <string name="dialog_text_auto_fill">Do you want to auto fill the details?</string>
 
 
+    <string name="activity_sign_in_hint_email">Email Address</string>
+    <string name="activity_sign_in_hint_password">Password</string>
+    <string name="activity_sign_in_button_submit">SIGN IN</string>
+    <string name="activity_sign_in_text_forgot_password">Forgot Password ? </string>
+    <string name="activity_sign_in_text_signup">Sign Up ? </string>
+    <string name="activity_sign_in_Connect_with_LinkedIn">Connect with LinkedIn</string>
+    <string name="activity_sign_in_Connect_with_Facebook">Connect with Facebook</string>
+    <string name="activity_sign_in_or">OR</string>
+
+    <string name="please_enter_password">Please enter password</string>
+
+
 </resources>
