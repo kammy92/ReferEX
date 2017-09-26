@@ -10,7 +10,7 @@ public class Skill {
     boolean parent_status;
 
 
-    public Skill(String skill_name, int id, int parent_id, boolean parent_status) {
+    public Skill(int id, int parent_id, String skill_name, boolean parent_status) {
         this.id = id;
         this.parent_id = parent_id;
         this.skill_name = skill_name;
@@ -51,4 +51,6 @@ public class Skill {
     public void setParent_status(boolean parent_status) {
         this.parent_status = parent_status;
     }
+
+
 }

@@ -53,7 +53,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -96,6 +95,7 @@ public class SignUpFragment extends Fragment {
     }
 
 
+
     private void initView(View rootView) {
         clMain = (CoordinatorLayout) rootView.findViewById(R.id.clMain);
         etName = (EditText) rootView.findViewById(R.id.etName);
@@ -116,13 +116,14 @@ public class SignUpFragment extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
 
 
-        skillsArrayList.addAll(Arrays.asList(new String[]{"C", "C++", "Java", "Android", "HTML", "PHP", "Hadoop", "Tableau", "iOS"}));
+        // skillsArrayList.addAll (Arrays.asList (new String[] {"C", "C++", "Java", "Android", "HTML", "PHP", "Hadoop", "Tableau", "iOS"}));
 
         SpannableString ss = new SpannableString(getResources().getString(R.string.activity_login_text_i_agree));
         ss.setSpan(new myClickableSpan(1), 17, 35, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ss.setSpan(new myClickableSpan(2), 40, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvTerm.setText(ss);
         tvTerm.setMovementMethod(LinkMovementMethod.getInstance());
+
 
 
     }
@@ -265,11 +266,24 @@ public class SignUpFragment extends Fragment {
         btAddSkills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                skillsArrayList.clear();
+                String skill_id = "";
                 ArrayList<Integer> skillPositionList = new ArrayList<Integer>();
                 for (int i = 0; i < skillsSelectedArrayList.size(); i++) {
                     for (int j = 0; j < skillList.size(); j++) {
                         if (skillsSelectedArrayList.get(i).equalsIgnoreCase(skillList.get(j).getSkill_name())) {
                             skillPositionList.add(j);
+                            if (j == 0) {
+                                skill_id = String.valueOf(skillList.get(j).getId());
+                            } else {
+                                skill_id = skill_id + "," + String.valueOf(skillList.get(j).getId());
+                            }
+
+                            Log.e("skill", skill_id);
+
+
+
+
                         }
                     }
                 }
@@ -281,9 +295,14 @@ public class SignUpFragment extends Fragment {
                 }
 
 
+                for (int k = 0; k < skillList.size(); k++) {
+                    skillsArrayList.add(skillList.get(k).getSkill_name());
+                }
+
+
                 new MaterialDialog.Builder(getActivity())
                         .title("Skills")
-                        .items(skillList)
+                        .items(skillsArrayList)
                         .typeface(SetTypeFace.getTypeface(getActivity()), SetTypeFace.getTypeface(getActivity()))
                         .itemsCallbackMultiChoice(ints, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
@@ -334,6 +353,7 @@ public class SignUpFragment extends Fragment {
         });
 
     }
+
 
 
     private void displayFirebaseRegId() {
@@ -444,7 +464,7 @@ public class SignUpFragment extends Fragment {
                     new com.android.volley.Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            skillsArrayList.clear();
+                            skillList.clear();
                             Utils.showLog(Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
                             if (response != null) {
                                 try {
@@ -457,10 +477,9 @@ public class SignUpFragment extends Fragment {
                                         for (int i = 0; i < jsonArray.length(); i++) {
                                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                                             skillList.add(new Skill(
-                                                    jsonObject.getString(AppConfigTags.SKILL_NAME),
                                                     jsonObject.getInt(AppConfigTags.SKILL_ID),
                                                     0,
-
+                                                    jsonObject.getString(AppConfigTags.SKILL_NAME),
                                                     true));
                                         }
 
