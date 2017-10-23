@@ -195,8 +195,6 @@
                 android:padding="@dimen/activity_margin_extra_small"
                 android:text="Look like you have applied to many filter \n Please Remove some filter and try again"
                 android:textSize="@dimen/text_size_medium"/>
-
-
             <TextView
                 android:id="@+id/tvResetFilter"
                 android:layout_width="match_parent"
