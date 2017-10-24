@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/clMain"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/app_background">
+-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:padding="@dimen/activity_margin"
+            android:src="@drawable/ic_close"/>
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivCancel"
+            android:layout_alignTop="@+id/ivCancel"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Filter"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"/>
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ivCancel"
+            android:background="@color/text_color_grey_light2"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlHeader">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Experience (Years)"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
+                    <Button
+                        android:id="@+id/btAddExperience"
+                        style="@style/Widget.AppCompat.Light.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:text="ADD"
+                        android:textColor="@color/primary_dark"/>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add experience"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
+                <com.referex.utils.FlowLayout
+                    android:id="@+id/flExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Location"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
+                    <Button
+                        android:id="@+id/btAddLocation"
+                        style="@style/Widget.AppCompat.Light.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:text="ADD"
+                        android:textColor="@color/primary_dark"/>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add location"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
+                <com.referex.utils.FlowLayout
+                    android:id="@+id/flLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Role"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
+                    <Button
+                        android:id="@+id/btAddRole"
+                        style="@style/Widget.AppCompat.Light.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:text="ADD"
+                        android:textColor="@color/primary_dark"/>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoRole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add role"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+                <com.referex.utils.FlowLayout
+                    android:id="@+id/flRole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Skills"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
+                    <Button
+                        android:id="@+id/btAddSkills"
+                        style="@style/Widget.AppCompat.Light.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@null"
+                        android:text="ADD"
+                        android:textColor="@color/primary_dark"/>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvNoSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginStart="@dimen/activity_margin"
+                    android:text="Please add skills"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+                <com.referex.utils.FlowLayout
+                    android:id="@+id/flSkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"/>
+            </LinearLayout>
+        </ScrollView>
+        <TextView
+            android:id="@+id/tvApply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/activity_margin"
+            android:background="@drawable/button_bg"
+            android:elevation="@dimen/button_elevation"
+            android:gravity="center"
+            android:padding="@dimen/edittext_padding"
+            android:text="APPLY"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"/>
+    </RelativeLayout>
+</RelativeLayout>
+
+
+    <!--</android.support.design.widget.CoordinatorLayout>-->

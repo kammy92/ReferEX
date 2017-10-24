@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background_color">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         android:animateLayoutChanges="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:visibility="visible">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Widget.MyApp.ActionBar"
@@ -73,18 +75,21 @@
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/activity_margin"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Full Name"
             android:textColor="@color/primary_dark"
             android:textSize="@dimen/text_size_small"/>
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"

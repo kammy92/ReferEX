@@ -59,6 +59,18 @@
                             android:padding="@dimen/activity_margin"
                             android:src="@drawable/ic_navigation"
                             android:visibility="visible"/>
+
+
+                        <ImageView
+                            android:id="@+id/ivFilter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/activity_margin_small"
+                            android:src="@drawable/ic_filter"
+                            android:visibility="visible"/>
                     </RelativeLayout>
 
                     <ImageView
@@ -90,6 +102,21 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/appBar"
             android:visibility="visible">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvJobList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/appBar"
+                    android:paddingBottom="4dp"
+                />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
 
         </RelativeLayout>
@@ -260,65 +287,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl2"
                 android:background="@color/primary_dark">
-                <TextView
-                    android:id="@+id/tvTotalReferrals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:text="Total Referrals"
-                    android:textColor="@color/text_color_white"/>
-                <TextView
-                    android:id="@+id/tvTotalReferralsCount"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/tvTotalReferrals"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="0"
-                    android:textColor="@color/text_color_white"/>
-                <TextView
-                    android:id="@+id/tvTotalReferralsSelected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTotalReferrals"
-                    android:padding="10dp"
-                    android:text="Total Referrals - Selected"
-                    android:textColor="@color/text_color_white"/>
-                <TextView
-                    android:id="@+id/tvReferralsSelectedCount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTotalReferrals"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/tvTotalReferralsSelected"
-                    android:gravity="end"
-                    android:padding="10dp"
-                    android:text="0"
-                    android:textColor="@color/text_color_white"/>
-                <TextView
-                    android:id="@+id/tvReferralsRejected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTotalReferralsSelected"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp"
-                    android:text="Total Referrals - Rejected"
-                    android:textColor="@color/text_color_white"/>
-                <TextView
-                    android:id="@+id/tvReferralsRejectedCount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTotalReferralsSelected"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/tvReferralsRejected"
-                    android:gravity="end"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="0"
-                    android:textColor="@color/text_color_white"/>
+                    android:paddingBottom="4dp"/>
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

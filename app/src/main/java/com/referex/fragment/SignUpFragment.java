@@ -38,6 +38,7 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.referex.R;
+import com.referex.model.Location;
 import com.referex.model.Skill;
 import com.referex.utils.AppConfigTags;
 import com.referex.utils.AppConfigURL;
@@ -77,10 +78,20 @@ public class SignUpFragment extends Fragment {
     int otp;
     ArrayList<String> skillsArrayList = new ArrayList<String>();
     ArrayList<String> skillsSelectedArrayList = new ArrayList<String>();
-    List<Skill> skillList = new ArrayList<>();
+    
+    String skill_ids = "";
+    List<Skill> skillList = new ArrayList<> ();
+    
+    int location_id = 0;
+    
+    int[] location_id_list;
+    ArrayList<String> locationNameList = new ArrayList<> ();
+    List<Location> locationList = new ArrayList<> ();
     FlowLayout chipsBoxLayout;
     Button btAddSkills;
     TextView tvNoSkills;
+    
+    EditText etLocation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,12 +101,12 @@ public class SignUpFragment extends Fragment {
         initListener();
         displayFirebaseRegId();
         getSkillList();
-
+        getLocationList ();
+        
         return rootView;
     }
-
-
-
+    
+    
     private void initView(View rootView) {
         clMain = (CoordinatorLayout) rootView.findViewById(R.id.clMain);
         etName = (EditText) rootView.findViewById(R.id.etName);
@@ -108,7 +119,7 @@ public class SignUpFragment extends Fragment {
         btAddSkills = (Button) rootView.findViewById(R.id.btAddSkills);
         Utils.setTypefaceToAllViews(getActivity(), tvSubmit);
         chipsBoxLayout = (FlowLayout) rootView.findViewById(R.id.chips_box_layout);
-
+        etLocation = (EditText) rootView.findViewById (R.id.etLocation);
     }
 
     private void initData() {
@@ -123,14 +134,9 @@ public class SignUpFragment extends Fragment {
         ss.setSpan(new myClickableSpan(2), 40, 54, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvTerm.setText(ss);
         tvTerm.setMovementMethod(LinkMovementMethod.getInstance());
-
-
-
     }
 
     private void initListener() {
-
-
         tvSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -278,12 +284,7 @@ public class SignUpFragment extends Fragment {
                             } else {
                                 skill_id = skill_id + "," + String.valueOf(skillList.get(j).getId());
                             }
-
                             Log.e("skill", skill_id);
-
-
-
-
                         }
                     }
                 }
@@ -294,12 +295,10 @@ public class SignUpFragment extends Fragment {
                     ints[i++] = n;
                 }
 
-
                 for (int k = 0; k < skillList.size(); k++) {
                     skillsArrayList.add(skillList.get(k).getSkill_name());
                 }
-
-
+    
                 new MaterialDialog.Builder(getActivity())
                         .title("Skills")
                         .items(skillsArrayList)
@@ -318,8 +317,10 @@ public class SignUpFragment extends Fragment {
                                     tvNoSkills.setVisibility(View.VISIBLE);
                                     btAddSkills.setText("ADD");
                                 }
+    
                                 for (int i = 0; i < text.length; i++) {
                                     skillsSelectedArrayList.add(skillList.get(i).getSkill_name());
+                                    skill_ids = skill_ids + "," + skillList.get (i).getId ();
                                     final TextView t = new TextView(getActivity());
                                     t.setLayoutParams(params);
                                     t.setPadding(8, 8, 8, 8);
@@ -351,11 +352,28 @@ public class SignUpFragment extends Fragment {
                         .show();
             }
         });
-
+    
+        etLocation.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                new MaterialDialog.Builder (getActivity ())
+                        .title ("Select a location")
+                        .typeface (SetTypeFace.getTypeface (getActivity ()), SetTypeFace.getTypeface (getActivity ()))
+                        .items (locationNameList)
+                        .itemsIds (location_id_list)
+                        .itemsCallback (new MaterialDialog.ListCallback () {
+                            @Override
+                            public void onSelection (MaterialDialog dialog, View view, int which, CharSequence text) {
+                                location_id = view.getId ();
+                                etLocation.setText (text.toString ());
+                                Utils.showToast (getActivity (), "location id " + location_id, false);
+                            }
+                        })
+                        .show ();
+            }
+        });
     }
-
-
-
+    
     private void displayFirebaseRegId() {
         Utils.showLog(Log.ERROR, "Firebase Reg ID:", userDetailsPref.getStringPref(getActivity(), UserDetailsPref.USER_FIREBASE_ID), true);
 
@@ -363,7 +381,6 @@ public class SignUpFragment extends Fragment {
 
     private void sendSignUpDetailsToServer(final String name, final String email, final String mobile, final String device_details) {
         if (NetworkConnection.isNetworkAvailable(getActivity())) {
-
             Utils.showProgressDialog(progressDialog, getResources().getString(R.string.progress_dialog_text_please_wait), true);
             Utils.showLog(Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_SIGN_UP, true);
             StringRequest strRequest1 = new StringRequest(Request.Method.POST, AppConfigURL.URL_SIGN_UP,
@@ -428,7 +445,8 @@ public class SignUpFragment extends Fragment {
                     params.put(AppConfigTags.NAME, name);
                     params.put(AppConfigTags.EMAIL, email);
                     params.put(AppConfigTags.MOBILE, mobile);
-                    params.put(AppConfigTags.SKILLS, "1,2");
+                    params.put (AppConfigTags.SKILLS, skill_ids);
+                    params.put (AppConfigTags.LOCATION_ID, String.valueOf (location_id));
                     params.put(AppConfigTags.FIREBASE_ID, userDetailsPref.getStringPref(getActivity(), UserDetailsPref.USER_FIREBASE_ID));
                     params.put(AppConfigTags.DEVICE_DETAILS, device_details);
 
@@ -525,7 +543,76 @@ public class SignUpFragment extends Fragment {
 
         }
     }
-
+    
+    private void getLocationList () {
+        if (NetworkConnection.isNetworkAvailable (getActivity ())) {
+            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_LOCATIONS, true);
+            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_LOCATIONS,
+                    new com.android.volley.Response.Listener<String> () {
+                        @Override
+                        public void onResponse (String response) {
+                            skillList.clear ();
+                            Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
+                            if (response != null) {
+                                try {
+                                    
+                                    JSONObject jsonObj = new JSONObject (response);
+                                    boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
+                                    String message = jsonObj.getString (AppConfigTags.MESSAGE);
+                                    if (! error) {
+                                        JSONArray jsonArray = jsonObj.getJSONArray (AppConfigTags.LOCATIONS);
+                                        location_id_list = new int[jsonArray.length ()];
+                                        for (int i = 0; i < jsonArray.length (); i++) {
+                                            JSONObject jsonObject = jsonArray.getJSONObject (i);
+                                            locationList.add (new Location (
+                                                    jsonObject.getInt (AppConfigTags.LOCATION_ID),
+                                                    jsonObject.getString (AppConfigTags.LOCATION_NAME)));
+                                            
+                                            location_id_list[i] = jsonObject.getInt (AppConfigTags.LOCATION_ID);
+                                            locationNameList.add (jsonObject.getString (AppConfigTags.LOCATION_NAME));
+                                        }
+                                    } else {
+                                        // Utils.showSnackBar (getActivity(), clMain, message, Snackbar.LENGTH_LONG, null, null);
+                                    }
+                                } catch (Exception e) {
+                                    
+                                    e.printStackTrace ();
+                                }
+                            } else {
+                                
+                                Utils.showLog (Log.WARN, AppConfigTags.SERVER_RESPONSE, AppConfigTags.DIDNT_RECEIVE_ANY_DATA_FROM_SERVER, true);
+                            }
+                            
+                        }
+                    },
+                    new com.android.volley.Response.ErrorListener () {
+                        @Override
+                        public void onErrorResponse (VolleyError error) {
+                            Utils.showLog (Log.ERROR, AppConfigTags.VOLLEY_ERROR, error.toString (), true);
+                            
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams () throws AuthFailureError {
+                    Map<String, String> params = new Hashtable<String, String> ();
+                    Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
+                    return params;
+                }
+                
+                @Override
+                public Map<String, String> getHeaders () throws AuthFailureError {
+                    Map<String, String> params = new HashMap<> ();
+                    params.put (AppConfigTags.HEADER_API_KEY, Constants.api_key);
+                    Utils.showLog (Log.INFO, AppConfigTags.HEADERS_SENT_TO_THE_SERVER, "" + params, false);
+                    return params;
+                }
+            };
+            Utils.sendRequest (strRequest1, 60);
+        } else {
+            
+        }
+    }
+    
     public class myClickableSpan extends ClickableSpan {
 
         int pos;
@@ -551,5 +638,4 @@ public class SignUpFragment extends Fragment {
         }
 
     }
-
 }

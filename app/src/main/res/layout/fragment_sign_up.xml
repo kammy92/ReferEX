@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/clMain"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@color/app_background">
+<android.support.design.widget.CoordinatorLayout android:id="@+id/clMain"
+                                                 xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:animateLayoutChanges="true"
+                                                 android:background="@color/app_background">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -33,14 +33,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/activity_margin"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Full Name"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small" />
-
                     <EditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
@@ -50,7 +48,6 @@
                         android:text="Karman Singh"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/text_size_medium" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,7 +55,6 @@
                         android:text="Email Address"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small" />
-
                     <EditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
@@ -68,7 +64,6 @@
                         android:text="karman.singh@actiknowbi.com"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/text_size_medium" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -76,7 +71,6 @@
                         android:text="Mobile"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small" />
-
                     <EditText
                         android:id="@+id/etMobile"
                         android:layout_width="match_parent"
@@ -87,7 +81,24 @@
                         android:text="9873684678"
                         android:textColor="@color/primary_text"
                         android:textSize="@dimen/text_size_medium" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:text="Location"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="@dimen/text_size_small"/>
 
+                    <EditText
+                        android:id="@+id/etLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_underline"
+                        android:focusable="false"
+                        android:inputType="textPostalAddress"
+                        android:text=""
+                        android:textColor="@color/primary_text"
+                        android:textSize="@dimen/text_size_medium"/>
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -112,7 +123,6 @@
                             android:textColor="@color/primary_dark" />
 
                     </RelativeLayout>
-
                     <TextView
                         android:id="@+id/tvNoSkills"
                         android:layout_width="match_parent"
@@ -122,13 +132,11 @@
                         android:text="Please add skills"
                         android:textColor="@color/secondary_text"
                         android:textSize="@dimen/text_size_small" />
-
                     <com.referex.utils.FlowLayout
                         android:id="@+id/chips_box_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start" />
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,8 +163,6 @@
                             android:layout_toRightOf="@+id/cbTerm" />
                     </RelativeLayout>
                 </LinearLayout>
-
-
                 <TextView
                     android:id="@+id/tvSubmit"
                     android:layout_width="match_parent"
@@ -171,7 +177,6 @@
                     android:text="SUBMIT"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_large" />
-
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

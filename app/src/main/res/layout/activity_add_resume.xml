@@ -139,7 +139,8 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,12 +168,14 @@
             android:layout_marginStart="@dimen/activity_margin"
             android:text="Please add skills"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small"
+            android:visibility="gone"/>
         <com.referex.utils.FlowLayout
             android:id="@+id/chips_box_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"/>
+            android:gravity="start"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -180,12 +183,14 @@
             android:layout_marginTop="@dimen/activity_margin"
             android:text="Upload Resume (Optional)"
             android:textColor="@color/primary_dark"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
             <TextView
                 android:id="@+id/editTextName"
                 android:layout_width="150dp"
@@ -217,7 +222,8 @@
             android:layout_marginRight="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
 
             <Button

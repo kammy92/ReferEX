@@ -36,6 +36,7 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Base64;
@@ -136,8 +137,43 @@ public class Utils {
             return "Unavailable";
         }
     }
-
-
+    
+    public static long getDateInMillis (String srcDate) {
+        SimpleDateFormat desiredFormat = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+        long dateInMillis = 0;
+        try {
+            Date date = desiredFormat.parse (srcDate);
+            dateInMillis = date.getTime ();
+            return dateInMillis;
+        } catch (ParseException e) {
+            Log.d ("Exception in date", e.getMessage ());
+            e.printStackTrace ();
+        }
+        
+        return 0;
+    }
+    
+    
+    public static String getFormattedDate (Context context, long smsTimeInMilis) {
+        Calendar smsTime = Calendar.getInstance ();
+        smsTime.setTimeInMillis (smsTimeInMilis);
+        
+        Calendar now = Calendar.getInstance ();
+        
+        final String timeFormatString = "hh:mm aa";
+        final String dateTimeFormatString = "EEEE, MMMM d, hh:mm aa";
+        final long HOURS = 60 * 60 * 60;
+        
+        if (now.get (Calendar.DATE) == smsTime.get (Calendar.DATE)) {
+            return "Today " + DateFormat.format (timeFormatString, smsTime);
+        } else if (now.get (Calendar.DATE) - smsTime.get (Calendar.DATE) == 1) {
+            return "Yesterday " + DateFormat.format (timeFormatString, smsTime);
+            // } else if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
+            //   return DateFormat.format(dateTimeFormatString, smsTime).toString();
+        } else {
+            return DateFormat.format ("MMMM d, hh:mm aa", smsTime).toString ();
+        }
+    }
 
 /*
         AlertDialog.Builder builder = new AlertDialog.Builder (activity);

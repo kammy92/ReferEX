@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_margin_extra_small"
-    card_view:cardCornerRadius="@dimen/cardview_default_radius"
-    card_view:cardElevation="@dimen/cardview_elevation">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/activity_margin_extra_small"
+                                    card_view:cardCornerRadius="@dimen/cardview_default_radius"
+                                    card_view:cardElevation="@dimen/cardview_elevation">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,11 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_margin_extra_small"
             android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:id="@+id/tvJobDescription"
+                    android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -33,6 +34,7 @@
                     android:layout_toLeftOf="@+id/ivRating"
                     android:layout_toStartOf="@+id/ivRating"
                     android:ellipsize="end"
+                    android:gravity="center"
                     android:maxLines="2"
                     android:text="Software Engineer"
                     android:textColor="@color/primary"
@@ -50,6 +52,36 @@
                     android:paddingRight="@dimen/activity_margin_extra_small"
                     android:src="@drawable/ic_bookmark"/>
             </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivJobDescription"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_exp"/>
+
+                <TextView
+                    android:id="@+id/tvJobDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/ivJobDescription"
+                    android:layout_toRightOf="@+id/ivJobDescription"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
+
+            </RelativeLayout>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,6 +97,7 @@
                     android:layout_marginRight="@dimen/activity_margin_small"
                     android:padding="2dp"
                     android:src="@drawable/ic_hot"/>
+
                 <TextView
                     android:id="@+id/tvCompanyName"
                     android:layout_width="match_parent"
@@ -77,6 +110,7 @@
                     android:textColor="@color/text_color_grey_dark"
                     android:textSize="@dimen/text_size_small"/>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -90,6 +124,7 @@
                     android:layout_marginRight="@dimen/activity_margin_small"
                     android:padding="2dp"
                     android:src="@drawable/ic_exp"/>
+
                 <TextView
                     android:id="@+id/tvExperience"
                     android:layout_width="wrap_content"
@@ -101,7 +136,38 @@
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
 
+
             </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivSalary"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_exp"/>
+
+                <TextView
+                    android:id="@+id/tvSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/ivSalary"
+                    android:layout_toRightOf="@+id/ivSalary"
+                    android:text="5000 - 10000"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="@dimen/text_size_small"/>
+
+            </RelativeLayout>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -115,6 +181,7 @@
                     android:layout_marginRight="@dimen/activity_margin_small"
                     android:padding="2dp"
                     android:src="@drawable/ic_location"/>
+
                 <TextView
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
@@ -127,9 +194,11 @@
                     android:textSize="@dimen/text_size_small"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:id="@+id/iv3"
                     android:layout_width="15dp"
@@ -139,6 +208,7 @@
                     android:layout_marginRight="@dimen/activity_margin_small"
                     android:padding="2dp"
                     android:src="@drawable/ic_skill"/>
+
                 <TextView
                     android:id="@+id/tvSkill"
                     android:layout_width="wrap_content"
@@ -152,6 +222,39 @@
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
             </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivtime"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginRight="@dimen/activity_margin_small"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_skill"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toEndOf="@+id/ivtime"
+                    android:layout_toRightOf="@+id/ivtime"
+                    android:ellipsize="end"
+                    android:gravity="end"
+                    android:maxLines="2"
+                    android:text="8 hour ago"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_size_small"/>
+            </RelativeLayout>
+
+
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
