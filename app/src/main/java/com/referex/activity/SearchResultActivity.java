@@ -103,6 +103,7 @@ public class SearchResultActivity extends AppCompatActivity {
     
     private void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
+        swipeRefreshLayout.setRefreshing (true);
         
         jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
         rvJobList.setAdapter (jobDescriptionAdapter);
@@ -139,6 +140,7 @@ public class SearchResultActivity extends AppCompatActivity {
                         public void onResponse (String response) {
                             Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
                             if (response != null) {
+                                swipeRefreshLayout.setRefreshing (false);
                                 rlNoResultFound.setVisibility (View.GONE);
                                 rvJobList.setVisibility (View.VISIBLE);
                                 try {
@@ -169,11 +171,16 @@ public class SearchResultActivity extends AppCompatActivity {
                                             jobDescriptionList.add (i, jobDescription);
                                         }
                                         jobDescriptionAdapter.notifyDataSetChanged ();
+                                        if (jsonArrayJobs.length () == 0) {
+                                            rlNoResultFound.setVisibility (View.VISIBLE);
+                                            rvJobList.setVisibility (View.GONE);
+                                        }
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace ();
                                     Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_exception_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
-                                    
+                                    rlNoResultFound.setVisibility (View.VISIBLE);
+                                    rvJobList.setVisibility (View.GONE);
                                 }
                             } else {
                                 rlNoResultFound.setVisibility (View.VISIBLE);
@@ -186,12 +193,15 @@ public class SearchResultActivity extends AppCompatActivity {
                     new Response.ErrorListener () {
                         @Override
                         public void onErrorResponse (VolleyError error) {
+                            swipeRefreshLayout.setRefreshing (false);
                             Utils.showLog (Log.ERROR, AppConfigTags.VOLLEY_ERROR, error.toString (), true);
                             NetworkResponse response = error.networkResponse;
                             if (response != null && response.data != null) {
                                 Utils.showLog (Log.ERROR, AppConfigTags.ERROR, new String (response.data), true);
                             }
                             Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                            rlNoResultFound.setVisibility (View.VISIBLE);
+                            rvJobList.setVisibility (View.GONE);
                         }
                     }) {
                 
@@ -220,6 +230,9 @@ public class SearchResultActivity extends AppCompatActivity {
             };
             Utils.sendRequest (strRequest, 5);
         } else {
+            swipeRefreshLayout.setRefreshing (false);
+            rlNoResultFound.setVisibility (View.VISIBLE);
+            rvJobList.setVisibility (View.GONE);
             Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_no_internet_connection_available), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_go_to_settings), new View.OnClickListener () {
                 @Override
                 public void onClick (View v) {
