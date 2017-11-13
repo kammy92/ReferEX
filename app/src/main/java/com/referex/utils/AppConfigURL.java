@@ -22,4 +22,6 @@ public class AppConfigURL {
     public static String URL_BOOKMARKED_JOB = BASE_URL + "/bookmark/job";
     public static String URL_RECOMMENDED = BASE_URL + "jobs/recommended";
     public static String URL_SUBMIT_PROFILE = BASE_URL + "submit/profile";
+    
+    public static String URL_SEARCH = BASE_URL + "jobs/search";
 }

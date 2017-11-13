@@ -79,4 +79,8 @@ public class AppConfigTags {
     public static String JOB_BOOKMARKED = "job_bookmarked";
     public static String JOB_TYPE = "job_type";
     
+    public static String MIN_EXP = "min_exp";
+    public static String MAX_EXP = "max_exp";
+    public static String MIN_SALARY = "min_salary";
+    public static String MAX_SALARY = "max_salary";
 }

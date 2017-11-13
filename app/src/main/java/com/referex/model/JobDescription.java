@@ -6,23 +6,57 @@ package com.referex.model;
 
 public class JobDescription {
     int id;
-    String job_title, job_description, experience, skill, company_name, location, salary, posted_at, job_type, job_expires;
+    String job_title, job_description, min_experience, max_experience, skill, company_name, location, min_salary, max_salary, posted_at, job_type, job_expires;
     boolean is_bookmarked;
     
     
-    public JobDescription (int id, String job_title, String job_description, String experience, String skill, String company_name, String location, String salary, String posted_at, String job_type, String job_expires, boolean is_bookmarked) {
+    public JobDescription (int id, String job_title, String job_description, String min_experience, String max_experience, String skill, String company_name, String location, String min_salary, String max_salary, String posted_at, String job_type, String job_expires, boolean is_bookmarked) {
         this.id = id;
         this.job_title = job_title;
         this.job_description = job_description;
-        this.experience = experience;
+        this.min_experience = min_experience;
+        this.max_experience = max_experience;
         this.skill = skill;
         this.company_name = company_name;
         this.location = location;
-        this.salary = salary;
+        this.min_salary = min_salary;
+        this.max_salary = max_salary;
         this.posted_at = posted_at;
         this.job_type = job_type;
         this.job_expires = job_expires;
         this.is_bookmarked = is_bookmarked;
+    }
+    
+    public String getMin_experience () {
+        return min_experience;
+    }
+    
+    public void setMin_experience (String min_experience) {
+        this.min_experience = min_experience;
+    }
+    
+    public String getMax_experience () {
+        return max_experience;
+    }
+    
+    public void setMax_experience (String max_experience) {
+        this.max_experience = max_experience;
+    }
+    
+    public String getMin_salary () {
+        return min_salary;
+    }
+    
+    public void setMin_salary (String min_salary) {
+        this.min_salary = min_salary;
+    }
+    
+    public String getMax_salary () {
+        return max_salary;
+    }
+    
+    public void setMax_salary (String max_salary) {
+        this.max_salary = max_salary;
     }
 
     public int getId() {
@@ -49,13 +83,6 @@ public class JobDescription {
         this.job_description = job_description;
     }
 
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
 
     public String getSkill() {
         return skill;
@@ -79,14 +106,6 @@ public class JobDescription {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-    
-    public String getSalary () {
-        return salary;
-    }
-    
-    public void setSalary (String salary) {
-        this.salary = salary;
     }
     
     public String getPosted_at () {

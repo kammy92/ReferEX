@@ -69,7 +69,7 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         holder.tvLocation.setText(jobDescription.getLocation());
         holder.tvSkill.setText(jobDescription.getSkill());
         holder.tvTime.setText (Utils.getFormattedDate (activity, (Utils.getDateInMillis (jobDescription.getPosted_at ()))));
-        holder.tvExperience.setText (jobDescription.getExperience () + " (" + jobDescription.getJob_type () + ")");
+        holder.tvExperience.setText (jobDescription.getMin_experience () + " - " + jobDescription.getMax_experience () + "  Year (" + jobDescription.getJob_type () + ")");
     
 
             holder.ivHot.setVisibility (View.VISIBLE);

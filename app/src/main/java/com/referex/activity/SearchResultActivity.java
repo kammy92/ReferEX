@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,122 +41,112 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by l on 27/07/2017.
- */
-
-public class RecommendedJobActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity {
     Bundle savedInstanceState;
-
     RelativeLayout rlInternetConnection;
     RelativeLayout rlNoResultFound;
-    RecyclerView rvJobList;
-    ImageView ivFilter;
-    CoordinatorLayout clMain;
-
-    JobDescriptionAdapter jobDescriptionAdapter;
-    List<JobDescription> jobDescriptionList = new ArrayList<> ();
     UserDetailsPref userDetailsPref;
     TextView tvTitle;
+    RecyclerView rvJobList;
+    CoordinatorLayout clMain;
     SwipeRefreshLayout swipeRefreshLayout;
-    RelativeLayout rlBack;
-    
+    JobDescriptionAdapter jobDescriptionAdapter;
+    List<JobDescription> jobDescriptionList = new ArrayList<> ();
+    String minExp;
+    String maxExp;
+    String minSalary;
+    String maxSalary;
+    String location;
+    String skill;
     
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_recommended_job);
+        setContentView (R.layout.activity_search_result);
         this.savedInstanceState = savedInstanceState;
         initView ();
         initData ();
         initListener ();
+        initBundle ();
         recommendedJobList ();
+        
+        
+    }
+    
+    private void initBundle () {
+        Bundle extras = getIntent ().getExtras ();
+        
+        if (extras != null) {
+            minExp = extras.getString (AppConfigTags.MIN_EXP);
+            maxExp = extras.getString (AppConfigTags.MAX_EXP);
+            minSalary = extras.getString (AppConfigTags.MIN_SALARY);
+            maxSalary = extras.getString (AppConfigTags.MAX_SALARY);
+            location = extras.getString (AppConfigTags.LOCATIONS);
+            skill = extras.getString (AppConfigTags.SKILLS);
+        }
     }
     
     
     private void initView () {
-        clMain = (CoordinatorLayout) findViewById (R.id.clMain);
+        
         rlInternetConnection = (RelativeLayout) findViewById (R.id.rlInternetConnection);
-        ivFilter = (ImageView) findViewById (R.id.ivFilter);
         rlNoResultFound = (RelativeLayout) findViewById (R.id.rlNoResultFound);
-        rvJobList = (RecyclerView) findViewById (R.id.rvJobList);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById (R.id.swipe_refresh_layout);
         tvTitle = (TextView) findViewById (R.id.tvTitle);
-        rlBack = (RelativeLayout) findViewById (R.id.rlBack);
-        Utils.setTypefaceToAllViews (this, tvTitle);
-    }
-    
-    
-    private void initListener () {
-        rlBack.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick (View v) {
-                finish ();
-                overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
-            }
-        });
-    
-        swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
-            @Override
-            public void onRefresh () {
-                swipeRefreshLayout.setRefreshing (false);
-            }
-        });
-    
-        ivFilter.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick (View view) {
-                ivFilter.setOnClickListener (new View.OnClickListener () {
-                    @Override
-                    public void onClick (View v) {
-                        Intent intent4 = new Intent (RecommendedJobActivity.this, FilterActivity.class);
-                        startActivity (intent4);
-                        overridePendingTransition (R.anim.slide_in_up, R.anim.slide_out_up);
-                    }
-                });
-            }
-        });
-
+        
+        Utils.setTypefaceToAllViews (SearchResultActivity.this, tvTitle);
+        
+        rvJobList = (RecyclerView) findViewById (R.id.rvJobList);
+        clMain = (CoordinatorLayout) findViewById (R.id.clMain);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById (R.id.swipe_refresh_layout);
+        
     }
     
     private void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
-        jobDescriptionList.clear ();
-        /*jobDescriptionList.add (new JobDescription (1, "Engineering Manager (PHP)", "ABC Technologies Pvt Ltd", "6 - 10 Years", "Delhi", "Java, MySQL, CSS, PHP, HTML5", true, false));
-        jobDescriptionList.add (new JobDescription (2, "Android Developer - Java", "XYZ Pvt Ltd", "1-3 Years", "Bengaluru", "Android, Java, SDK, Mobile Development", false, false));
-        jobDescriptionList.add (new JobDescription (3, "Sr Project Manager", "SLA Consulting India", "3-6 Years", "Faridabad, Guurgaon", "Team Lead, Python, Java, JavaScript, Django", false, false));
-        jobDescriptionList.add (new JobDescription (4, "Consultant / Sr. Consultant", "Focus Consulting Co India", "6-10 Years", "Delhi", "Java, PHP, HTML5, Django, Symphony", true, false));
-        jobDescriptionList.add (new JobDescription (5, "Java Full Stack Developer", "Premium", "3-5 Years", "Delhi NCR", "Java, Swings, Servlets, Applets, JavaScript, Java Advanced", false, false));
-        jobDescriptionList.add (new JobDescription (6, "C++ Developer", "Angel Network", "2-3 Years", "Pune", "C++, C, Java, OOOPs, CSS, Django, Symphony", false, false));*/
         
-        swipeRefreshLayout.setRefreshing (false);
-    
         jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
         rvJobList.setAdapter (jobDescriptionAdapter);
         rvJobList.setHasFixedSize (true);
         rvJobList.addItemDecoration (new SimpleDividerItemDecoration (this));
         rvJobList.setLayoutManager (new LinearLayoutManager (this, LinearLayoutManager.VERTICAL, false));
         rvJobList.setItemAnimator (new DefaultItemAnimator ());
+        
+        
+    }
     
+    private void initListener () {
+        swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
+            @Override
+            public void onRefresh () {
+                recommendedJobList ();
+            }
+        });
+    }
     
+    @Override
+    public void onBackPressed () {
+        super.onBackPressed ();
     }
     
     
     public void recommendedJobList () {
-        if (NetworkConnection.isNetworkAvailable (RecommendedJobActivity.this)) {
+        if (NetworkConnection.isNetworkAvailable (SearchResultActivity.this)) {
             jobDescriptionList.clear ();
-            Utils.showLog (Log.INFO, AppConfigTags.URL, AppConfigURL.URL_RECOMMENDED, true);
-            StringRequest strRequest = new StringRequest (Request.Method.GET, AppConfigURL.URL_RECOMMENDED,
+            Utils.showLog (Log.INFO, AppConfigTags.URL, AppConfigURL.URL_SEARCH, true);
+            StringRequest strRequest = new StringRequest (Request.Method.POST, AppConfigURL.URL_SEARCH,
                     new Response.Listener<String> () {
                         @Override
                         public void onResponse (String response) {
                             Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
                             if (response != null) {
+                                rlNoResultFound.setVisibility (View.GONE);
+                                rvJobList.setVisibility (View.VISIBLE);
                                 try {
                                     JSONObject jsonObj = new JSONObject (response);
                                     boolean is_error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! is_error) {
+                                        swipeRefreshLayout.setRefreshing (false);
                                         JSONArray jsonArrayJobs = jsonObj.getJSONArray (AppConfigTags.JOBS);
                                         for (int i = 0; i < jsonArrayJobs.length (); i++) {
                                             JSONObject jsonObjectDescription = jsonArrayJobs.getJSONObject (i);
@@ -171,7 +160,7 @@ public class RecommendedJobActivity extends AppCompatActivity {
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_COMPANY),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_LOCATION),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_MIN_SALARY),
-                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE),
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_SALARY),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_POSTED_AT),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_TYPE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_EXPIRES_IN),
@@ -179,17 +168,17 @@ public class RecommendedJobActivity extends AppCompatActivity {
                                             );
                                             jobDescriptionList.add (i, jobDescription);
                                         }
-                                        
-                                        
                                         jobDescriptionAdapter.notifyDataSetChanged ();
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace ();
-                                    Utils.showSnackBar (RecommendedJobActivity.this, clMain, getResources ().getString (R.string.snackbar_text_exception_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                                    Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_exception_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
                                     
                                 }
                             } else {
-                                Utils.showSnackBar (RecommendedJobActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                                rlNoResultFound.setVisibility (View.VISIBLE);
+                                rvJobList.setVisibility (View.GONE);
+                                Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
                                 Utils.showLog (Log.WARN, AppConfigTags.SERVER_RESPONSE, AppConfigTags.DIDNT_RECEIVE_ANY_DATA_FROM_SERVER, true);
                             }
                         }
@@ -202,13 +191,19 @@ public class RecommendedJobActivity extends AppCompatActivity {
                             if (response != null && response.data != null) {
                                 Utils.showLog (Log.ERROR, AppConfigTags.ERROR, new String (response.data), true);
                             }
-                            Utils.showSnackBar (RecommendedJobActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                            Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
                         }
                     }) {
                 
                 @Override
                 protected Map<String, String> getParams () throws AuthFailureError {
                     Map<String, String> params = new Hashtable<String, String> ();
+                    params.put (AppConfigTags.MIN_EXP, minExp);
+                    params.put (AppConfigTags.MAX_EXP, maxExp);
+                    params.put (AppConfigTags.MIN_SALARY, minSalary);
+                    params.put (AppConfigTags.MAX_SALARY, maxSalary);
+                    params.put (AppConfigTags.LOCATIONS, location);
+                    params.put (AppConfigTags.SKILLS, skill);
                     Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
                     return params;
                 }
@@ -218,14 +213,14 @@ public class RecommendedJobActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<> ();
                     UserDetailsPref userDetailsPref = UserDetailsPref.getInstance ();
                     params.put (AppConfigTags.HEADER_API_KEY, Constants.api_key);
-                    params.put (AppConfigTags.HEADER_USER_LOGIN_KEY, userDetailsPref.getStringPref (RecommendedJobActivity.this, UserDetailsPref.USER_LOGIN_KEY));
+                    params.put (AppConfigTags.HEADER_USER_LOGIN_KEY, userDetailsPref.getStringPref (SearchResultActivity.this, UserDetailsPref.USER_LOGIN_KEY));
                     Utils.showLog (Log.INFO, AppConfigTags.HEADERS_SENT_TO_THE_SERVER, "" + params, false);
                     return params;
                 }
             };
             Utils.sendRequest (strRequest, 5);
         } else {
-            Utils.showSnackBar (RecommendedJobActivity.this, clMain, getResources ().getString (R.string.snackbar_text_no_internet_connection_available), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_go_to_settings), new View.OnClickListener () {
+            Utils.showSnackBar (SearchResultActivity.this, clMain, getResources ().getString (R.string.snackbar_text_no_internet_connection_available), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_go_to_settings), new View.OnClickListener () {
                 @Override
                 public void onClick (View v) {
                     Intent dialogIntent = new Intent (Settings.ACTION_SETTINGS);
@@ -235,4 +230,5 @@ public class RecommendedJobActivity extends AppCompatActivity {
             });
         }
     }
+    
 }

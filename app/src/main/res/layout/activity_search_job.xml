@@ -176,11 +176,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Role"
+                        android:text="Salary"
                         android:textColor="@color/primary_dark"
                         android:textSize="@dimen/text_size_small"/>
                     <Button
-                        android:id="@+id/btAddRole"
+                        android:id="@+id/btAddSalary"
                         style="@style/Widget.AppCompat.Light.ActionButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,16 +191,16 @@
                         android:textColor="@color/primary_dark"/>
                 </RelativeLayout>
                 <TextView
-                    android:id="@+id/tvNoRole"
+                    android:id="@+id/tvNoSalary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginStart="@dimen/activity_margin"
-                    android:text="Please add role"
+                    android:text="Please add salary"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_size_small"/>
                 <com.referex.utils.FlowLayout
-                    android:id="@+id/flRole"
+                    android:id="@+id/flSalary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"/>

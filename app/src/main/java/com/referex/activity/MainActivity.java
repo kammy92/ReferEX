@@ -493,8 +493,13 @@ public class MainActivity extends AppCompatActivity {
                                         pieView.setInnerText (percentage + "%");
                                         pieView.setPercentageTextSize (Utils.pxFromDp (MainActivity.this, 8));
                                         pieView.setPercentage ((float) percentage);
-                                        
-                                        
+    
+                                        JSONArray jsonArraySKills = jsonObj.getJSONArray (AppConfigTags.SKILLS);
+                                        JSONArray jsonArrayLocation = jsonObj.getJSONArray (AppConfigTags.LOCATIONS);
+    
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.SKILLS, jsonArraySKills.toString ());
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.LOCATION, jsonArrayLocation.toString ());
+    
                                         JSONArray jsonArrayPerformance = jsonObj.getJSONArray (AppConfigTags.PERFORMANCE_STATUS);
                                         Log.e ("percentage", "" + percentage);
                                         for (int i = 0; i < jsonArrayPerformance.length (); i++) {
@@ -570,22 +575,24 @@ public class MainActivity extends AppCompatActivity {
                                     if (! is_error) {
                                         swipeRefreshLayout.setRefreshing (false);
                                         JSONArray jsonArrayJobs = jsonObj.getJSONArray (AppConfigTags.JOBS);
+    
                                         for (int i = 0; i < jsonArrayJobs.length (); i++) {
                                             JSONObject jsonObjectDescription = jsonArrayJobs.getJSONObject (i);
                                             JobDescription jobDescription = new JobDescription (
                                                     jsonObjectDescription.getInt (AppConfigTags.JOB_ID),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_TITLE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_DESCRIPTION),
-                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MIN_EXPERIENCE) + " - " + jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE) + " Year ",
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MIN_EXPERIENCE),
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_SKILLS),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_COMPANY),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_LOCATION),
-                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MIN_SALARY) + " - " + jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE),
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MIN_SALARY),
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_POSTED_AT),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_TYPE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_EXPIRES_IN),
                                                     jsonObjectDescription.getBoolean (AppConfigTags.JOB_BOOKMARKED)
-                                            
                                             );
                                             jobDescriptionList.add (i, jobDescription);
                                         }
