@@ -374,7 +374,8 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_bookmark).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_bullhorn).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
+                        new PrimaryDrawerItem ().withName ("My Account").withIcon (FontAwesome.Icon.faw_suitcase).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
                 )
                 .withSavedInstance (savedInstanceState)
                 .withOnDrawerItemClickListener (new Drawer.OnDrawerItemClickListener () {
@@ -402,25 +403,13 @@ public class MainActivity extends AppCompatActivity {
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
                             case 7:
-                                showLogOutDialog ();
+                                Intent intent7 = new Intent (MainActivity.this, MyAccountActivity.class);
+                                startActivity (intent7);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
                                 break;
                             case 8:
-
-                            /*
-                            case 4:
-                                Intent intent3 = new Intent (MainActivity.this, AboutUsActivity.class);
-                                startActivity (intent3);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
-                                break;
-                            case 5:
-                                Intent intent4 = new Intent (MainActivity.this, TestimonialActivity.class);
-                                startActivity (intent4);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
-                                break;
-
-                            case 10:
                                 showLogOutDialog ();
-                                break;*/
+                                break;
                         }
                         return false;
                     }

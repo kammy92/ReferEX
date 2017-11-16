@@ -85,4 +85,7 @@ public class AppConfigTags {
     public static String MAX_SALARY = "max_salary";
     
     public static String RESUME = "resume";
+    
+    public static String PERFORMANCE = "performance";
+    public static String CANDIDATES = "candidates";
 }

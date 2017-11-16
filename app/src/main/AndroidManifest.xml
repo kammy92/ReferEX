@@ -45,6 +45,9 @@
         <activity android:name=".activity.UploadFileActivity"
                   android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.MyAccountActivity"
+                  android:screenOrientation="portrait"/>
+
         <service android:name="com.referex.service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>

@@ -68,10 +68,6 @@ import java.util.Map;
 
 import mabbas007.tagsedittext.TagsEditText;
 
-/**
- * Created by l on 25/07/2017.
- */
-
 public class UploadResumeActivity extends AppCompatActivity implements TagsEditText.TagsEditListener {
     private static final int STORAGE_PERMISSION_CODE = 123;
     private static final int PICK_FILE_REQUEST = 1;
@@ -97,7 +93,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     String FileName = "";
     private int PICK_PDF_REQUEST = 1;
     private String selectedFilePath;
-
+    
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -145,7 +141,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
             @Override
             public void onClick (View view) {
                 showFileChooser ();
-
+    
             }
         });
         tvUploadResume.setOnClickListener (new View.OnClickListener () {
@@ -199,7 +195,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     }
                 }
             }
-
+    
         });
         etName.addTextChangedListener (new TextWatcher () {
             @Override
@@ -208,11 +204,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etName.setError (null);
                 }
             }
-
+    
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-
+    
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -224,11 +220,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etEmail.setError (null);
                 }
             }
-
+    
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-
+    
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -240,11 +236,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etMobile.setError (null);
                 }
             }
-
+    
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-
+    
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -336,7 +332,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     
     public void uploadMultipart () {
         if (selectedFilePath != null) {
-            progressDialog = ProgressDialog.show (UploadResumeActivity.this, "", "Uploading File...", true);
+            Utils.showProgressDialog (progressDialog, "Uploading Resume...", true);
+//            progressDialog = ProgressDialog.show (UploadResumeActivity.this, "", "Uploading File...", true);
             new Thread (new Runnable () {
                 @Override
                 public void run () {
@@ -377,12 +374,12 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 Uri selectedFileUri = data.getData ();
                 selectedFilePath = FilePath.getPath (this, selectedFileUri);
                 Log.i (TAG, "Selected File Path:" + selectedFilePath);
-            
+    
                 if (selectedFilePath != null && ! selectedFilePath.equals ("")) {
                     String[] parts = selectedFilePath.split ("/");
                     final String fileName = parts[parts.length - 1];
                     tvFileSelected.setText (fileName);
-                
+        
                     tvFileSelected.setVisibility (View.VISIBLE);
                 } else {
                     tvFileSelected.setVisibility (View.GONE);
@@ -494,40 +491,36 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                         public void run () {
                             uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (),
                                     etMobile.getText ().toString ().trim (), String.valueOf (jobId), FileName);
-                            
+                
                             tvFileSelected.setText (fileName);
                         }
                     });
+                } else {
+                    progressDialog.dismiss ();
                 }
                 
                 //closing the input and output streams
                 fileInputStream.close ();
                 dataOutputStream.flush ();
                 dataOutputStream.close ();
-                
-                
             } catch (FileNotFoundException e) {
                 e.printStackTrace ();
-                runOnUiThread (new Runnable () {
-                    @Override
-                    public void run () {
-                        Toast.makeText (UploadResumeActivity.this, "File Not Found", Toast.LENGTH_SHORT).show ();
-                    }
-                });
+                Toast.makeText (UploadResumeActivity.this, "File Not Found", Toast.LENGTH_SHORT).show ();
+                progressDialog.dismiss ();
             } catch (MalformedURLException e) {
                 e.printStackTrace ();
                 Toast.makeText (UploadResumeActivity.this, "URL error!", Toast.LENGTH_SHORT).show ();
-                
+                progressDialog.dismiss ();
             } catch (IOException e) {
                 e.printStackTrace ();
                 Toast.makeText (UploadResumeActivity.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show ();
+                progressDialog.dismiss ();
             }
-            progressDialog.dismiss ();
             return serverResponseCode;
         }
     }
-
-
+    
+    
     //Requesting permission
     private void requestStoragePermission () {
         if (ContextCompat.checkSelfPermission (this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
@@ -536,18 +529,18 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         }
         ActivityCompat.requestPermissions (this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
     }
-
+    
     @Override
     public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText (this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show ();
+                Toast.makeText (this, "Permission granted now you can upload resume", Toast.LENGTH_LONG).show ();
             } else {
                 Toast.makeText (this, "Oops you just denied the permission", Toast.LENGTH_LONG).show ();
             }
         }
     }
-
+    
     @Override
     public void onTagsChanged (Collection<String> tags) {
         Log.d ("chip add value", "Tags changed: ");
@@ -578,7 +571,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! error) {
-        
+    
                                         MaterialDialog dialog = new MaterialDialog.Builder (UploadResumeActivity.this)
                                                 .limitIconToDefaultSize ()
                                                 .content (message)
@@ -589,12 +582,12 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                                     @Override
                                                     public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                                         finish ();
-
+    
                                                     }
                                                 }).build ();
                                         dialog.show ();
-
-
+    
+    
                                     } else {
                                         Utils.showSnackBar (UploadResumeActivity.this, clMain, message, Snackbar.LENGTH_LONG, null, null);
                                     }
