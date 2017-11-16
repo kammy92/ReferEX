@@ -148,10 +148,6 @@ public class MainActivity extends AppCompatActivity {
         pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.pie_color_good));
         pieView.setInnerBackgroundColor (getResources ().getColor (R.color.primary));
         pieView.setTextColor (getResources ().getColor (R.color.text_color_white));
-        PieAngleAnimation animation = new PieAngleAnimation (pieView);
-        animation.setDuration (2000); //This is the duration of the animation in millis
-        pieView.startAnimation (animation);
-        pieView.setInnerTextVisibility (View.VISIBLE);
       /*  pieView.setInnerText(percentage+"%");
         pieView.setPercentageTextSize(Utils.pxFromDp(this, 8));
         pieView.setPercentage((float) percentage);*/
@@ -438,7 +434,6 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed ();
     }
     
-    
     private void showLogOutDialog () {
         MaterialDialog dialog = new MaterialDialog.Builder (this)
                 .limitIconToDefaultSize ()
@@ -463,7 +458,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show ();
     }
     
-    
     private void initApplication () {
         PackageInfo pInfo = null;
         try {
@@ -485,7 +479,6 @@ public class MainActivity extends AppCompatActivity {
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     
-                                    
                                     if (! error) {
                                         swipeRefreshLayout.setRefreshing (false);
                                         percentage = jsonObj.getDouble (AppConfigTags.PERFORMANCE_PERCENTAGE);
@@ -493,6 +486,12 @@ public class MainActivity extends AppCompatActivity {
                                         pieView.setInnerText (percentage + "%");
                                         pieView.setPercentageTextSize (Utils.pxFromDp (MainActivity.this, 8));
                                         pieView.setPercentage ((float) percentage);
+    
+                                        PieAngleAnimation animation = new PieAngleAnimation (pieView);
+                                        animation.setDuration (2000); //This is the duration of the animation in millis
+                                        pieView.startAnimation (animation);
+                                        pieView.setInnerTextVisibility (View.VISIBLE);
+    
     
                                         JSONArray jsonArraySKills = jsonObj.getJSONArray (AppConfigTags.SKILLS);
                                         JSONArray jsonArrayLocation = jsonObj.getJSONArray (AppConfigTags.LOCATIONS);
@@ -507,20 +506,14 @@ public class MainActivity extends AppCompatActivity {
                                             bottomSheetList.add (i, new BottomSheet (
                                                     jsonObjectPerformance.getString (AppConfigTags.TEXT),
                                                     jsonObjectPerformance.getString (AppConfigTags.VALUE)
-                                            
-                                            
                                             ));
                                         }
                                         bottomSheetAdapter.notifyDataSetChanged ();
-                                        
                                     }
                                 } catch (Exception e) {
-                                    
-                                    
                                     e.printStackTrace ();
                                 }
                             } else {
-                                
                                 Utils.showLog (Log.WARN, AppConfigTags.SERVER_RESPONSE, AppConfigTags.DIDNT_RECEIVE_ANY_DATA_FROM_SERVER, true);
                             }
                         }
@@ -553,8 +546,6 @@ public class MainActivity extends AppCompatActivity {
             strRequest.setRetryPolicy (new DefaultRetryPolicy (DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Utils.sendRequest (strRequest, 30);
         } else {
-            
-            
         }
     }
     
@@ -588,7 +579,7 @@ public class MainActivity extends AppCompatActivity {
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_COMPANY),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_LOCATION),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_MIN_SALARY),
-                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_EXPERIENCE),
+                                                    jsonObjectDescription.getString (AppConfigTags.JOB_MAX_SALARY),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_POSTED_AT),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_TYPE),
                                                     jsonObjectDescription.getString (AppConfigTags.JOB_EXPIRES_IN),
@@ -652,5 +643,4 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
 }

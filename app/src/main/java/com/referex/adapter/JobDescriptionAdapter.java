@@ -70,7 +70,7 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         holder.tvSkill.setText(jobDescription.getSkill());
         holder.tvTime.setText (Utils.getFormattedDate (activity, (Utils.getDateInMillis (jobDescription.getPosted_at ()))));
         holder.tvExperience.setText (jobDescription.getMin_experience () + " - " + jobDescription.getMax_experience () + "  Year (" + jobDescription.getJob_type () + ")");
-    
+        holder.tvSalary.setText (jobDescription.getMin_salary () + " - " + jobDescription.getMax_salary ());
 
             holder.ivHot.setVisibility (View.VISIBLE);
     
@@ -180,6 +180,7 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         TextView tvLocation;
         TextView tvTitle;
         TextView tvSkill;
+        TextView tvSalary;
         ImageView ivRating;
         ImageView ivHot;
 
@@ -196,7 +197,7 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
             tvSkill = (TextView) view.findViewById(R.id.tvSkill);
             tvTime = (TextView) view.findViewById (R.id.tvTime);
             ivRating = (ImageView) view.findViewById(R.id.ivRating);
-    
+            tvSalary = (TextView) view.findViewById (R.id.tvSalary);
             ivHot = (ImageView) view.findViewById (R.id.ivHot);
             view.setOnClickListener(this);
         }
@@ -204,7 +205,9 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         @Override
         public void onClick(View v) {
             final JobDescription jobDescription = jobDescriptions.get (getLayoutPosition ());
-            Intent intent=new Intent(activity, UploadResumeActivity.class);
+            Intent intent = new Intent (activity, UploadResumeActivity.class);
+//            Intent intent = new Intent (activity, UploadFileActivity.class);
+            intent.putExtra (AppConfigTags.JOB_ID, jobDescription.getId ());
             intent.putExtra (AppConfigTags.JOB_POSITION, jobDescription.getJob_title ());
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

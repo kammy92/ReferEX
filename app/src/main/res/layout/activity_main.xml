@@ -70,7 +70,7 @@
                             android:layout_centerVertical="true"
                             android:padding="@dimen/activity_margin_small"
                             android:src="@drawable/ic_filter"
-                            android:visibility="visible"/>
+                            android:visibility="gone"/>
                     </RelativeLayout>
 
                     <ImageView
@@ -269,7 +269,7 @@
                     android:layout_margin="10dp"
                     plainpie:inner_pie_padding="10"
                     plainpie:inner_text_visibility="true"
-                    plainpie:percentage="75"
+                    plainpie:percentage="0"
                 />
                 <ImageView
                     android:id="@+id/ivSwipe"

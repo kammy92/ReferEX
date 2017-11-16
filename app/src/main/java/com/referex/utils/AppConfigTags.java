@@ -83,4 +83,6 @@ public class AppConfigTags {
     public static String MAX_EXP = "max_exp";
     public static String MIN_SALARY = "min_salary";
     public static String MAX_SALARY = "max_salary";
+    
+    public static String RESUME = "resume";
 }

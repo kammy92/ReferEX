@@ -1,14 +1,13 @@
 package com.referex.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -47,19 +46,25 @@ import com.referex.utils.TypefaceSpan;
 import com.referex.utils.UserDetailsPref;
 import com.referex.utils.Utils;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
-
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-import java.util.UUID;
 
 import mabbas007.tagsedittext.TagsEditText;
 
@@ -68,10 +73,9 @@ import mabbas007.tagsedittext.TagsEditText;
  */
 
 public class UploadResumeActivity extends AppCompatActivity implements TagsEditText.TagsEditListener {
-    
-    public static final String UPLOAD_URL = "https://project-referex-cammy92.c9users.io/api/upload_new.php";
-    public static final String PDF_FETCH_URL = "http://internetfaqs.net/AndroidPdfUpload/getPdfs.php";
     private static final int STORAGE_PERMISSION_CODE = 123;
+    private static final int PICK_FILE_REQUEST = 1;
+    private static final String TAG = MainActivity.class.getSimpleName ();
     TextView tvUploadResume;
     TextView tvTitle;
     TextView tvSelectResume;
@@ -90,9 +94,10 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     FlowLayout chipsBoxLayout;
     ArrayList<String> skillsArrayList = new ArrayList<String> ();
     ArrayList<String> skillsSelectedArrayList = new ArrayList<String> ();
+    String FileName = "";
     private int PICK_PDF_REQUEST = 1;
-    private Uri filePath;
-    
+    private String selectedFilePath;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -113,9 +118,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     private void initData () {
         requestStoragePermission ();
         progressDialog = new ProgressDialog (this);
-    
         skillsArrayList.addAll (Arrays.asList (new String[] {"C", "C++", "Java", "Android", "HTML", "PHP", "Hadoop", "Tableau", "iOS"}));
-        
         Utils.setTypefaceToAllViews (this, tvSelectResume);
     }
     
@@ -142,13 +145,13 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
             @Override
             public void onClick (View view) {
                 showFileChooser ();
-                
+
             }
         });
         tvUploadResume.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
-                // uploadMultipart ();
+    
                 SpannableString s = new SpannableString (getResources ().getString (R.string.please_enter_name));
                 s.setSpan (new TypefaceSpan (UploadResumeActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 SpannableString s2 = new SpannableString (getResources ().getString (R.string.please_enter_email));
@@ -184,9 +187,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                 etMobile.setError (s4);
                                 break;
                             case 3:
-                                uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (),
-                                        etMobile.getText ().toString ().trim (), String.valueOf (jobId));
-                    
+                                uploadMultipart ();
                                 break;
                             case 4:
                                 etMobile.setError (s3);
@@ -200,8 +201,6 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
             }
 
         });
-    
-    
         etName.addTextChangedListener (new TextWatcher () {
             @Override
             public void onTextChanged (CharSequence s, int start, int before, int count) {
@@ -209,11 +208,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etName.setError (null);
                 }
             }
-        
+
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-        
+
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -225,11 +224,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etEmail.setError (null);
                 }
             }
-        
+
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-        
+
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -241,17 +240,15 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     etMobile.setError (null);
                 }
             }
-        
+
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-        
+
             @Override
             public void afterTextChanged (Editable s) {
             }
         });
-    
-    
         rlBack.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
@@ -259,7 +256,6 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-    
         btAddSkills.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -271,14 +267,11 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                         }
                     }
                 }
-    
                 Integer[] ints = new Integer[skillPositionList.size ()];
                 int i = 0;
                 for (Integer n : skillPositionList) {
                     ints[i++] = n;
                 }
-    
-    
                 new MaterialDialog.Builder (UploadResumeActivity.this)
                         .title ("Skills")
                         .items (skillsArrayList)
@@ -341,88 +334,200 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         });
     }
     
-    
     public void uploadMultipart () {
-        
-        String name = tvSelectResume.getText ().toString ().trim ();
-        String path = FilePath.getPath (this, filePath);
-        if (path == null) {
-            Toast.makeText (this, "Please move your .pdf file to internal storage and retry", Toast.LENGTH_LONG).show ();
+        if (selectedFilePath != null) {
+            progressDialog = ProgressDialog.show (UploadResumeActivity.this, "", "Uploading File...", true);
+            new Thread (new Runnable () {
+                @Override
+                public void run () {
+                    //creating new thread to handle Http Operations
+                    uploadFile (selectedFilePath);
+                }
+            }).start ();
         } else {
-            try {
-                String uploadId = UUID.randomUUID ().toString ();
-                new MultipartUploadRequest (this, uploadId, UPLOAD_URL)
-                        .addFileToUpload (path, "pdf") //Adding file
-                        .addParameter ("name", name)//Adding text parameter to the request
-                        .setNotificationConfig (new UploadNotificationConfig ())
-                        .setMaxRetries (2)
-                        .startUpload (); //Starting the upload
-            } catch (Exception exc) {
-                Toast.makeText (this, exc.getMessage (), Toast.LENGTH_SHORT).show ();
-            }
+            uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (), etMobile.getText ().toString ().trim (), String.valueOf (jobId), "");
         }
     }
     
-    
     private void showFileChooser () {
         Intent intent = new Intent ();
-        intent.setType ("application/*");
-        intent.addCategory (Intent.CATEGORY_OPENABLE);
+        //sets the select file to all types of files
+        intent.setType ("*/*");
+        //allows to select data and return it
         intent.setAction (Intent.ACTION_GET_CONTENT);
+        //starts new activity to select file and return data
         try {
             startActivityForResult (Intent.createChooser (intent, "Select a File to Upload"), PICK_PDF_REQUEST);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText (UploadResumeActivity.this, "Please install a File Manager.", Toast.LENGTH_SHORT).show ();
         }
+        
     }
-    
     
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult (requestCode, resultCode, data);
-        
-        if (requestCode == PICK_PDF_REQUEST && resultCode == RESULT_OK && data != null && data.getData () != null) {
-            filePath = data.getData ();
     
-        }
-        
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    // Get the Uri of the selected file
-                    Uri uri = data.getData ();
-                    String uriString = uri.toString ();
-                    File myFile = new File (uriString);
-                    String path = myFile.getAbsolutePath ();
-                    String displayName = null;
-                    
-                    if (uriString.startsWith ("content://")) {
-                        Cursor cursor = null;
-                        try {
-                            cursor = getContentResolver ().query (uri, null, null, null, null);
-                            if (cursor != null && cursor.moveToFirst ()) {
-                                displayName = cursor.getString (cursor.getColumnIndex (OpenableColumns.DISPLAY_NAME));
-                                tvFileSelected.setText (displayName);
-                                tvFileSelected.setVisibility (View.VISIBLE);
-                            } else {
-                                tvFileSelected.setVisibility (View.GONE);
-                            }
-                            
-                        } finally {
-                            cursor.close ();
-                        }
-                    } else if (uriString.startsWith ("file://")) {
-                        displayName = myFile.getName ();
-                        tvSelectResume.setText (displayName);
-                        tvFileSelected.setVisibility (View.VISIBLE);
-                    } else {
-                        tvFileSelected.setVisibility (View.GONE);
-                    }
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_FILE_REQUEST) {
+                if (data == null) {
+                    //no data present
+                    return;
                 }
-                break;
+                Uri selectedFileUri = data.getData ();
+                selectedFilePath = FilePath.getPath (this, selectedFileUri);
+                Log.i (TAG, "Selected File Path:" + selectedFilePath);
+            
+                if (selectedFilePath != null && ! selectedFilePath.equals ("")) {
+                    String[] parts = selectedFilePath.split ("/");
+                    final String fileName = parts[parts.length - 1];
+                    tvFileSelected.setText (fileName);
+                
+                    tvFileSelected.setVisibility (View.VISIBLE);
+                } else {
+                    tvFileSelected.setVisibility (View.GONE);
+                    Toast.makeText (this, "Cannot upload file to server", Toast.LENGTH_SHORT).show ();
+                }
+            }
         }
     }
     
+    
+    public int uploadFile (final String selectedFilePath) {
+        
+        int serverResponseCode = 0;
+        
+        HttpURLConnection connection;
+        DataOutputStream dataOutputStream;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        
+        
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File selectedFile = new File (selectedFilePath);
+        
+        
+        String[] parts = selectedFilePath.split ("/");
+        final String fileName = parts[parts.length - 1];
+        
+        if (! selectedFile.isFile ()) {
+            progressDialog.dismiss ();
+            
+            runOnUiThread (new Runnable () {
+                @Override
+                public void run () {
+                    tvFileSelected.setText ("Source File Doesn't Exist: " + selectedFilePath);
+                }
+            });
+            return 0;
+        } else {
+            try {
+                FileInputStream fileInputStream = new FileInputStream (selectedFile);
+                URL url = new URL (AppConfigURL.UPLOAD_URL);
+                connection = (HttpURLConnection) url.openConnection ();
+                connection.setDoInput (true);//Allow Inputs
+                connection.setDoOutput (true);//Allow Outputs
+                connection.setUseCaches (false);//Don't use a cached Copy
+                connection.setRequestMethod ("POST");
+                connection.setRequestProperty ("Connection", "Keep-Alive");
+                connection.setRequestProperty ("ENCTYPE", "multipart/form-data");
+                connection.setRequestProperty ("Content-Type", "multipart/form-data;boundary=" + boundary);
+                connection.setRequestProperty ("uploaded_file", selectedFilePath);
+                
+                //creating new dataoutputstream
+                dataOutputStream = new DataOutputStream (connection.getOutputStream ());
+                
+                //writing bytes to data outputstream
+                dataOutputStream.writeBytes (twoHyphens + boundary + lineEnd);
+                dataOutputStream.writeBytes ("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
+                        + selectedFilePath + "\"" + lineEnd);
+                
+                dataOutputStream.writeBytes (lineEnd);
+                
+                //returns no. of bytes present in fileInputStream
+                bytesAvailable = fileInputStream.available ();
+                //selecting the buffer size as minimum of available bytes or 1 MB
+                bufferSize = Math.min (bytesAvailable, maxBufferSize);
+                //setting the buffer as byte array of size of bufferSize
+                buffer = new byte[bufferSize];
+                
+                //reads bytes from FileInputStream(from 0th index of buffer to buffersize)
+                bytesRead = fileInputStream.read (buffer, 0, bufferSize);
+                
+                //loop repeats till bytesRead = -1, i.e., no bytes are left to read
+                while (bytesRead > 0) {
+                    //write the bytes read from inputstream
+                    dataOutputStream.write (buffer, 0, bufferSize);
+                    bytesAvailable = fileInputStream.available ();
+                    bufferSize = Math.min (bytesAvailable, maxBufferSize);
+                    bytesRead = fileInputStream.read (buffer, 0, bufferSize);
+                }
+                
+                dataOutputStream.writeBytes (lineEnd);
+                dataOutputStream.writeBytes (twoHyphens + boundary + twoHyphens + lineEnd);
+                
+                serverResponseCode = connection.getResponseCode ();
+                String serverResponseMessage = connection.getResponseMessage ();
+                
+                BufferedReader br = new BufferedReader (new InputStreamReader ((connection.getInputStream ())));
+                StringBuilder sb = new StringBuilder ();
+                String output;
+                while ((output = br.readLine ()) != null) {
+                    sb.append (output);
+                }
+                
+                try {
+                    JSONObject jsonObject = new JSONObject (sb.toString ());
+                    FileName = jsonObject.getString ("file_name");
+                    Log.i ("RenameFile", jsonObject.getString ("file_name"));
+                } catch (JSONException e) {
+                    e.printStackTrace ();
+                }
+                
+                Log.i (TAG, "Server Response is: " + sb.toString () + serverResponseMessage + ": " + serverResponseCode);
+                if (serverResponseCode == 200) {
+                    runOnUiThread (new Runnable () {
+                        @Override
+                        public void run () {
+                            uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (),
+                                    etMobile.getText ().toString ().trim (), String.valueOf (jobId), FileName);
+                            
+                            tvFileSelected.setText (fileName);
+                        }
+                    });
+                }
+                
+                //closing the input and output streams
+                fileInputStream.close ();
+                dataOutputStream.flush ();
+                dataOutputStream.close ();
+                
+                
+            } catch (FileNotFoundException e) {
+                e.printStackTrace ();
+                runOnUiThread (new Runnable () {
+                    @Override
+                    public void run () {
+                        Toast.makeText (UploadResumeActivity.this, "File Not Found", Toast.LENGTH_SHORT).show ();
+                    }
+                });
+            } catch (MalformedURLException e) {
+                e.printStackTrace ();
+                Toast.makeText (UploadResumeActivity.this, "URL error!", Toast.LENGTH_SHORT).show ();
+                
+            } catch (IOException e) {
+                e.printStackTrace ();
+                Toast.makeText (UploadResumeActivity.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show ();
+            }
+            progressDialog.dismiss ();
+            return serverResponseCode;
+        }
+    }
+
+
     //Requesting permission
     private void requestStoragePermission () {
         if (ContextCompat.checkSelfPermission (this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
@@ -431,7 +536,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         }
         ActivityCompat.requestPermissions (this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
     }
-    
+
     @Override
     public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE) {
@@ -442,13 +547,12 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
             }
         }
     }
-    
+
     @Override
     public void onTagsChanged (Collection<String> tags) {
         Log.d ("chip add value", "Tags changed: ");
         Log.d ("chip add value", Arrays.toString (tags.toArray ()));
     }
-    
     
     @Override
     public void onEditingFinished () {
@@ -458,8 +562,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
 //        //mTagsEditText.clearFocus();
     }
     
-    
-    private void uploadProfileDetailsToServer (final String name, final String email, final String mobile, final String job_id) {
+    private void uploadProfileDetailsToServer (final String name, final String email, final String mobile, final String job_id, final String fileName) {
         if (NetworkConnection.isNetworkAvailable (UploadResumeActivity.this)) {
             
             Utils.showProgressDialog (progressDialog, getResources ().getString (R.string.progress_dialog_text_please_wait), true);
@@ -475,7 +578,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! error) {
-                                        
+        
                                         MaterialDialog dialog = new MaterialDialog.Builder (UploadResumeActivity.this)
                                                 .limitIconToDefaultSize ()
                                                 .content (message)
@@ -486,12 +589,12 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                                                     @Override
                                                     public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                                         finish ();
-                                                        
+
                                                     }
                                                 }).build ();
                                         dialog.show ();
-                                        
-                                        
+
+
                                     } else {
                                         Utils.showSnackBar (UploadResumeActivity.this, clMain, message, Snackbar.LENGTH_LONG, null, null);
                                     }
@@ -527,6 +630,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     params.put (AppConfigTags.EMAIL, email);
                     params.put (AppConfigTags.MOBILE, mobile);
                     params.put (AppConfigTags.JOB_ID, job_id);
+                    params.put (AppConfigTags.RESUME, fileName);
                     Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
                     return params;
                 }
@@ -553,7 +657,6 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
             });
         }
     }
-    
 }
 
 

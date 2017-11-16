@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -44,6 +43,8 @@ public class SearchJobActivity extends AppCompatActivity {
     Button btAddLocation;
     Button btAddSalary;
     Button btAddSkills;
+    
+    String tempSalary = "";
     
     FlowLayout flExperience;
     FlowLayout flLocation;
@@ -315,7 +316,11 @@ public class SearchJobActivity extends AppCompatActivity {
                 intent.putExtra (AppConfigTags.MIN_EXP, String.valueOf (min));
                 intent.putExtra (AppConfigTags.MAX_EXP, String.valueOf (maximum));
                 intent.putExtra (AppConfigTags.MIN_SALARY, String.valueOf (minsalary));
-                intent.putExtra (AppConfigTags.MAX_SALARY, String.valueOf (maxsalary));
+                if (! tempSalary.equalsIgnoreCase ("")) {
+                    intent.putExtra (AppConfigTags.MAX_SALARY, tempSalary);
+                } else {
+                    intent.putExtra (AppConfigTags.MAX_SALARY, String.valueOf (maxsalary));
+                }
                 intent.putExtra (AppConfigTags.LOCATIONS, location_id);
                 intent.putExtra (AppConfigTags.SKILLS, skills_id);
                 startActivity (intent);
@@ -423,7 +428,7 @@ public class SearchJobActivity extends AppCompatActivity {
                 }
                 
                 new MaterialDialog.Builder (SearchJobActivity.this)
-                        .title ("Skills")
+                        .title ("Salary")
                         .items (salaryArrayList)
                         .typeface (SetTypeFace.getTypeface (SearchJobActivity.this), SetTypeFace.getTypeface (SearchJobActivity.this))
                         .itemsCallbackMultiChoice (ints, new MaterialDialog.ListCallbackMultiChoice () {
@@ -447,6 +452,9 @@ public class SearchJobActivity extends AppCompatActivity {
                                     t.setLayoutParams (params);
                                     t.setTypeface (SetTypeFace.getTypeface (SearchJobActivity.this));
                                     t.setPadding (8, 8, 8, 8);
+                                    if (text[i].toString ().contains ("+")) {
+                                        tempSalary = text[i].toString ();
+                                    }
                                     t.setText (text[i]);
                                     t.setTextColor (Color.WHITE);
                                     t.setBackgroundResource (R.drawable.square);
@@ -587,7 +595,6 @@ public class SearchJobActivity extends AppCompatActivity {
                             public boolean onSelection (MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                                 FlowLayout.LayoutParams params = new FlowLayout.LayoutParams (FlowLayout.LayoutParams.WRAP_CONTENT, FlowLayout.LayoutParams.WRAP_CONTENT);
                                 params.setMargins (5, 5, 5, 5);
-                                Toast.makeText (SearchJobActivity.this, which.toString () + ": " + text.toString () + "", Toast.LENGTH_SHORT).show ();
                                 flLocation.removeAllViews ();
                                 locationSelectedArrayList.clear ();
                                 if (text.length > 0) {
