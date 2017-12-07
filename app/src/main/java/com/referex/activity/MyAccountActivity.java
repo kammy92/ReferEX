@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -53,6 +54,7 @@ public class MyAccountActivity extends AppCompatActivity {
     TextView tvViewAll;
     TextView tvName;
     TextView tvEmail;
+    RelativeLayout rlBack;
     SwipeRefreshLayout swipeRefreshLayout;
     
     
@@ -83,6 +85,9 @@ public class MyAccountActivity extends AppCompatActivity {
         myReferralList.add(new MyAccount("Total Joined","2"));
 
 */
+    
+        tvName.setText (userDetailsPref.getStringPref (this, UserDetailsPref.USER_NAME));
+        tvEmail.setText (userDetailsPref.getStringPref (this, UserDetailsPref.USER_EMAIL));
         swipeRefreshLayout.setRefreshing (false);
         myAccountAdapter = new MyAccountAdapter (this, myReferralList);
         rvReferralList.setAdapter (myAccountAdapter);
@@ -100,8 +105,9 @@ public class MyAccountActivity extends AppCompatActivity {
         tvName = (TextView) findViewById (R.id.tvName);
         tvViewAll = (TextView) findViewById (R.id.tvViewAll);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById (R.id.swipe_refresh_layout);
-        
-        
+        rlBack = (RelativeLayout) findViewById (R.id.rlBack);
+    
+    
     }
     
     private void initListener () {
@@ -120,7 +126,14 @@ public class MyAccountActivity extends AppCompatActivity {
                 setData ();
             }
         });
-        
+        rlBack.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                finish ();
+                overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+    
     }
     
     

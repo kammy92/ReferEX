@@ -3,6 +3,7 @@ package com.referex.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,54 +34,49 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-
 public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAdapter.ViewHolder> {
     OnItemClickListener mItemClickListener;
-
+    
     private Activity activity;
-    private List<JobDescription> jobDescriptions = new ArrayList<JobDescription>();
-
-    public JobDescriptionAdapter(Activity activity, List<JobDescription> jobDescriptions) {
+    private List<JobDescription> jobDescriptions = new ArrayList<JobDescription> ();
+    
+    public JobDescriptionAdapter (Activity activity, List<JobDescription> jobDescriptions) {
         this.activity = activity;
         this.jobDescriptions = jobDescriptions;
     }
-
+    
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final LayoutInflater mInflater = LayoutInflater.from(parent.getContext());
-        final View sView = mInflater.inflate(R.layout.list_item_job_listing, parent, false);
-        return new ViewHolder(sView);
+    public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
+        final LayoutInflater mInflater = LayoutInflater.from (parent.getContext ());
+        final View sView = mInflater.inflate (R.layout.list_item_job_listing, parent, false);
+        return new ViewHolder (sView);
     }
-
+    
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {//        runEnterAnimation (holder.itemView);
-
-        final JobDescription jobDescription = jobDescriptions.get(position);
-
-        Utils.setTypefaceToAllViews(activity, holder.tvCompanyName);
-        Utils.setTypefaceToAllViews(activity, holder.tvExperience);
-        Utils.setTypefaceToAllViews (activity, holder.tvJobDescription);
-        Utils.setTypefaceToAllViews(activity, holder.tvLocation);
-        Utils.setTypefaceToAllViews(activity, holder.tvSkill);
-
-        holder.tvCompanyName.setText(jobDescription.getCompany_name());
+    public void onBindViewHolder (final ViewHolder holder, int position) {//        runEnterAnimation (holder.itemView);
+        
+        final JobDescription jobDescription = jobDescriptions.get (position);
+        
+        Utils.setTypefaceToAllViews (activity, holder.tvCompanyName);
+        
+        holder.tvCompanyName.setText (Html.fromHtml (jobDescription.getCompany_name ()));
         holder.tvTitle.setText (jobDescription.getJob_title ());
-        holder.tvJobDescription.setText (jobDescription.getJob_description ());
-        holder.tvLocation.setText(jobDescription.getLocation());
-        holder.tvSkill.setText(jobDescription.getSkill());
+        holder.tvJobDescription.setText (Html.fromHtml (jobDescription.getJob_description ()));
+        holder.tvLocation.setText (jobDescription.getLocation ());
+        holder.tvSkill.setText (jobDescription.getSkill ());
         holder.tvTime.setText (Utils.getFormattedDate (activity, (Utils.getDateInMillis (jobDescription.getPosted_at ()))));
         holder.tvExperience.setText (jobDescription.getMin_experience () + " - " + jobDescription.getMax_experience () + "  Year (" + jobDescription.getJob_type () + ")");
         holder.tvSalary.setText (jobDescription.getMin_salary () + " - " + jobDescription.getMax_salary ());
-
-            holder.ivHot.setVisibility (View.VISIBLE);
-    
-    
+        
+        holder.ivHot.setVisibility (View.VISIBLE);
+        
+        
         if (jobDescription.is_bookmarked ()) {
             holder.ivRating.setImageResource (R.drawable.ic_bookmark_filled);
         } else {
             holder.ivRating.setImageResource (R.drawable.ic_bookmark);
         }
-
+        
         holder.ivRating.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
@@ -100,15 +96,15 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
                 }
             }
         });
-
+        
     }
-
+    
     @Override
-    public int getItemCount() {
-        return jobDescriptions.size();
+    public int getItemCount () {
+        return jobDescriptions.size ();
     }
-
-    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+    
+    public void SetOnItemClickListener (final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
     
@@ -167,11 +163,11 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         } else {
         }
     }
-
+    
     public interface OnItemClickListener {
         public void onItemClick (View view, int position);
     }
-
+    
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvJobDescription;
         TextView tvCompanyName;
@@ -183,40 +179,36 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         TextView tvSalary;
         ImageView ivRating;
         ImageView ivHot;
-
+        
         ProgressBar progressBar;
-
-
-        public ViewHolder(View view) {
-            super(view);
+        
+        
+        public ViewHolder (View view) {
+            super (view);
             tvJobDescription = (TextView) view.findViewById (R.id.tvJobDescription);
             tvTitle = (TextView) view.findViewById (R.id.tvTitle);
-            tvCompanyName = (TextView) view.findViewById(R.id.tvCompanyName);
-            tvExperience = (TextView) view.findViewById(R.id.tvExperience);
-            tvLocation = (TextView) view.findViewById(R.id.tvLocation);
-            tvSkill = (TextView) view.findViewById(R.id.tvSkill);
+            tvCompanyName = (TextView) view.findViewById (R.id.tvCompanyName);
+            tvExperience = (TextView) view.findViewById (R.id.tvExperience);
+            tvLocation = (TextView) view.findViewById (R.id.tvLocation);
+            tvSkill = (TextView) view.findViewById (R.id.tvSkill);
             tvTime = (TextView) view.findViewById (R.id.tvTime);
-            ivRating = (ImageView) view.findViewById(R.id.ivRating);
+            ivRating = (ImageView) view.findViewById (R.id.ivRating);
             tvSalary = (TextView) view.findViewById (R.id.tvSalary);
             ivHot = (ImageView) view.findViewById (R.id.ivHot);
-            view.setOnClickListener(this);
+            view.setOnClickListener (this);
         }
-
+        
         @Override
-        public void onClick(View v) {
+        public void onClick (View v) {
             final JobDescription jobDescription = jobDescriptions.get (getLayoutPosition ());
             Intent intent = new Intent (activity, UploadResumeActivity.class);
 //            Intent intent = new Intent (activity, UploadFileActivity.class);
             intent.putExtra (AppConfigTags.JOB_ID, jobDescription.getId ());
             intent.putExtra (AppConfigTags.JOB_POSITION, jobDescription.getJob_title ());
-            activity.startActivity(intent);
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-
+            activity.startActivity (intent);
+            activity.overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+            
+            
         }
     }
-    
-    
 }
-
-

@@ -651,6 +651,3 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         }
     }
 }
-
-
-

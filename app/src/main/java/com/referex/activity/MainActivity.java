@@ -368,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
 //                .withToolbar (toolbar)
 //                .withItemAnimator (new AlphaCrossFadeAnimator ())
                 .addDrawerItems (
-                        new PrimaryDrawerItem ().withName ("Dashboard").withIcon (FontAwesome.Icon.faw_tachometer).withIdentifier (1).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Dashboard").withIcon (FontAwesome.Icon.faw_tachometer).withIdentifier (1).withTypeface (SetTypeFace.getTypeface (MainActivity.this)).withSelectable (false),
                         new PrimaryDrawerItem ().withName ("Search job").withIcon (FontAwesome.Icon.faw_search).withIdentifier (2).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         //  new PrimaryDrawerItem().withName("Recommended Job").withIcon(FontAwesome.Icon.faw_thumbs_up).withIdentifier(3).withSelectable(false).withTypeface(SetTypeFace.getTypeface(MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_bookmark).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
