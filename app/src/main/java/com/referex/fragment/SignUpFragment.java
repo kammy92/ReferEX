@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -326,7 +325,7 @@ public class SignUpFragment extends Fragment {
                                     t.setPadding(8, 8, 8, 8);
                                     t.setTypeface(SetTypeFace.getTypeface(getActivity()));
                                     t.setText(text[i]);
-                                    t.setTextColor(Color.WHITE);
+                                    t.setTextColor (getResources ().getColor (R.color.primary_text));
                                     t.setBackgroundResource(R.drawable.square);
                                     chipsBoxLayout.addView(t);
                                 }

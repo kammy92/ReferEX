@@ -94,9 +94,9 @@ public class LoginFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    tvForgotPassword.setTextColor(getResources().getColor(R.color.primary_dark));
+                    tvForgotPassword.setTextColor (getResources ().getColor (R.color.secondary_text));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    tvForgotPassword.setTextColor(getResources().getColor(R.color.secondary_text));
+                    tvForgotPassword.setTextColor (getResources ().getColor (R.color.text_color_white));
                     // showForgotPasswordDialog ();
                 }
                 return true;

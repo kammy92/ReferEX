@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/app_background">
+    android:background="@color/primary">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
@@ -38,53 +38,53 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Full Name"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"/>
                     <EditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext_underline"
+                        android:background="@drawable/edittext_underline2"
                         android:inputType="textPersonName"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_medium"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_margin"
                         android:text="Email Address"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"/>
                     <EditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext_underline"
+                        android:background="@drawable/edittext_underline2"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_medium"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_margin"
                         android:text="Mobile"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"/>
                     <EditText
                         android:id="@+id/etMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext_underline"
+                        android:background="@drawable/edittext_underline2"
                         android:inputType="number"
                         android:maxLength="10"
-                        android:textColor="@color/primary_text"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_medium"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/activity_margin"
                         android:text="Location"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"
                         android:visibility="gone"/>
 
@@ -108,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/activity_margin"
                             android:text="Skills"
-                            android:textColor="@color/primary_dark"
+                            android:textColor="@color/text_color_white"
                             android:textSize="@dimen/text_size_small"/>
 
                         <Button
@@ -120,7 +120,7 @@
                             android:layout_alignParentRight="true"
                             android:background="@null"
                             android:text="ADD"
-                            android:textColor="@color/primary_dark"/>
+                            android:textColor="@color/text_color_white"/>
 
                     </RelativeLayout>
                     <TextView
@@ -130,7 +130,7 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginStart="@dimen/activity_margin"
                         android:text="Please add skills"
-                        android:textColor="@color/secondary_text"
+                        android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_small"/>
                     <com.referex.utils.FlowLayout
                         android:id="@+id/chips_box_layout"
@@ -170,13 +170,14 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin"
-                    android:background="@drawable/button_bg"
+                    android:background="@drawable/button_bg2"
                     android:elevation="@dimen/button_elevation"
                     android:gravity="center"
                     android:padding="@dimen/edittext_padding"
                     android:text="SUBMIT"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/text_size_large"/>
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
