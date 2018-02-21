@@ -688,12 +688,12 @@ public class Utils {
                         tv.setLayoutParams(tv.getLayoutParams());
                         tv.setText(tv.getTag().toString(), TextView.BufferType.SPANNABLE);
                         tv.invalidate();
-                        makeTextViewResizable(tv, -1, "View Less", false);
+                        makeTextViewResizable (tv, - 1, "...less", false);
                     } else {
                         tv.setLayoutParams(tv.getLayoutParams());
                         tv.setText(tv.getTag().toString(), TextView.BufferType.SPANNABLE);
                         tv.invalidate();
-                        makeTextViewResizable(tv, 1, "View More", true);
+                        makeTextViewResizable (tv, 1, "...more", true);
                     }
 
                 }
