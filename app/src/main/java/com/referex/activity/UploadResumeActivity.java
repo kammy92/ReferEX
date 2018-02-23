@@ -78,6 +78,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
     EditText etName;
     EditText etEmail;
     EditText etMobile;
+    EditText etSkill;
+    EditText etExperience;
     TextView tvJobPosition;
     TextView tvNoSkills;
     CoordinatorLayout clMain;
@@ -127,6 +129,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
         etName = (EditText) findViewById (R.id.etName);
         etEmail = (EditText) findViewById (R.id.etEmail);
         etMobile = (EditText) findViewById (R.id.etMobile);
+        etSkill = (EditText) findViewById (R.id.etSkill);
+        etExperience = (EditText) findViewById (R.id.etExperience);
         rlBack = (RelativeLayout) findViewById (R.id.rlBack);
         tvFileSelected = (TextView) findViewById (R.id.etFileSelected);
         btAddSkills = (Button) findViewById (R.id.btAddSkills);
@@ -342,7 +346,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 }
             }).start ();
         } else {
-            uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (), etMobile.getText ().toString ().trim (), String.valueOf (jobId), "");
+            uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (), etMobile.getText ().toString ().trim (), String.valueOf (jobId), "", etSkill.getText ().toString (), etExperience.getText ().toString ());
+    
         }
     }
     
@@ -490,7 +495,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                         @Override
                         public void run () {
                             uploadProfileDetailsToServer (etName.getText ().toString ().trim (), etEmail.getText ().toString ().trim (),
-                                    etMobile.getText ().toString ().trim (), String.valueOf (jobId), FileName);
+                                    etMobile.getText ().toString ().trim (), String.valueOf (jobId), FileName, etSkill.getText ().toString (), etExperience.getText ().toString ());
                 
                             tvFileSelected.setText (fileName);
                         }
@@ -555,7 +560,7 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
 //        //mTagsEditText.clearFocus();
     }
     
-    private void uploadProfileDetailsToServer (final String name, final String email, final String mobile, final String job_id, final String fileName) {
+    private void uploadProfileDetailsToServer (final String name, final String email, final String mobile, final String job_id, final String fileName, final String skill, final String experience) {
         if (NetworkConnection.isNetworkAvailable (UploadResumeActivity.this)) {
             
             Utils.showProgressDialog (progressDialog, getResources ().getString (R.string.progress_dialog_text_please_wait), true);
@@ -624,6 +629,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                     params.put (AppConfigTags.MOBILE, mobile);
                     params.put (AppConfigTags.JOB_ID, job_id);
                     params.put (AppConfigTags.RESUME, fileName);
+                    params.put (AppConfigTags.EXPERIENCE, experience);
+                    params.put (AppConfigTags.SKILL, skill);
                     Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
                     return params;
                 }

@@ -82,5 +82,5 @@
 
 
     <string name="please_enter_feedback">Please enter Feedback</string>
-
+    <string name="Password_not_matched">Password did not matched</string>
 </resources>

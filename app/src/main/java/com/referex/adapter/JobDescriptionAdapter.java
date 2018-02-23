@@ -63,7 +63,7 @@ public class JobDescriptionAdapter extends RecyclerView.Adapter<JobDescriptionAd
         holder.tvTitle.setText (jobDescription.getJob_title ());
     
         holder.tvJobDescription.setText (Html.fromHtml (jobDescription.getJob_description ()));
-        Utils.makeTextViewResizable (holder.tvJobDescription, 5, "...more", true);
+        Utils.makeTextViewResizable (holder.tvJobDescription, 2, "...more", true);
 //        holder.tvJobDescription.setText (Html.fromHtml (jobDescription.getJob_description ()));
   
         holder.tvLocation.setText (jobDescription.getLocation ());

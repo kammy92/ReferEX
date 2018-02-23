@@ -88,4 +88,7 @@ public class AppConfigTags {
     
     public static String PERFORMANCE = "performance";
     public static String CANDIDATES = "candidates";
+    
+    public static String SKILL = "skill";
+    public static String EXPERIENCE = "experience";
 }

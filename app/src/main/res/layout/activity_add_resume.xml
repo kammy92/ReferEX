@@ -70,7 +70,6 @@
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -136,6 +135,43 @@
             android:maxLength="10"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="Skill"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/text_size_small"/>
+        <EditText
+            android:id="@+id/etSkill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_underline"
+            android:inputType="text"
+            android:maxLength="10"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_size_medium"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="Experience"
+            android:textColor="@color/primary_dark"
+            android:textSize="@dimen/text_size_small"/>
+        <EditText
+            android:id="@+id/etExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_underline"
+            android:inputType="text"
+            android:maxLength="10"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_size_medium"/>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"

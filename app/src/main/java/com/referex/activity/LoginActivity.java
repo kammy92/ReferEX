@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-
     }
 
     private void displayFirebaseRegId() {
