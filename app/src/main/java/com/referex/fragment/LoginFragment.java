@@ -318,8 +318,8 @@ public class LoginFragment extends Fragment {
     private void sendForgotPasswordRequestToServer (final String user_name) {
         if (NetworkConnection.isNetworkAvailable (getActivity ())) {
             Utils.showProgressDialog (progressDialog, getResources ().getString (R.string.progress_dialog_text_please_wait), true);
-            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.FORGOT_PASSWORD, true);
-            StringRequest strRequest1 = new StringRequest (Request.Method.POST, AppConfigURL.FORGOT_PASSWORD,
+            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_FORGOT_PASSWORD, true);
+            StringRequest strRequest1 = new StringRequest (Request.Method.POST, AppConfigURL.URL_FORGOT_PASSWORD,
                     new com.android.volley.Response.Listener<String> () {
                         @Override
                         public void onResponse (String response) {

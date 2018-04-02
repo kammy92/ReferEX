@@ -438,7 +438,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 connection.setRequestProperty ("ENCTYPE", "multipart/form-data");
                 connection.setRequestProperty ("Content-Type", "multipart/form-data;boundary=" + boundary);
                 connection.setRequestProperty ("uploaded_file", selectedFilePath);
-                
+                connection.setRequestProperty ("User-Agent", "Mozilla/5.0 ( compatible ) ");
+                connection.setRequestProperty ("Accept", "*/*");
                 //creating new dataoutputstream
                 dataOutputStream = new DataOutputStream (connection.getOutputStream ());
                 
@@ -473,7 +474,8 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 
                 serverResponseCode = connection.getResponseCode ();
                 String serverResponseMessage = connection.getResponseMessage ();
-                
+    
+    
                 BufferedReader br = new BufferedReader (new InputStreamReader ((connection.getInputStream ())));
                 StringBuilder sb = new StringBuilder ();
                 String output;
@@ -510,15 +512,15 @@ public class UploadResumeActivity extends AppCompatActivity implements TagsEditT
                 dataOutputStream.close ();
             } catch (FileNotFoundException e) {
                 e.printStackTrace ();
-                Toast.makeText (UploadResumeActivity.this, "File Not Found", Toast.LENGTH_SHORT).show ();
+//                Toast.makeText (UploadResumeActivity.this, "File Not Found", Toast.LENGTH_SHORT).show ();
                 progressDialog.dismiss ();
             } catch (MalformedURLException e) {
                 e.printStackTrace ();
-                Toast.makeText (UploadResumeActivity.this, "URL error!", Toast.LENGTH_SHORT).show ();
+//                Toast.makeText (UploadResumeActivity.this, "URL error!", Toast.LENGTH_SHORT).show ();
                 progressDialog.dismiss ();
             } catch (IOException e) {
                 e.printStackTrace ();
-                Toast.makeText (UploadResumeActivity.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show ();
+//                Toast.makeText (UploadResumeActivity.this, "Cannot Read/Write File!", Toast.LENGTH_SHORT).show ();
                 progressDialog.dismiss ();
             }
             return serverResponseCode;

@@ -39,6 +39,8 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.BookmarkedJobActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ChangePasswordActivity"
+                  android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.SearchResultActivity"
                   android:screenOrientation="portrait"/>

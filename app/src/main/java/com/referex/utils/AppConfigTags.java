@@ -91,4 +91,8 @@ public class AppConfigTags {
     
     public static String SKILL = "skill";
     public static String EXPERIENCE = "experience";
+    
+    
+    public static String OLD_PASSWORD = "old_password";
+    public static String NEW_PASSWORD = "new_password";
 }

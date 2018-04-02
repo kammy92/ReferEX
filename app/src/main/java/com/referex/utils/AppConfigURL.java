@@ -1,9 +1,6 @@
 package com.referex.utils;
 
 public class AppConfigURL {
-    //   public static String BASE_URL = "https://project-clearsale-cammy92.c9users.io/";
-    
-    
     public static String version = "v1";
     public static String BASE_URL = "http://actipatient.com/referex/api/" + version + "/";
     //    public static String BASE_URL = "https://project-referex-cammy92.c9users.io/api/" + version + "/";
@@ -23,5 +20,6 @@ public class AppConfigURL {
     public static String URL_SUBMIT_PROFILE = BASE_URL + "submit/profile";
     public static String URL_SEARCH = BASE_URL + "jobs/search";
     
-    public static String FORGOT_PASSWORD = BASE_URL + "referee/forgot-password";
+    public static String URL_FORGOT_PASSWORD = BASE_URL + "referee/forgot-password";
+    public static String URL_CHANGE_PASSWORD = BASE_URL + "referee/change-password";
 }

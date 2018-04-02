@@ -100,6 +100,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_underline"
             android:inputType="textPersonName|textCapSentences"
+            android:text="karman"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
 
@@ -116,6 +117,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_underline"
             android:inputType="textEmailAddress"
+            android:text="karman.singh@actiknowbi.com"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
 
@@ -133,6 +135,7 @@
             android:background="@drawable/edittext_underline"
             android:inputType="number"
             android:maxLength="10"
+            android:text="9873684678"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_medium"/>
 

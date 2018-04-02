@@ -100,20 +100,20 @@ public class MainActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
     private BottomSheetBehavior mBottomSheetBehavior;
-
+    
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
         this.savedInstanceState = savedInstanceState;
-        initView();
-        initData();
-        initListener();
+        initView ();
+        initData ();
+        initListener ();
         initDrawer ();
         initApplication ();
         recommendedJobList ();
-        isLogin();
-
+        isLogin ();
+        
     }
     
     private void isLogin () {
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
         if (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY) == "")
             finish ();
     }
-
-    private void initView() {
+    
+    private void initView () {
         ivNavigation = (ImageView) findViewById (R.id.ivNavigation);
         rlInternetConnection = (RelativeLayout) findViewById (R.id.rlInternetConnection);
         rlNoResultFound = (RelativeLayout) findViewById (R.id.rlNoResultFound);
@@ -142,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById (R.id.swipe_refresh_layout);
         ivFilter = (ImageView) findViewById (R.id.ivFilter);
     }
-
-    private void initData() {
+    
+    private void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         pieView.setPercentageBackgroundColor (getResources ().getColor (R.color.pie_color_good));
         pieView.setInnerBackgroundColor (getResources ().getColor (R.color.primary));
@@ -151,49 +151,49 @@ public class MainActivity extends AppCompatActivity {
       /*  pieView.setInnerText(percentage+"%");
         pieView.setPercentageTextSize(Utils.pxFromDp(this, 8));
         pieView.setPercentage((float) percentage);*/
-    
+        
         mBottomSheetBehavior = BottomSheetBehavior.from (bottomSheet);
         mBottomSheetBehavior.setPeekHeight ((int) Utils.pxFromDp (this, 80));
         mBottomSheetBehavior.setState (BottomSheetBehavior.STATE_COLLAPSED);
-    
-    
+        
+        
         bottomSheetAdapter = new BottomSheetAdapter (MainActivity.this, bottomSheetList);
         rvList.setAdapter (bottomSheetAdapter);
         rvList.setHasFixedSize (true);
         rvList.setLayoutManager (new LinearLayoutManager (MainActivity.this, LinearLayoutManager.VERTICAL, false));
         rvList.setItemAnimator (new DefaultItemAnimator ());
-    
-    
+        
+        
         jobDescriptionAdapter = new JobDescriptionAdapter (this, jobDescriptionList);
         rvJobList.setAdapter (jobDescriptionAdapter);
         rvJobList.setHasFixedSize (true);
         rvJobList.addItemDecoration (new SimpleDividerItemDecoration (this));
         rvJobList.setLayoutManager (new LinearLayoutManager (this, LinearLayoutManager.VERTICAL, false));
         rvJobList.setItemAnimator (new DefaultItemAnimator ());
-
-
+        
+        
     }
-
-    private void initListener() {
+    
+    private void initListener () {
         swipeRefreshLayout.setOnRefreshListener (new SwipeRefreshLayout.OnRefreshListener () {
             @Override
             public void onRefresh () {
                 recommendedJobList ();
             }
         });
-    
-    
+        
+        
         ivFilter.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
                 final android.app.FragmentTransaction ft = getFragmentManager ().beginTransaction ();
                 FilterDialogFragment frag = new FilterDialogFragment ();
                 frag.show (ft, "");
-            
+    
             }
         });
-    
-    
+        
+        
         ivNavigation.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -212,14 +212,14 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
-
+    
             @Override
             public void onSlide (@NonNull View bottomSheet, float slideOffset) {
                 // React to dragging events
             }
         });
-
-
+        
+        
     }
     
     private void initDrawer () {
@@ -228,72 +228,72 @@ public class MainActivity extends AppCompatActivity {
             public Object withName (String name) {
                 return null;
             }
-
+    
             @Override
             public StringHolder getName () {
                 return null;
             }
-
+    
             @Override
             public Object withEmail (String email) {
                 return null;
             }
-
+    
             @Override
             public StringHolder getEmail () {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (Drawable icon) {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (Bitmap bitmap) {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (@DrawableRes int iconRes) {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (String url) {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (Uri uri) {
                 return null;
             }
-
+    
             @Override
             public Object withIcon (IIcon icon) {
                 return null;
             }
-
+    
             @Override
             public ImageHolder getIcon () {
                 return null;
             }
-
+    
             @Override
             public Object withSelectable (boolean selectable) {
                 return null;
             }
-
+    
             @Override
             public boolean isSelectable () {
                 return false;
             }
-
+    
             @Override
             public Object withIdentifier (long identifier) {
                 return null;
             }
-
+    
             @Override
             public long getIdentifier () {
                 return 0;
@@ -307,12 +307,12 @@ public class MainActivity extends AppCompatActivity {
                     Glide.with (imageView.getContext ()).load (uri).placeholder (placeholder).into (imageView);
                 }
             }
-
+    
             @Override
             public void cancel (ImageView imageView) {
                 Glide.clear (imageView);
             }
-
+    
             @Override
             public Drawable placeholder (Context ctx, String tag) {
                 //define different placeholders for different imageView targets
@@ -325,10 +325,10 @@ public class MainActivity extends AppCompatActivity {
                 } else if ("customUrlItem".equals (tag)) {
                     return new IconicsDrawable (ctx).iconText (" ").backgroundColorRes (R.color.md_white_1000);
                 }
-
+        
                 //we use the default one for
                 //DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name()
-    
+        
                 return super.placeholder (ctx, tag);
             }
         });
@@ -360,9 +360,9 @@ public class MainActivity extends AppCompatActivity {
                 .withIcon (R.drawable.doctor)
                 .withName (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_NAME))
                 .withEmail (userDetailsPref.getStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL)));
-
-
-        result = new DrawerBuilder()
+    
+    
+        result = new DrawerBuilder ()
                 .withActivity (this)
                 .withAccountHeader (headerResult)
 //                .withToolbar (toolbar)
@@ -375,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_bullhorn).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("My Account").withIcon (FontAwesome.Icon.faw_suitcase).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
+                        new PrimaryDrawerItem ().withName ("Change Password").withIcon (FontAwesome.Icon.faw_key).withIdentifier (9).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
                         new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
                 )
                 .withSavedInstance (savedInstanceState)
@@ -410,6 +411,11 @@ public class MainActivity extends AppCompatActivity {
                             case 8:
                                 showLogOutDialog ();
                                 break;
+                            case 9:
+                                Intent intent9 = new Intent (MainActivity.this, ChangePasswordActivity.class);
+                                startActivity (intent9);
+                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
                         }
                         return false;
                     }
@@ -433,11 +439,11 @@ public class MainActivity extends AppCompatActivity {
                 .onPositive (new MaterialDialog.SingleButtonCallback () {
                     @Override
                     public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-
-                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_EMAIL, "");
-                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_NAME, "");
-                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
+    
+    
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
                         Intent intent = new Intent (MainActivity.this, LoginActivity.class);
                         intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity (intent);
