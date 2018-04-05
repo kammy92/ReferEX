@@ -76,9 +76,7 @@
                     android:layout_toEndOf="@+id/ivJobDescription"
                     android:layout_toRightOf="@+id/ivJobDescription"
                     android:textColor="@color/secondary_text"
-                    android:textSize="@dimen/text_size_small"/>
-
-
+                    android:textSize="@dimen/text_size_extra_small"/>
             </RelativeLayout>
 
 
